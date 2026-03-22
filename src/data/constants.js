@@ -31,3 +31,6 @@ export const REVISION_COSTS = {
   'Web Launch Lab': 50,
   'AdScale Engine': 30,
 }
+
+export const ADMIN_EMAIL = 'admin@dhandabuzz.com'
+export const ADMIN_PASSWORD = 'admin123'

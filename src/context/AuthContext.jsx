@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from 'react'
 import { mockOrders } from '../data/mockOrders'
-import { SIGNUP_BONUS, REVISION_COSTS } from '../data/constants'
+import { SIGNUP_BONUS, REVISION_COSTS, ADMIN_EMAIL, ADMIN_PASSWORD } from '../data/constants'
 
 export const AuthContext = createContext(null)
 
@@ -64,6 +64,11 @@ export function AuthProvider({ children }) {
   }
 
   const login = (email, password) => {
+    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+      const adminUser = { name: 'Admin', businessName: 'DhandaBuzz', email: ADMIN_EMAIL, phone: '' }
+      setState(prev => ({ ...prev, currentUser: adminUser }))
+      return { success: true }
+    }
     const user = state.users.find(u => u.email === email && u.password === password)
     if (!user) {
       return { success: false, message: 'ইমেইল অথবা পাসওয়ার্ড ভুল হয়েছে।' }
@@ -149,10 +154,90 @@ export function AuthProvider({ children }) {
     })
   }
 
+  const isAdmin = state.currentUser?.email === ADMIN_EMAIL
+
+  const adminUpdateOrderStatus = (orderId, newStatus, note = '') => {
+    setState(prev => ({
+      ...prev,
+      orders: prev.orders.map(order => {
+        if (order.id !== orderId) return order
+        const now = new Date()
+        return {
+          ...order,
+          status: newStatus,
+          timeline: [
+            ...(order.timeline || []),
+            {
+              status: newStatus,
+              date: now.toISOString().split('T')[0],
+              time: now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }),
+              note: note || `Status updated to ${newStatus}`,
+            },
+          ],
+        }
+      }),
+    }))
+  }
+
+  const adminSetOrderUrls = (orderId, urls) => {
+    setState(prev => ({
+      ...prev,
+      orders: prev.orders.map(order => {
+        if (order.id !== orderId) return order
+        return {
+          ...order,
+          ...(urls.previewUrl !== undefined && { previewUrl: urls.previewUrl }),
+          ...(urls.downloadUrl !== undefined && { downloadUrl: urls.downloadUrl }),
+        }
+      }),
+    }))
+  }
+
+  const adminApproveRecharge = (txId) => {
+    setState(prev => {
+      const tx = prev.transactions.find(t => t.id === txId)
+      if (!tx || tx.status !== 'Pending') return prev
+      return {
+        ...prev,
+        balance: prev.balance + tx.amount,
+        transactions: prev.transactions.map(t =>
+          t.id === txId ? { ...t, status: 'Approved' } : t
+        ),
+      }
+    })
+  }
+
+  const adminRejectRecharge = (txId) => {
+    setState(prev => ({
+      ...prev,
+      transactions: prev.transactions.map(t =>
+        t.id === txId ? { ...t, status: 'Rejected' } : t
+      ),
+    }))
+  }
+
+  const adminAddOrderNote = (orderId, note) => {
+    setState(prev => ({
+      ...prev,
+      orders: prev.orders.map(order => {
+        if (order.id !== orderId) return order
+        return {
+          ...order,
+          adminNotes: [
+            ...(order.adminNotes || []),
+            { text: note, date: new Date().toISOString() },
+          ],
+        }
+      }),
+    }))
+  }
+
   const value = {
     user: state.currentUser,
     isAuthenticated: !!state.currentUser,
+    isAdmin,
     balance: state.balance,
+    users: state.users,
     orders: state.orders,
     transactions: state.transactions,
     register,
@@ -162,6 +247,11 @@ export function AuthProvider({ children }) {
     addOrder,
     getOrderById,
     addRevision,
+    adminUpdateOrderStatus,
+    adminSetOrderUrls,
+    adminApproveRecharge,
+    adminRejectRecharge,
+    adminAddOrderNote,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

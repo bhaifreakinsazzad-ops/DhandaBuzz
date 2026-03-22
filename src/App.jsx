@@ -1,7 +1,9 @@
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom'
 import { useAuth } from './hooks/useAuth'
+import { ADMIN_EMAIL } from './data/constants'
 import PublicLayout from './components/layout/PublicLayout'
 import DashboardLayout from './components/layout/DashboardLayout'
+import AdminLayout from './components/layout/AdminLayout'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
@@ -15,10 +17,21 @@ import CreativeEnginePage from './pages/CreativeEnginePage'
 import WebLaunchLabPage from './pages/WebLaunchLabPage'
 import AdScaleEnginePage from './pages/AdScaleEnginePage'
 import OrderDetailPage from './pages/OrderDetailPage'
+import AdminDashboardPage from './pages/admin/AdminDashboardPage'
+import AdminOrdersPage from './pages/admin/AdminOrdersPage'
+import AdminRechargesPage from './pages/admin/AdminRechargesPage'
+import AdminUsersPage from './pages/admin/AdminUsersPage'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useAuth()
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />
+}
+
+function AdminProtectedRoute() {
+  const { isAuthenticated, user } = useAuth()
+  if (!isAuthenticated) return <Navigate to="/login" replace />
+  if (user?.email !== ADMIN_EMAIL) return <Navigate to="/dashboard" replace />
+  return <Outlet />
 }
 
 export default function App() {
@@ -42,6 +55,15 @@ export default function App() {
           <Route path="/services/adscale-engine" element={<AdScaleEnginePage />} />
           <Route path="/support" element={<SupportPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+        </Route>
+      </Route>
+
+      <Route element={<AdminProtectedRoute />}>
+        <Route element={<AdminLayout />}>
+          <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+          <Route path="/admin/orders" element={<AdminOrdersPage />} />
+          <Route path="/admin/recharges" element={<AdminRechargesPage />} />
+          <Route path="/admin/users" element={<AdminUsersPage />} />
         </Route>
       </Route>
 
