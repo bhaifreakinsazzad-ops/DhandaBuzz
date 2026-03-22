@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DhandaBuzz - AI Business Services Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="navbar-brand" onclick="App.showPage('home')">
+      <div class="logo-icon">DB</div>
+      <span>DhandaBuzz</span>
+    </div>
+    <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+    <ul class="navbar-nav">
+      <li><a href="#" data-page="home" class="active">Services</a></li>
+      <li><a href="#" data-page="creative-engine">Creative Engine</a></li>
+      <li><a href="#" data-page="web-launch-lab">Web Launch Lab</a></li>
+      <li><a href="#" data-page="adscale-engine">AdScale Engine</a></li>
+      <li>
+        <div class="maal-badge">
+          <span class="maal-icon">&#9733;</span>
+          <span class="maal-balance-value">500</span> Maal
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-content">
+
+    <!-- ==========================================
+         HOME PAGE - Services Grid
+         ========================================== -->
+    <div id="home" class="page active">
+      <div class="hero">
+        <h1>Grow Your <span class="highlight">Dhanda</span> With AI</h1>
+        <p>Professional business services powered by AI. Request creatives, websites, ad campaigns &mdash; all from one portal.</p>
+      </div>
+
+      <div class="services-grid">
+
+        <!-- Creative Engine -->
+        <div class="service-card" onclick="App.showPage('creative-engine')">
+          <div class="service-card-icon" style="background: rgba(108,92,231,0.15); color: #a29bfe;">&#9998;</div>
+          <h3>Creative Engine</h3>
+          <p>Request ad creatives, marketing visuals, social media posts, offer posters, and promo videos for your business.</p>
+          <span class="price-tag">Starting at 10 Maal</span>
+          <div class="card-arrow">&rarr;</div>
+        </div>
+
+        <!-- Web Launch Lab -->
+        <div class="service-card" onclick="App.showPage('web-launch-lab')">
+          <div class="service-card-icon" style="background: rgba(0,206,201,0.15); color: #55efc4;">&#9881;</div>
+          <h3>Web Launch Lab</h3>
+          <p>Get landing pages, portfolio sites, business websites, or full e-commerce stores built for your brand.</p>
+          <span class="price-tag">Starting at 300 Maal</span>
+          <div class="card-arrow">&rarr;</div>
+        </div>
+
+        <!-- AdScale Engine -->
+        <div class="service-card" onclick="App.showPage('adscale-engine')">
+          <div class="service-card-icon" style="background: rgba(249,202,36,0.15); color: #f9ca24;">&#9889;</div>
+          <h3>AdScale Engine</h3>
+          <p>Facebook advertising support — from ad planning to full campaign setup and launch management.</p>
+          <span class="price-tag">Starting at 50 Maal</span>
+          <div class="card-arrow">&rarr;</div>
+        </div>
+
+        <!-- COMING SOON CARDS -->
+        <div class="service-card coming-soon">
+          <span class="coming-soon-badge">Coming Soon</span>
+          <div class="service-card-icon" style="background: rgba(255,255,255,0.05); color: var(--text-muted);">&#9830;</div>
+          <h3>Branding</h3>
+          <p>Complete brand identity design — logo, colors, typography, and brand guidelines for your business.</p>
+        </div>
+
+        <div class="service-card coming-soon">
+          <span class="coming-soon-badge">Coming Soon</span>
+          <div class="service-card-icon" style="background: rgba(255,255,255,0.05); color: var(--text-muted);">&#128270;</div>
+          <h3>SEO</h3>
+          <p>Search engine optimization to rank your business higher on Google and drive organic traffic.</p>
+        </div>
+
+        <div class="service-card coming-soon">
+          <span class="coming-soon-badge">Coming Soon</span>
+          <div class="service-card-icon" style="background: rgba(255,255,255,0.05); color: var(--text-muted);">&#128172;</div>
+          <h3>WhatsApp Automation</h3>
+          <p>Automated WhatsApp messaging, chatbots, and customer engagement tools for your business.</p>
+        </div>
+
+        <div class="service-card coming-soon">
+          <span class="coming-soon-badge">Coming Soon</span>
+          <div class="service-card-icon" style="background: rgba(255,255,255,0.05); color: var(--text-muted);">&#128203;</div>
+          <h3>CRM Setup</h3>
+          <p>Customer relationship management setup to track leads, sales, and customer interactions.</p>
+        </div>
+
+        <div class="service-card coming-soon">
+          <span class="coming-soon-badge">Coming Soon</span>
+          <div class="service-card-icon" style="background: rgba(255,255,255,0.05); color: var(--text-muted);">&#128722;</div>
+          <h3>E-commerce Growth</h3>
+          <p>Scale your online store with product optimization, marketing funnels, and conversion strategies.</p>
+        </div>
+
+        <div class="service-card coming-soon">
+          <span class="coming-soon-badge">Coming Soon</span>
+          <div class="service-card-icon" style="background: rgba(255,255,255,0.05); color: var(--text-muted);">&#128161;</div>
+          <h3>Consultation</h3>
+          <p>One-on-one business consulting sessions to plan growth, strategy, and digital transformation.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==========================================
+         CREATIVE ENGINE PAGE
+         ========================================== -->
+    <div id="creative-engine" class="page">
+      <div class="service-page-header">
+        <button class="back-btn" data-page="home">&larr; Back to Services</button>
+        <h1>&#9998; Creative Engine</h1>
+        <p>Request ad creatives and marketing visuals for your business</p>
+      </div>
+
+      <!-- Pricing -->
+      <div class="pricing-section">
+        <h2>Pricing</h2>
+        <div class="pricing-grid">
+          <div class="pricing-item">
+            <div class="item-name">1 Image</div>
+            <div class="item-price">10 Maal</div>
+          </div>
+          <div class="pricing-item">
+            <div class="item-name">5 Images</div>
+            <div class="item-price">45 Maal</div>
+            <div class="item-price-sub">9 Maal each</div>
+          </div>
+          <div class="pricing-item">
+            <div class="item-name">10 Images</div>
+            <div class="item-price">80 Maal</div>
+            <div class="item-price-sub">8 Maal each</div>
+          </div>
+          <div class="pricing-item">
+            <div class="item-name">1 Short Video</div>
+            <div class="item-price">50 Maal</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cost Display -->
+      <div class="maal-cost-display">
+        <div>
+          <div class="cost-label">Estimated Cost</div>
+          <div class="cost-value" id="ce-cost-value">-- Maal</div>
+        </div>
+        <div class="balance-info">
+          <span class="current-balance">Balance: <strong class="maal-balance-value">500</strong> Maal</span>
+          <span class="remaining-balance" id="ce-remaining"></span>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <form class="service-form" id="ce-form">
+        <h2>Submit Your Request</h2>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Business Name <span class="required">*</span></label>
+            <input type="text" name="business-name" class="form-control" placeholder="Your business name" required>
+          </div>
+          <div class="form-group">
+            <label>Product / Service Name <span class="required">*</span></label>
+            <input type="text" name="product-name" class="form-control" placeholder="What are you promoting?" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Target Audience</label>
+          <input type="text" name="target-audience" class="form-control" placeholder="e.g. Young professionals aged 25-35 in Dhaka">
+        </div>
+
+        <div class="form-group">
+          <label>Creative Type <span class="required">*</span></label>
+          <div class="option-group">
+            <div class="option-pill">
+              <input type="radio" name="creative-type" value="ad-image" id="ct-ad-image">
+              <label for="ct-ad-image">Ad Image</label>
+            </div>
+            <div class="option-pill">
+              <input type="radio" name="creative-type" value="offer-poster" id="ct-offer-poster">
+              <label for="ct-offer-poster">Offer Poster</label>
+            </div>
+            <div class="option-pill">
+              <input type="radio" name="creative-type" value="social-media-post" id="ct-social">
+              <label for="ct-social">Social Media Post</label>
+            </div>
+            <div class="option-pill">
+              <input type="radio" name="creative-type" value="short-promo-video" id="ct-video">
+              <label for="ct-video">Short Promo Video</label>
+            </div>
+            <div class="option-pill">
+              <input type="radio" name="creative-type" value="caption-ad-copy" id="ct-copy">
+              <label for="ct-copy">Caption / Ad Copy</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Quantity Options -->
+        <div class="form-group">
+          <label>Select Package</label>
+          <div class="pricing-grid" id="ce-qty-options">
+            <p style="color: var(--text-muted); font-size: 0.88rem;">Select a creative type above to see packages</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Preferred Style</label>
+          <select name="preferred-style" class="form-control">
+            <option value="">Select a style...</option>
+            <option value="modern-minimal">Modern & Minimal</option>
+            <option value="bold-colorful">Bold & Colorful</option>
+            <option value="professional">Professional / Corporate</option>
+            <option value="playful">Playful / Fun</option>
+            <option value="luxury">Luxury / Premium</option>
+            <option value="desi-vibrant">Desi Vibrant</option>
+            <option value="other">Other (describe in notes)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Reference Links or Notes</label>
+          <textarea name="notes" class="form-control" placeholder="Share any reference links, inspirations, text you want on the creative, or special instructions..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Upload Files</label>
+          <div class="upload-area" id="ce-upload-area">
+            <input type="file" multiple accept="image/*,.pdf,.doc,.docx">
+            <div class="upload-icon">&#128206;</div>
+            <div class="upload-text"><strong>Click to upload</strong> or drag files here<br>Images, PDFs, Docs up to 10MB</div>
+          </div>
+          <div class="upload-file-list" id="ce-file-list"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">
+          Submit Request &#10140;
+        </button>
+      </form>
+    </div>
+
+    <!-- ==========================================
+         WEB LAUNCH LAB PAGE
+         ========================================== -->
+    <div id="web-launch-lab" class="page">
+      <div class="service-page-header">
+        <button class="back-btn" data-page="home">&larr; Back to Services</button>
+        <h1>&#9881; Web Launch Lab</h1>
+        <p>Request websites or landing pages for your business</p>
+      </div>
+
+      <!-- Pricing -->
+      <div class="pricing-section">
+        <h2>Choose Website Type</h2>
+        <div class="pricing-grid">
+          <div class="pricing-item" data-type="landing-page">
+            <div class="item-name">Landing / Order Page</div>
+            <div class="item-price">300 Maal</div>
+          </div>
+          <div class="pricing-item" data-type="portfolio-site">
+            <div class="item-name">Portfolio / Profile Site</div>
+            <div class="item-price">450 Maal</div>
+          </div>
+          <div class="pricing-item" data-type="business-website">
+            <div class="item-name">Business Website</div>
+            <div class="item-price">700 Maal</div>
+          </div>
+          <div class="pricing-item" data-type="ecommerce-starter">
+            <div class="item-name">E-commerce Starter</div>
+            <div class="item-price">1200 Maal</div>
+          </div>
+          <div class="pricing-item" data-type="custom-web-app">
+            <div class="item-name">Custom Web App</div>
+            <div class="item-price">Custom Quote</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cost Display -->
+      <div class="maal-cost-display">
+        <div>
+          <div class="cost-label">Estimated Cost</div>
+          <div class="cost-value" id="wll-cost-value">-- Maal</div>
+        </div>
+        <div class="balance-info">
+          <span class="current-balance">Balance: <strong class="maal-balance-value">500</strong> Maal</span>
+          <span class="remaining-balance" id="wll-remaining"></span>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <form class="service-form" id="wll-form">
+        <h2>Submit Your Request</h2>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Business Name <span class="required">*</span></label>
+            <input type="text" name="business-name" class="form-control" placeholder="Your business name" required>
+          </div>
+          <div class="form-group">
+            <label>Website Type <span class="required">*</span></label>
+            <select name="website-type" class="form-control">
+              <option value="">Select from pricing above or here...</option>
+              <option value="landing-page">Landing / Order Page</option>
+              <option value="portfolio-site">Portfolio / Profile Site</option>
+              <option value="business-website">Business Website</option>
+              <option value="ecommerce-starter">E-commerce Starter</option>
+              <option value="custom-web-app">Custom Web App</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Reference Links</label>
+          <textarea name="reference-links" class="form-control" placeholder="Share links to websites you like or want as inspiration..." rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Required Pages / Features</label>
+          <textarea name="required-pages" class="form-control" placeholder="e.g. Home, About, Contact, Product Gallery, Order Form, WhatsApp integration..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Design Style</label>
+          <select name="design-style" class="form-control">
+            <option value="">Select a style...</option>
+            <option value="modern-minimal">Modern & Minimal</option>
+            <option value="bold-colorful">Bold & Colorful</option>
+            <option value="professional">Professional / Corporate</option>
+            <option value="creative">Creative / Unique</option>
+            <option value="ecommerce">E-commerce Focused</option>
+            <option value="other">Other (describe in notes)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Upload Files</label>
+          <div class="upload-area" id="wll-upload-area">
+            <input type="file" multiple accept="image/*,.pdf,.doc,.docx,.zip">
+            <div class="upload-icon">&#128206;</div>
+            <div class="upload-text"><strong>Click to upload</strong> or drag files here<br>Logos, images, content docs, wireframes</div>
+          </div>
+          <div class="upload-file-list" id="wll-file-list"></div>
+        </div>
+
+        <div class="form-group">
+          <label>Additional Notes</label>
+          <textarea name="notes" class="form-control" placeholder="Any other details, timeline preferences, or special requirements..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">
+          Submit Request &#10140;
+        </button>
+      </form>
+    </div>
+
+    <!-- ==========================================
+         ADSCALE ENGINE PAGE
+         ========================================== -->
+    <div id="adscale-engine" class="page">
+      <div class="service-page-header">
+        <button class="back-btn" data-page="home">&larr; Back to Services</button>
+        <h1>&#9889; AdScale Engine</h1>
+        <p>Facebook advertising support for your business</p>
+      </div>
+
+      <!-- Pricing -->
+      <div class="pricing-section">
+        <h2>Choose Your Plan</h2>
+        <div class="pricing-grid">
+          <div class="pricing-item" data-plan="ad-plan-unlock">
+            <div class="item-name">Ad Plan Unlock</div>
+            <div class="item-price">50 Maal</div>
+          </div>
+          <div class="pricing-item" data-plan="full-planning-bundle">
+            <div class="item-name">Full Planning Bundle</div>
+            <div class="item-price">100 Maal</div>
+          </div>
+          <div class="pricing-item" data-plan="campaign-setup">
+            <div class="item-name">Campaign Setup</div>
+            <div class="item-price">300 Maal</div>
+          </div>
+          <div class="pricing-item" data-plan="full-launch-support">
+            <div class="item-name">Full Launch Support</div>
+            <div class="item-price">700 Maal</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cost Display -->
+      <div class="maal-cost-display">
+        <div>
+          <div class="cost-label">Estimated Cost</div>
+          <div class="cost-value" id="as-cost-value">-- Maal</div>
+        </div>
+        <div class="balance-info">
+          <span class="current-balance">Balance: <strong class="maal-balance-value">500</strong> Maal</span>
+          <span class="remaining-balance" id="as-remaining"></span>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <form class="service-form" id="as-form">
+        <h2>Submit Your Request</h2>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Business Name <span class="required">*</span></label>
+            <input type="text" name="business-name" class="form-control" placeholder="Your business name" required>
+          </div>
+          <div class="form-group">
+            <label>Product / Service <span class="required">*</span></label>
+            <input type="text" name="product-service" class="form-control" placeholder="What are you advertising?" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Objective <span class="required">*</span></label>
+            <select name="objective" class="form-control" required>
+              <option value="">Select objective...</option>
+              <option value="brand-awareness">Brand Awareness</option>
+              <option value="reach">Reach</option>
+              <option value="traffic">Traffic / Website Visits</option>
+              <option value="engagement">Engagement</option>
+              <option value="leads">Lead Generation</option>
+              <option value="messages">Messages / WhatsApp</option>
+              <option value="sales">Sales / Conversions</option>
+              <option value="app-installs">App Installs</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Monthly Budget (BDT)</label>
+            <input type="text" name="budget" class="form-control" placeholder="e.g. 5,000 - 20,000 BDT">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Target Location</label>
+            <input type="text" name="target-location" class="form-control" placeholder="e.g. Dhaka, Chittagong, All Bangladesh">
+          </div>
+          <div class="form-group">
+            <label>Age Range</label>
+            <div class="form-row" style="gap: 10px;">
+              <input type="number" name="age-min" class="form-control" placeholder="Min (e.g. 18)" min="13" max="65">
+              <input type="number" name="age-max" class="form-control" placeholder="Max (e.g. 45)" min="13" max="65">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Gender</label>
+          <div class="option-group">
+            <div class="option-pill">
+              <input type="radio" name="gender" value="all" id="gender-all" checked>
+              <label for="gender-all">All</label>
+            </div>
+            <div class="option-pill">
+              <input type="radio" name="gender" value="male" id="gender-male">
+              <label for="gender-male">Male</label>
+            </div>
+            <div class="option-pill">
+              <input type="radio" name="gender" value="female" id="gender-female">
+              <label for="gender-female">Female</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Quick Setup Questions</label>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px;">
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Existing Facebook Page?</span>
+              <div class="option-group" style="gap: 6px;">
+                <div class="option-pill">
+                  <input type="radio" name="existing-page" value="yes" id="ep-yes">
+                  <label for="ep-yes" style="padding: 4px 12px; font-size: 0.82rem;">Yes</label>
+                </div>
+                <div class="option-pill">
+                  <input type="radio" name="existing-page" value="no" id="ep-no">
+                  <label for="ep-no" style="padding: 4px 12px; font-size: 0.82rem;">No</label>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px;">
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Existing Ad Account?</span>
+              <div class="option-group" style="gap: 6px;">
+                <div class="option-pill">
+                  <input type="radio" name="existing-ad-account" value="yes" id="eaa-yes">
+                  <label for="eaa-yes" style="padding: 4px 12px; font-size: 0.82rem;">Yes</label>
+                </div>
+                <div class="option-pill">
+                  <input type="radio" name="existing-ad-account" value="no" id="eaa-no">
+                  <label for="eaa-no" style="padding: 4px 12px; font-size: 0.82rem;">No</label>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px;">
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Need card support?</span>
+              <div class="option-group" style="gap: 6px;">
+                <div class="option-pill">
+                  <input type="radio" name="need-card" value="yes" id="nc-yes">
+                  <label for="nc-yes" style="padding: 4px 12px; font-size: 0.82rem;">Yes</label>
+                </div>
+                <div class="option-pill">
+                  <input type="radio" name="need-card" value="no" id="nc-no">
+                  <label for="nc-no" style="padding: 4px 12px; font-size: 0.82rem;">No</label>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px;">
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Need creative support?</span>
+              <div class="option-group" style="gap: 6px;">
+                <div class="option-pill">
+                  <input type="radio" name="need-creative" value="yes" id="ncs-yes">
+                  <label for="ncs-yes" style="padding: 4px 12px; font-size: 0.82rem;">Yes</label>
+                </div>
+                <div class="option-pill">
+                  <input type="radio" name="need-creative" value="no" id="ncs-no">
+                  <label for="ncs-no" style="padding: 4px 12px; font-size: 0.82rem;">No</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Additional Notes</label>
+          <textarea name="notes" class="form-control" placeholder="Any other details about your ad requirements, past campaigns, or special instructions..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">
+          Submit Request &#10140;
+        </button>
+      </form>
+    </div>
+
+  </main>
+
+  <!-- ===== SUCCESS MODAL ===== -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-box">
+      <div class="modal-icon">&#10003;</div>
+      <h3>Request Submitted!</h3>
+      <p>Your <span class="service-name">service</span> request has been received. Our team will review and get back to you shortly.</p>
+      <button class="btn btn-primary" onclick="App.closeModal()">Back to Services</button>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <p>&copy; 2026 DhandaBuzz &mdash; AI-Powered Business Services Portal</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
