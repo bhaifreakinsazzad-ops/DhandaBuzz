@@ -21,6 +21,7 @@ import AdminDashboardPage from './pages/admin/AdminDashboardPage'
 import AdminOrdersPage from './pages/admin/AdminOrdersPage'
 import AdminRechargesPage from './pages/admin/AdminRechargesPage'
 import AdminUsersPage from './pages/admin/AdminUsersPage'
+import AdminCRMPage from './pages/admin/AdminCRMPage'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useAuth()
@@ -64,6 +65,7 @@ export default function App() {
           <Route path="/admin/orders" element={<AdminOrdersPage />} />
           <Route path="/admin/recharges" element={<AdminRechargesPage />} />
           <Route path="/admin/users" element={<AdminUsersPage />} />
+          <Route path="/admin/crm" element={<AdminCRMPage />} />
         </Route>
       </Route>
 

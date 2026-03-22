@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import {
-  FiGrid, FiShoppingBag, FiCreditCard, FiUsers, FiLogOut, FiX
+  FiGrid, FiShoppingBag, FiCreditCard, FiUsers, FiDatabase, FiLogOut, FiX
 } from 'react-icons/fi'
 import { useAuth } from '../../hooks/useAuth'
 
@@ -9,6 +9,7 @@ const navItems = [
   { to: '/admin/orders', icon: FiShoppingBag, label: 'Orders' },
   { to: '/admin/recharges', icon: FiCreditCard, label: 'Recharges' },
   { to: '/admin/users', icon: FiUsers, label: 'Users' },
+  { to: '/admin/crm', icon: FiDatabase, label: 'HubSpot CRM' },
 ]
 
 export default function AdminSidebar({ isOpen, onClose }) {

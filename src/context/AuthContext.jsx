@@ -1,6 +1,14 @@
 import { createContext, useState, useEffect } from 'react'
 import { mockOrders } from '../data/mockOrders'
 import { SIGNUP_BONUS, REVISION_COSTS, ADMIN_EMAIL, ADMIN_PASSWORD } from '../data/constants'
+import { SYNC_TYPES } from '../data/hubspotConfig'
+import {
+  buildContactPayload,
+  buildCompanyPayload,
+  buildDealPayload,
+  buildDealUpdatePayload,
+  createSyncEvent,
+} from '../services/hubspot'
 
 export const AuthContext = createContext(null)
 
@@ -29,6 +37,7 @@ export function AuthProvider({ children }) {
       balance: 0,
       orders: [],
       transactions: [],
+      hubspotSync: [],
     }
   })
 
@@ -43,6 +52,16 @@ export function AuthProvider({ children }) {
     }
 
     const newUser = { name, businessName, email, phone, password }
+    const contactEvent = createSyncEvent(
+      SYNC_TYPES.CONTACT_CREATE,
+      buildContactPayload(newUser),
+      { email, source: 'registration' }
+    )
+    const companyEvent = createSyncEvent(
+      SYNC_TYPES.COMPANY_CREATE,
+      buildCompanyPayload(newUser),
+      { businessName, source: 'registration' }
+    )
     setState(prev => ({
       ...prev,
       users: [...prev.users, newUser],
@@ -59,6 +78,7 @@ export function AuthProvider({ children }) {
           status: 'Approved',
         },
       ],
+      hubspotSync: [...(prev.hubspotSync || []), contactEvent, companyEvent],
     }))
     return { success: true }
   }
@@ -119,9 +139,15 @@ export function AuthProvider({ children }) {
         { status: 'Submitted', date: dateStr, time: timeStr, note: 'অর্ডার সাবমিট হয়েছে' },
       ],
     }
+    const dealEvent = createSyncEvent(
+      SYNC_TYPES.DEAL_CREATE,
+      buildDealPayload(newOrder, state.currentUser),
+      { orderId: newOrder.id, source: 'order_submit' }
+    )
     setState(prev => ({
       ...prev,
       orders: [newOrder, ...prev.orders],
+      hubspotSync: [...(prev.hubspotSync || []), dealEvent],
     }))
   }
 
@@ -157,9 +183,8 @@ export function AuthProvider({ children }) {
   const isAdmin = state.currentUser?.email === ADMIN_EMAIL
 
   const adminUpdateOrderStatus = (orderId, newStatus, note = '') => {
-    setState(prev => ({
-      ...prev,
-      orders: prev.orders.map(order => {
+    setState(prev => {
+      const updatedOrders = prev.orders.map(order => {
         if (order.id !== orderId) return order
         const now = new Date()
         return {
@@ -175,8 +200,23 @@ export function AuthProvider({ children }) {
             },
           ],
         }
-      }),
-    }))
+      })
+      const updatedOrder = updatedOrders.find(o => o.id === orderId)
+      const dealUpdateEvent = updatedOrder
+        ? createSyncEvent(
+            SYNC_TYPES.DEAL_UPDATE,
+            buildDealUpdatePayload(updatedOrder, note),
+            { orderId, newStatus, source: 'admin_status_update' }
+          )
+        : null
+      return {
+        ...prev,
+        orders: updatedOrders,
+        hubspotSync: dealUpdateEvent
+          ? [...(prev.hubspotSync || []), dealUpdateEvent]
+          : (prev.hubspotSync || []),
+      }
+    })
   }
 
   const adminSetOrderUrls = (orderId, urls) => {
@@ -232,6 +272,24 @@ export function AuthProvider({ children }) {
     }))
   }
 
+  const markSyncEvent = (syncId, status, error = null) => {
+    setState(prev => ({
+      ...prev,
+      hubspotSync: (prev.hubspotSync || []).map(ev =>
+        ev.id === syncId
+          ? { ...ev, status, syncedAt: status === 'synced' ? new Date().toISOString() : ev.syncedAt, error }
+          : ev
+      ),
+    }))
+  }
+
+  const clearSyncedEvents = () => {
+    setState(prev => ({
+      ...prev,
+      hubspotSync: (prev.hubspotSync || []).filter(ev => ev.status !== 'synced'),
+    }))
+  }
+
   const value = {
     user: state.currentUser,
     isAuthenticated: !!state.currentUser,
@@ -240,6 +298,7 @@ export function AuthProvider({ children }) {
     users: state.users,
     orders: state.orders,
     transactions: state.transactions,
+    hubspotSync: state.hubspotSync || [],
     register,
     login,
     logout,
@@ -252,6 +311,8 @@ export function AuthProvider({ children }) {
     adminApproveRecharge,
     adminRejectRecharge,
     adminAddOrderNote,
+    markSyncEvent,
+    clearSyncedEvents,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
