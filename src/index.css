@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Hind Siliguri', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', 'Hind Siliguri', sans-serif;
+  }
+}
+
+@layer components {
+  .gradient-primary {
+    @apply bg-gradient-to-r from-brand-primary to-purple-500;
+  }
+
+  .gradient-hero {
+    @apply bg-gradient-to-br from-brand-darker via-brand-dark to-brand-primary;
+  }
+}
