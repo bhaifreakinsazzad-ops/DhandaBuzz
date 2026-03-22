@@ -25,3 +25,9 @@ export const STATUS_COLORS = {
   Delivered: 'bg-green-500',
   Completed: 'bg-emerald-600',
 }
+
+export const REVISION_COSTS = {
+  'Creative Engine': 10,
+  'Web Launch Lab': 50,
+  'AdScale Engine': 30,
+}

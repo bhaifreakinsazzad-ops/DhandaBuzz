@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from 'react'
 import { mockOrders } from '../data/mockOrders'
-import { SIGNUP_BONUS } from '../data/constants'
+import { SIGNUP_BONUS, REVISION_COSTS } from '../data/constants'
 
 export const AuthContext = createContext(null)
 
@@ -98,16 +98,55 @@ export function AuthProvider({ children }) {
   }
 
   const addOrder = (order) => {
+    const now = new Date()
+    const dateStr = now.toISOString().split('T')[0]
+    const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })
     const newOrder = {
       ...order,
       id: `ORD-${1000 + state.orders.length + 1}`,
       status: 'Submitted',
-      date: new Date().toISOString().split('T')[0],
+      date: dateStr,
+      revisions: [],
+      attachments: order.attachments || [],
+      previewUrl: null,
+      downloadUrl: null,
+      timeline: [
+        { status: 'Submitted', date: dateStr, time: timeStr, note: 'অর্ডার সাবমিট হয়েছে' },
+      ],
     }
     setState(prev => ({
       ...prev,
       orders: [newOrder, ...prev.orders],
     }))
+  }
+
+  const getOrderById = (id) => {
+    return state.orders.find(o => o.id === id) || null
+  }
+
+  const addRevision = (orderId, message) => {
+    setState(prev => {
+      const orders = prev.orders.map(order => {
+        if (order.id !== orderId) return order
+        const isFirstRevision = !order.revisions || order.revisions.length === 0
+        const cost = isFirstRevision ? 0 : (REVISION_COSTS[order.service] || 10)
+        const newRevision = {
+          id: `REV-${Date.now()}`,
+          message,
+          date: new Date().toISOString().split('T')[0],
+          status: 'Submitted',
+          cost,
+        }
+        return {
+          ...order,
+          revisions: [...(order.revisions || []), newRevision],
+        }
+      })
+      const order = orders.find(o => o.id === orderId)
+      const latestRevision = order?.revisions?.[order.revisions.length - 1]
+      const newBalance = latestRevision ? prev.balance - latestRevision.cost : prev.balance
+      return { ...prev, orders, balance: newBalance }
+    })
   }
 
   const value = {
@@ -121,6 +160,8 @@ export function AuthProvider({ children }) {
     logout,
     addTransaction,
     addOrder,
+    getOrderById,
+    addRevision,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

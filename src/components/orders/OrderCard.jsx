@@ -1,10 +1,16 @@
+import { useNavigate } from 'react-router-dom'
 import StatusBadge from './StatusBadge'
 import Card from '../ui/Card'
-import { FiCalendar } from 'react-icons/fi'
+import { FiCalendar, FiChevronRight } from 'react-icons/fi'
 
 export default function OrderCard({ order }) {
+  const navigate = useNavigate()
+
   return (
-    <Card className="hover:shadow-md transition-shadow">
+    <Card
+      className="hover:shadow-md transition-shadow cursor-pointer group"
+      onClick={() => navigate(`/orders/${order.id}`)}
+    >
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1 min-w-0">
           <p className="font-semibold text-brand-dark truncate">{order.title}</p>
@@ -17,7 +23,10 @@ export default function OrderCard({ order }) {
             </span>
           </div>
         </div>
-        <StatusBadge status={order.status} />
+        <div className="flex items-center gap-2">
+          <StatusBadge status={order.status} />
+          <FiChevronRight className="text-gray-300 group-hover:text-brand-primary transition-colors" size={18} />
+        </div>
       </div>
       <div className="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between">
         <span className="text-sm text-gray-500">খরচ:</span>

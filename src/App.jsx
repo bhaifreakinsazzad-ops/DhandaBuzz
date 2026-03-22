@@ -14,6 +14,7 @@ import ServicesPage from './pages/ServicesPage'
 import CreativeEnginePage from './pages/CreativeEnginePage'
 import WebLaunchLabPage from './pages/WebLaunchLabPage'
 import AdScaleEnginePage from './pages/AdScaleEnginePage'
+import OrderDetailPage from './pages/OrderDetailPage'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useAuth()
@@ -34,6 +35,7 @@ export default function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/wallet" element={<WalletPage />} />
           <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/orders/:orderId" element={<OrderDetailPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/services/creative-engine" element={<CreativeEnginePage />} />
           <Route path="/services/web-launch-lab" element={<WebLaunchLabPage />} />
