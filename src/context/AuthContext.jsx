@@ -76,12 +76,17 @@ export function AuthProvider({ children }) {
     setState(prev => ({ ...prev, currentUser: null }))
   }
 
-  const addTransaction = (txId, pkg) => {
+  const addTransaction = (data) => {
+    const isLegacy = typeof data === 'string'
+    const pkg = isLegacy ? arguments[1] : data.pkg
     const transaction = {
-      id: txId,
+      id: isLegacy ? data : data.txId,
       type: 'recharge',
       bdt: pkg.bdt,
       amount: pkg.maal,
+      amountPaid: isLegacy ? pkg.bdt : (data.amountPaid || pkg.bdt),
+      businessName: isLegacy ? '' : (data.businessName || ''),
+      note: isLegacy ? '' : (data.note || ''),
       description: `${pkg.label} প্যাকেজ — ৳${pkg.bdt}`,
       date: new Date().toISOString(),
       status: 'Pending',
