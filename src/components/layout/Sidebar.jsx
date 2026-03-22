@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import {
-  FiGrid, FiCreditCard, FiShoppingBag, FiHeadphones,
+  FiGrid, FiZap, FiCreditCard, FiShoppingBag, FiHeadphones,
   FiUser, FiLogOut, FiX
 } from 'react-icons/fi'
 import { useAuth } from '../../hooks/useAuth'
@@ -8,6 +8,7 @@ import { BRAND_NAME } from '../../data/constants'
 
 const navItems = [
   { to: '/dashboard', icon: FiGrid, label: 'Dashboard' },
+  { to: '/services', icon: FiZap, label: 'Services' },
   { to: '/wallet', icon: FiCreditCard, label: 'Wallet' },
   { to: '/orders', icon: FiShoppingBag, label: 'Orders' },
   { to: '/support', icon: FiHeadphones, label: 'Support' },

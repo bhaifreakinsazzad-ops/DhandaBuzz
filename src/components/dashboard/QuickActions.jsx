@@ -16,7 +16,7 @@ export default function QuickActions() {
               key={service.id}
               dark
               className="cursor-pointer hover:scale-[1.02] transition-transform"
-              onClick={() => navigate('/orders')}
+              onClick={() => navigate(service.path)}
             >
               <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-3`}>
                 <Icon className="text-white" size={18} />

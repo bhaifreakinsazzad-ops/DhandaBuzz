@@ -10,6 +10,10 @@ import WalletPage from './pages/WalletPage'
 import OrdersPage from './pages/OrdersPage'
 import SupportPage from './pages/SupportPage'
 import ProfilePage from './pages/ProfilePage'
+import ServicesPage from './pages/ServicesPage'
+import CreativeEnginePage from './pages/CreativeEnginePage'
+import WebLaunchLabPage from './pages/WebLaunchLabPage'
+import AdScaleEnginePage from './pages/AdScaleEnginePage'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useAuth()
@@ -30,6 +34,10 @@ export default function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/wallet" element={<WalletPage />} />
           <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/services/creative-engine" element={<CreativeEnginePage />} />
+          <Route path="/services/web-launch-lab" element={<WebLaunchLabPage />} />
+          <Route path="/services/adscale-engine" element={<AdScaleEnginePage />} />
           <Route path="/support" element={<SupportPage />} />
           <Route path="/profile" element={<ProfilePage />} />
         </Route>
