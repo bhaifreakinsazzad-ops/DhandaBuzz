@@ -1,6 +1,27 @@
 import { createContext, useState, useEffect } from 'react'
-import { mockOrders } from '../data/mockOrders'
-import { SIGNUP_BONUS, REVISION_COSTS, ADMIN_EMAIL, ADMIN_PASSWORD } from '../data/constants'
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+} from 'firebase/auth'
+import {
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+  collection,
+  addDoc,
+  query,
+  where,
+  orderBy,
+  onSnapshot,
+  serverTimestamp,
+  increment,
+  arrayUnion,
+} from 'firebase/firestore'
+import { auth, db } from '../firebase/config'
+import { SIGNUP_BONUS, REVISION_COSTS } from '../data/constants'
 import { SYNC_TYPES } from '../data/hubspotConfig'
 import {
   buildContactPayload,
@@ -12,293 +33,399 @@ import {
 
 export const AuthContext = createContext(null)
 
-const STORAGE_KEY = 'dhandabuzz_data'
+// localStorage key for HubSpot sync queue only (harmless UI data)
+const HUBSPOT_SYNC_KEY = 'dhandabuzz_hubspot_sync'
 
-function loadData() {
+function loadHubspotSync() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    return raw ? JSON.parse(raw) : null
+    const raw = localStorage.getItem(HUBSPOT_SYNC_KEY)
+    return raw ? JSON.parse(raw) : []
   } catch {
-    return null
+    return []
   }
-}
-
-function saveData(data) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
 }
 
 export function AuthProvider({ children }) {
-  const [state, setState] = useState(() => {
-    const saved = loadData()
-    if (saved) return saved
-    return {
-      users: [],
-      currentUser: null,
-      balance: 0,
-      orders: [],
-      transactions: [],
-      hubspotSync: [],
-    }
-  })
+  const [firebaseUser, setFirebaseUser] = useState(undefined) // undefined = initializing
+  const [userProfile, setUserProfile] = useState(null)
+  const [orders, setOrders] = useState([])
+  const [transactions, setTransactions] = useState([])
+  const [allUsers, setAllUsers] = useState([])
+  const [allOrders, setAllOrders] = useState([])
+  const [allTransactions, setAllTransactions] = useState([])
+  const [hubspotSync, setHubspotSync] = useState(loadHubspotSync)
 
+  // Persist HubSpot sync queue to localStorage
   useEffect(() => {
-    saveData(state)
-  }, [state])
+    localStorage.setItem(HUBSPOT_SYNC_KEY, JSON.stringify(hubspotSync))
+  }, [hubspotSync])
 
-  const register = ({ name, businessName, email, phone, password }) => {
-    const existingUser = state.users.find(u => u.email === email)
-    if (existingUser) {
-      return { success: false, message: 'এই ইমেইল দিয়ে আগেই অ্যাকাউন্ট তৈরি হয়েছে।' }
+  // Auth state listener
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (fbUser) => {
+      setFirebaseUser(fbUser)
+      if (!fbUser) {
+        setUserProfile(null)
+        setOrders([])
+        setTransactions([])
+      }
+    })
+    return unsubscribe
+  }, [])
+
+  // Listen to user profile (real-time for balance updates)
+  useEffect(() => {
+    if (!firebaseUser) return
+    const unsubProfile = onSnapshot(doc(db, 'users', firebaseUser.uid), (snap) => {
+      if (snap.exists()) {
+        const data = snap.data()
+        setUserProfile({
+          uid: firebaseUser.uid,
+          ...data,
+          // map ownerName -> name for backward compatibility with UI
+          name: data.ownerName || data.name || '',
+        })
+      }
+    })
+    return unsubProfile
+  }, [firebaseUser])
+
+  const isAdmin = userProfile?.role === 'admin'
+
+  // Listen to current user's orders
+  useEffect(() => {
+    if (!firebaseUser || isAdmin) return
+    const q = query(
+      collection(db, 'orders'),
+      where('userId', '==', firebaseUser.uid),
+      orderBy('createdAt', 'desc')
+    )
+    const unsub = onSnapshot(q, (snapshot) => {
+      setOrders(snapshot.docs.map((d) => ({ ...d.data(), id: d.id })))
+    })
+    return unsub
+  }, [firebaseUser, isAdmin])
+
+  // Listen to current user's recharge requests
+  useEffect(() => {
+    if (!firebaseUser || isAdmin) return
+    const q = query(
+      collection(db, 'rechargeRequests'),
+      where('userId', '==', firebaseUser.uid),
+      orderBy('submittedAt', 'desc')
+    )
+    const unsub = onSnapshot(q, (snapshot) => {
+      setTransactions(snapshot.docs.map((d) => ({ ...d.data(), docId: d.id })))
+    })
+    return unsub
+  }, [firebaseUser, isAdmin])
+
+  // Admin: listen to all data
+  useEffect(() => {
+    if (!isAdmin) return
+    const unsubUsers = onSnapshot(collection(db, 'users'), (snap) => {
+      setAllUsers(
+        snap.docs.map((d) => {
+          const data = d.data()
+          return { uid: d.id, ...data, name: data.ownerName || data.name || '' }
+        })
+      )
+    })
+    const qOrders = query(collection(db, 'orders'), orderBy('createdAt', 'desc'))
+    const unsubOrders = onSnapshot(qOrders, (snap) => {
+      setAllOrders(snap.docs.map((d) => ({ ...d.data(), id: d.id })))
+    })
+    const qRecharges = query(collection(db, 'rechargeRequests'), orderBy('submittedAt', 'desc'))
+    const unsubRecharges = onSnapshot(qRecharges, (snap) => {
+      setAllTransactions(snap.docs.map((d) => ({ ...d.data(), docId: d.id })))
+    })
+    return () => {
+      unsubUsers()
+      unsubOrders()
+      unsubRecharges()
     }
+  }, [isAdmin])
 
-    const newUser = { name, businessName, email, phone, password }
-    const contactEvent = createSyncEvent(
-      SYNC_TYPES.CONTACT_CREATE,
-      buildContactPayload(newUser),
-      { email, source: 'registration' }
-    )
-    const companyEvent = createSyncEvent(
-      SYNC_TYPES.COMPANY_CREATE,
-      buildCompanyPayload(newUser),
-      { businessName, source: 'registration' }
-    )
-    setState(prev => ({
-      ...prev,
-      users: [...prev.users, newUser],
-      currentUser: newUser,
-      balance: SIGNUP_BONUS,
-      orders: [...mockOrders],
-      transactions: [
-        {
-          id: 'TXN-BONUS',
-          type: 'bonus',
-          amount: SIGNUP_BONUS,
-          description: 'সাইনআপ বোনাস',
-          date: new Date().toISOString(),
-          status: 'Approved',
-        },
-      ],
-      hubspotSync: [...(prev.hubspotSync || []), contactEvent, companyEvent],
-    }))
-    return { success: true }
+  // ── AUTH ──────────────────────────────────────────────────────────────────
+
+  const register = async ({ name, businessName, email, phone, password }) => {
+    try {
+      const cred = await createUserWithEmailAndPassword(auth, email, password)
+      const uid = cred.user.uid
+      await setDoc(doc(db, 'users', uid), {
+        uid,
+        businessName,
+        ownerName: name,
+        email,
+        phone,
+        role: 'client',
+        maalBalance: SIGNUP_BONUS,
+        createdAt: serverTimestamp(),
+        isActive: true,
+      })
+      // Create signup bonus recharge record
+      await addDoc(collection(db, 'rechargeRequests'), {
+        id: 'TXN-BONUS',
+        userId: uid,
+        businessName,
+        amountBDT: 0,
+        maalAmount: SIGNUP_BONUS,
+        trxId: 'SIGNUP_BONUS',
+        paymentMethod: 'bonus',
+        status: 'Approved',
+        type: 'bonus',
+        amount: SIGNUP_BONUS,
+        bdt: 0,
+        description: 'সাইনআপ বোনাস',
+        date: new Date().toISOString(),
+        submittedAt: serverTimestamp(),
+        reviewedAt: serverTimestamp(),
+        reviewedBy: 'system',
+      })
+      // HubSpot sync events
+      const newUser = { name, businessName, email, phone }
+      const contactEvent = createSyncEvent(
+        SYNC_TYPES.CONTACT_CREATE,
+        buildContactPayload(newUser),
+        { email, source: 'registration' }
+      )
+      const companyEvent = createSyncEvent(
+        SYNC_TYPES.COMPANY_CREATE,
+        buildCompanyPayload(newUser),
+        { businessName, source: 'registration' }
+      )
+      setHubspotSync((prev) => [...prev, contactEvent, companyEvent])
+      return { success: true }
+    } catch (err) {
+      if (err.code === 'auth/email-already-in-use') {
+        return { success: false, message: 'এই ইমেইল দিয়ে আগেই অ্যাকাউন্ট তৈরি হয়েছে।' }
+      }
+      return { success: false, message: err.message || 'রেজিস্ট্রেশন ব্যর্থ হয়েছে।' }
+    }
   }
 
-  const login = (email, password) => {
-    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-      const adminUser = { name: 'Admin', businessName: 'DhandaBuzz', email: ADMIN_EMAIL, phone: '' }
-      setState(prev => ({ ...prev, currentUser: adminUser }))
+  const login = async (email, password) => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password)
       return { success: true }
-    }
-    const user = state.users.find(u => u.email === email && u.password === password)
-    if (!user) {
+    } catch {
       return { success: false, message: 'ইমেইল অথবা পাসওয়ার্ড ভুল হয়েছে।' }
     }
-    setState(prev => ({ ...prev, currentUser: user }))
-    return { success: true }
   }
 
-  const logout = () => {
-    setState(prev => ({ ...prev, currentUser: null }))
-  }
+  const logout = () => signOut(auth)
 
-  const addTransaction = (data) => {
-    const isLegacy = typeof data === 'string'
-    const pkg = isLegacy ? arguments[1] : data.pkg
-    const transaction = {
-      id: isLegacy ? data : data.txId,
+  // ── WALLET ────────────────────────────────────────────────────────────────
+
+  const addTransaction = async (data) => {
+    const pkg = data.pkg
+    await addDoc(collection(db, 'rechargeRequests'), {
+      id: data.txId,
+      trxId: data.txId,
+      userId: firebaseUser.uid,
+      businessName: data.businessName || userProfile?.businessName || '',
+      amountBDT: pkg.bdt,
+      maalAmount: pkg.maal,
+      paymentMethod: 'bkash',
+      status: 'Pending',
       type: 'recharge',
-      bdt: pkg.bdt,
       amount: pkg.maal,
-      amountPaid: isLegacy ? pkg.bdt : (data.amountPaid || pkg.bdt),
-      businessName: isLegacy ? '' : (data.businessName || ''),
-      note: isLegacy ? '' : (data.note || ''),
+      bdt: pkg.bdt,
+      amountPaid: data.amountPaid || pkg.bdt,
+      note: data.note || '',
       description: `${pkg.label} প্যাকেজ — ৳${pkg.bdt}`,
       date: new Date().toISOString(),
-      status: 'Pending',
-    }
-    setState(prev => ({
-      ...prev,
-      transactions: [transaction, ...prev.transactions],
-    }))
+      submittedAt: serverTimestamp(),
+      reviewedAt: null,
+      reviewedBy: null,
+    })
   }
 
-  const addOrder = (order) => {
+  // ── ORDERS ────────────────────────────────────────────────────────────────
+
+  const addOrder = async (order) => {
     const now = new Date()
     const dateStr = now.toISOString().split('T')[0]
-    const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })
-    const newOrder = {
-      ...order,
-      id: `ORD-${1000 + state.orders.length + 1}`,
+    const timeStr = now.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+    })
+    const orderId = `ORD-${Date.now()}`
+    const orderData = {
+      id: orderId,
+      orderId,
+      userId: firebaseUser.uid,
+      businessName: userProfile?.businessName || '',
+      serviceType: order.service,
+      serviceName: order.service,
+      service: order.service,
+      title: order.title,
+      maalCost: order.maalCost || 0,
       status: 'Submitted',
-      date: dateStr,
+      requestData: order.details || {},
+      details: order.details || {},
       revisions: [],
+      revisionCount: 0,
       attachments: order.attachments || [],
+      previewFiles: [],
+      finalFiles: [],
       previewUrl: null,
       downloadUrl: null,
+      adminNotes: [],
+      date: dateStr,
       timeline: [
         { status: 'Submitted', date: dateStr, time: timeStr, note: 'অর্ডার সাবমিট হয়েছে' },
       ],
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
     }
+    // Use orderId as Firestore document ID for easy lookup
+    await setDoc(doc(db, 'orders', orderId), orderData)
+
+    // HubSpot sync event
     const dealEvent = createSyncEvent(
       SYNC_TYPES.DEAL_CREATE,
-      buildDealPayload(newOrder, state.currentUser),
-      { orderId: newOrder.id, source: 'order_submit' }
+      buildDealPayload(orderData, userProfile),
+      { orderId, source: 'order_submit' }
     )
-    setState(prev => ({
-      ...prev,
-      orders: [newOrder, ...prev.orders],
-      hubspotSync: [...(prev.hubspotSync || []), dealEvent],
-    }))
+    setHubspotSync((prev) => [...prev, dealEvent])
   }
 
   const getOrderById = (id) => {
-    return state.orders.find(o => o.id === id) || null
+    const list = isAdmin ? allOrders : orders
+    return list.find((o) => o.id === id || o.orderId === id) || null
   }
 
-  const addRevision = (orderId, message) => {
-    setState(prev => {
-      const orders = prev.orders.map(order => {
-        if (order.id !== orderId) return order
-        const isFirstRevision = !order.revisions || order.revisions.length === 0
-        const cost = isFirstRevision ? 0 : (REVISION_COSTS[order.service] || 10)
-        const newRevision = {
-          id: `REV-${Date.now()}`,
-          message,
-          date: new Date().toISOString().split('T')[0],
-          status: 'Submitted',
-          cost,
-        }
-        return {
-          ...order,
-          revisions: [...(order.revisions || []), newRevision],
-        }
+  const addRevision = async (orderId, message) => {
+    const order = getOrderById(orderId)
+    if (!order) return
+    const isFirstRevision = !order.revisions || order.revisions.length === 0
+    const cost = isFirstRevision ? 0 : (REVISION_COSTS[order.service] || 10)
+    const newRevision = {
+      id: `REV-${Date.now()}`,
+      message,
+      date: new Date().toISOString().split('T')[0],
+      status: 'Submitted',
+      cost,
+    }
+    await updateDoc(doc(db, 'orders', orderId), {
+      revisions: arrayUnion(newRevision),
+      revisionCount: increment(1),
+      updatedAt: serverTimestamp(),
+    })
+    if (cost > 0) {
+      await updateDoc(doc(db, 'users', firebaseUser.uid), {
+        maalBalance: increment(-cost),
       })
-      const order = orders.find(o => o.id === orderId)
-      const latestRevision = order?.revisions?.[order.revisions.length - 1]
-      const newBalance = latestRevision ? prev.balance - latestRevision.cost : prev.balance
-      return { ...prev, orders, balance: newBalance }
+    }
+  }
+
+  // ── ADMIN ─────────────────────────────────────────────────────────────────
+
+  const adminUpdateOrderStatus = async (orderId, newStatus, note = '') => {
+    const now = new Date()
+    const timelineEntry = {
+      status: newStatus,
+      date: now.toISOString().split('T')[0],
+      time: now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }),
+      note: note || `Status updated to ${newStatus}`,
+    }
+    await updateDoc(doc(db, 'orders', orderId), {
+      status: newStatus,
+      timeline: arrayUnion(timelineEntry),
+      updatedAt: serverTimestamp(),
+    })
+    // HubSpot sync
+    const order = getOrderById(orderId)
+    if (order) {
+      const dealUpdateEvent = createSyncEvent(
+        SYNC_TYPES.DEAL_UPDATE,
+        buildDealUpdatePayload({ ...order, status: newStatus }, note),
+        { orderId, newStatus, source: 'admin_status_update' }
+      )
+      setHubspotSync((prev) => [...prev, dealUpdateEvent])
+    }
+  }
+
+  const adminSetOrderUrls = async (orderId, urls) => {
+    const updates = { updatedAt: serverTimestamp() }
+    if (urls.previewUrl !== undefined) updates.previewUrl = urls.previewUrl
+    if (urls.downloadUrl !== undefined) updates.downloadUrl = urls.downloadUrl
+    await updateDoc(doc(db, 'orders', orderId), updates)
+  }
+
+  // txDocId is the Firestore document ID of the rechargeRequest
+  const adminApproveRecharge = async (txDocId) => {
+    const tx = allTransactions.find((t) => t.docId === txDocId)
+    if (!tx || tx.status !== 'Pending') return
+    await updateDoc(doc(db, 'rechargeRequests', txDocId), {
+      status: 'Approved',
+      reviewedAt: serverTimestamp(),
+      reviewedBy: firebaseUser.uid,
+    })
+    await updateDoc(doc(db, 'users', tx.userId), {
+      maalBalance: increment(tx.amount),
     })
   }
 
-  const isAdmin = state.currentUser?.email === ADMIN_EMAIL
-
-  const adminUpdateOrderStatus = (orderId, newStatus, note = '') => {
-    setState(prev => {
-      const updatedOrders = prev.orders.map(order => {
-        if (order.id !== orderId) return order
-        const now = new Date()
-        return {
-          ...order,
-          status: newStatus,
-          timeline: [
-            ...(order.timeline || []),
-            {
-              status: newStatus,
-              date: now.toISOString().split('T')[0],
-              time: now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }),
-              note: note || `Status updated to ${newStatus}`,
-            },
-          ],
-        }
-      })
-      const updatedOrder = updatedOrders.find(o => o.id === orderId)
-      const dealUpdateEvent = updatedOrder
-        ? createSyncEvent(
-            SYNC_TYPES.DEAL_UPDATE,
-            buildDealUpdatePayload(updatedOrder, note),
-            { orderId, newStatus, source: 'admin_status_update' }
-          )
-        : null
-      return {
-        ...prev,
-        orders: updatedOrders,
-        hubspotSync: dealUpdateEvent
-          ? [...(prev.hubspotSync || []), dealUpdateEvent]
-          : (prev.hubspotSync || []),
-      }
+  const adminRejectRecharge = async (txDocId) => {
+    await updateDoc(doc(db, 'rechargeRequests', txDocId), {
+      status: 'Rejected',
+      reviewedAt: serverTimestamp(),
+      reviewedBy: firebaseUser.uid,
     })
   }
 
-  const adminSetOrderUrls = (orderId, urls) => {
-    setState(prev => ({
-      ...prev,
-      orders: prev.orders.map(order => {
-        if (order.id !== orderId) return order
-        return {
-          ...order,
-          ...(urls.previewUrl !== undefined && { previewUrl: urls.previewUrl }),
-          ...(urls.downloadUrl !== undefined && { downloadUrl: urls.downloadUrl }),
-        }
-      }),
-    }))
-  }
-
-  const adminApproveRecharge = (txId) => {
-    setState(prev => {
-      const tx = prev.transactions.find(t => t.id === txId)
-      if (!tx || tx.status !== 'Pending') return prev
-      return {
-        ...prev,
-        balance: prev.balance + tx.amount,
-        transactions: prev.transactions.map(t =>
-          t.id === txId ? { ...t, status: 'Approved' } : t
-        ),
-      }
+  const adminAddOrderNote = async (orderId, note) => {
+    const noteEntry = { text: note, date: new Date().toISOString() }
+    await updateDoc(doc(db, 'orders', orderId), {
+      adminNotes: arrayUnion(noteEntry),
+      updatedAt: serverTimestamp(),
     })
   }
 
-  const adminRejectRecharge = (txId) => {
-    setState(prev => ({
-      ...prev,
-      transactions: prev.transactions.map(t =>
-        t.id === txId ? { ...t, status: 'Rejected' } : t
-      ),
-    }))
+  const adminUpdateUserBalance = async (uid, newBalance) => {
+    await updateDoc(doc(db, 'users', uid), { maalBalance: newBalance })
   }
 
-  const adminAddOrderNote = (orderId, note) => {
-    setState(prev => ({
-      ...prev,
-      orders: prev.orders.map(order => {
-        if (order.id !== orderId) return order
-        return {
-          ...order,
-          adminNotes: [
-            ...(order.adminNotes || []),
-            { text: note, date: new Date().toISOString() },
-          ],
-        }
-      }),
-    }))
-  }
+  // ── HUBSPOT SYNC ──────────────────────────────────────────────────────────
 
   const markSyncEvent = (syncId, status, error = null) => {
-    setState(prev => ({
-      ...prev,
-      hubspotSync: (prev.hubspotSync || []).map(ev =>
+    setHubspotSync((prev) =>
+      prev.map((ev) =>
         ev.id === syncId
-          ? { ...ev, status, syncedAt: status === 'synced' ? new Date().toISOString() : ev.syncedAt, error }
+          ? {
+              ...ev,
+              status,
+              syncedAt: status === 'synced' ? new Date().toISOString() : ev.syncedAt,
+              error,
+            }
           : ev
-      ),
-    }))
+      )
+    )
   }
 
   const clearSyncedEvents = () => {
-    setState(prev => ({
-      ...prev,
-      hubspotSync: (prev.hubspotSync || []).filter(ev => ev.status !== 'synced'),
-    }))
+    setHubspotSync((prev) => prev.filter((ev) => ev.status !== 'synced'))
   }
 
+  // ── CONTEXT VALUE ─────────────────────────────────────────────────────────
+
+  const balance = userProfile?.maalBalance ?? 0
+  const authLoading = firebaseUser === undefined
+
   const value = {
-    user: state.currentUser,
-    isAuthenticated: !!state.currentUser,
+    user: userProfile,
+    isAuthenticated: !!firebaseUser && !!userProfile,
     isAdmin,
-    balance: state.balance,
-    users: state.users,
-    orders: state.orders,
-    transactions: state.transactions,
-    hubspotSync: state.hubspotSync || [],
+    authLoading,
+    balance,
+    // Admin sees all; client sees own
+    users: isAdmin ? allUsers : [],
+    orders: isAdmin ? allOrders : orders,
+    transactions: isAdmin ? allTransactions : transactions,
+    hubspotSync,
     register,
     login,
     logout,
@@ -311,6 +438,7 @@ export function AuthProvider({ children }) {
     adminApproveRecharge,
     adminRejectRecharge,
     adminAddOrderNote,
+    adminUpdateUserBalance,
     markSyncEvent,
     clearSyncedEvents,
   }

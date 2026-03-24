@@ -13,6 +13,7 @@ export default function AdminOrdersPage() {
   const [notesOrder, setNotesOrder] = useState(null)
   const [form, setForm] = useState({ status: '', previewUrl: '', downloadUrl: '', note: '' })
   const [noteText, setNoteText] = useState('')
+  const [saving, setSaving] = useState(false)
 
   const filtered = filterStatus ? orders.filter(o => o.status === filterStatus) : orders
 
@@ -26,26 +27,35 @@ export default function AdminOrdersPage() {
     })
   }
 
-  const handleUpdate = () => {
-    if (form.status !== editOrder.status) {
-      adminUpdateOrderStatus(editOrder.id, form.status, form.note)
+  const handleUpdate = async () => {
+    setSaving(true)
+    try {
+      if (form.status !== editOrder.status) {
+        await adminUpdateOrderStatus(editOrder.id, form.status, form.note)
+      }
+      const urls = {}
+      if (form.previewUrl !== (editOrder.previewUrl || '')) urls.previewUrl = form.previewUrl
+      if (form.downloadUrl !== (editOrder.downloadUrl || '')) urls.downloadUrl = form.downloadUrl
+      if (Object.keys(urls).length > 0) await adminSetOrderUrls(editOrder.id, urls)
+      toast.success(`Order ${editOrder.id} updated`)
+      setEditOrder(null)
+    } catch {
+      toast.error('Update failed. Try again.')
     }
-    const urls = {}
-    if (form.previewUrl !== (editOrder.previewUrl || '')) urls.previewUrl = form.previewUrl
-    if (form.downloadUrl !== (editOrder.downloadUrl || '')) urls.downloadUrl = form.downloadUrl
-    if (Object.keys(urls).length > 0) adminSetOrderUrls(editOrder.id, urls)
-    toast.success(`Order ${editOrder.id} updated`)
-    setEditOrder(null)
+    setSaving(false)
   }
 
-  const handleAddNote = () => {
+  const handleAddNote = async () => {
     if (!noteText.trim()) return
-    adminAddOrderNote(notesOrder.id, noteText.trim())
-    toast.success('Note added')
-    setNoteText('')
-    // Refresh notesOrder reference
-    const updated = orders.find(o => o.id === notesOrder.id)
-    if (updated) setNotesOrder(updated)
+    setSaving(true)
+    try {
+      await adminAddOrderNote(notesOrder.id, noteText.trim())
+      toast.success('Note added')
+      setNoteText('')
+    } catch {
+      toast.error('Failed to add note.')
+    }
+    setSaving(false)
   }
 
   return (
@@ -85,6 +95,7 @@ export default function AdminOrdersPage() {
             <thead className="bg-gray-50">
               <tr>
                 <th className="text-left px-4 py-3 font-medium text-gray-500">Order ID</th>
+                <th className="text-left px-4 py-3 font-medium text-gray-500">Business</th>
                 <th className="text-left px-4 py-3 font-medium text-gray-500">Service</th>
                 <th className="text-left px-4 py-3 font-medium text-gray-500">Title</th>
                 <th className="text-left px-4 py-3 font-medium text-gray-500">Status</th>
@@ -99,8 +110,9 @@ export default function AdminOrdersPage() {
               {filtered.map(order => (
                 <tr key={order.id} className="hover:bg-gray-50/50">
                   <td className="px-4 py-3 font-mono text-xs text-gray-500">{order.id}</td>
+                  <td className="px-4 py-3 text-xs text-gray-600 truncate max-w-[100px]">{order.businessName || '—'}</td>
                   <td className="px-4 py-3 text-xs text-gray-600">{order.service}</td>
-                  <td className="px-4 py-3 text-gray-700 truncate max-w-[180px]">{order.title}</td>
+                  <td className="px-4 py-3 text-gray-700 truncate max-w-[160px]">{order.title}</td>
                   <td className="px-4 py-3"><StatusBadge status={order.status} /></td>
                   <td className="px-4 py-3 text-xs text-gray-500 whitespace-nowrap">{order.date}</td>
                   <td className="px-4 py-3 font-semibold text-brand-accent whitespace-nowrap">{order.maalCost} M</td>
@@ -128,7 +140,7 @@ export default function AdminOrdersPage() {
                 </tr>
               ))}
               {filtered.length === 0 && (
-                <tr><td colSpan={9} className="px-4 py-8 text-center text-gray-400">No orders found</td></tr>
+                <tr><td colSpan={10} className="px-4 py-8 text-center text-gray-400">No orders found</td></tr>
               )}
             </tbody>
           </table>
@@ -154,7 +166,7 @@ export default function AdminOrdersPage() {
               type="text"
               value={form.previewUrl}
               onChange={e => setForm(f => ({ ...f, previewUrl: e.target.value }))}
-              placeholder="/previews/filename.jpg"
+              placeholder="https://... or /previews/filename.jpg"
               className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-primary/50"
             />
           </div>
@@ -164,7 +176,7 @@ export default function AdminOrdersPage() {
               type="text"
               value={form.downloadUrl}
               onChange={e => setForm(f => ({ ...f, downloadUrl: e.target.value }))}
-              placeholder="/downloads/filename.zip"
+              placeholder="https://... or /downloads/filename.zip"
               className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-primary/50"
             />
           </div>
@@ -178,8 +190,8 @@ export default function AdminOrdersPage() {
               className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-primary/50"
             />
           </div>
-          <Button onClick={handleUpdate} className="w-full" variant="dark">
-            Save Changes
+          <Button onClick={handleUpdate} className="w-full" variant="dark" disabled={saving}>
+            {saving ? 'Saving...' : 'Save Changes'}
           </Button>
         </div>
       </Modal>
@@ -208,8 +220,8 @@ export default function AdminOrdersPage() {
               className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-sm resize-none focus:outline-none focus:ring-2 focus:ring-brand-primary/50"
             />
           </div>
-          <Button onClick={handleAddNote} className="w-full" variant="dark" disabled={!noteText.trim()}>
-            Add Note
+          <Button onClick={handleAddNote} className="w-full" variant="dark" disabled={!noteText.trim() || saving}>
+            {saving ? 'Adding...' : 'Add Note'}
           </Button>
         </div>
       </Modal>

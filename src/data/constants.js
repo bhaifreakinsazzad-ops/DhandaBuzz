@@ -32,5 +32,5 @@ export const REVISION_COSTS = {
   'AdScale Engine': 30,
 }
 
-export const ADMIN_EMAIL = 'admin@dhandabuzz.com'
-export const ADMIN_PASSWORD = 'admin123'
+// Admin role is determined by the 'role' field in the Firestore users collection.
+// To make a user admin, set their role to 'admin' directly in Firestore.

@@ -2,7 +2,7 @@ import { useAuth } from '../../hooks/useAuth'
 import { FiUsers } from 'react-icons/fi'
 
 export default function AdminUsersPage() {
-  const { users, orders, balance } = useAuth()
+  const { users, orders } = useAuth()
 
   return (
     <div className="space-y-6">
@@ -25,34 +25,49 @@ export default function AdminUsersPage() {
                 <th className="text-left px-4 py-3 font-medium text-gray-500">Email</th>
                 <th className="text-left px-4 py-3 font-medium text-gray-500">Balance</th>
                 <th className="text-left px-4 py-3 font-medium text-gray-500">Orders</th>
+                <th className="text-left px-4 py-3 font-medium text-gray-500">Role</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
-              {users.map((user, i) => (
-                <tr key={user.email} className="hover:bg-gray-50/50">
-                  <td className="px-4 py-3 text-gray-400 text-xs">{i + 1}</td>
-                  <td className="px-4 py-3">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary font-bold text-xs">
-                        {(user.businessName || user.name || '?').charAt(0).toUpperCase()}
+              {users.map((user, i) => {
+                const userOrderCount = orders.filter(o => o.userId === user.uid).length
+                return (
+                  <tr key={user.uid || user.email} className="hover:bg-gray-50/50">
+                    <td className="px-4 py-3 text-gray-400 text-xs">{i + 1}</td>
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary font-bold text-xs">
+                          {(user.businessName || user.name || '?').charAt(0).toUpperCase()}
+                        </div>
+                        <span className="font-medium text-gray-900">{user.businessName || '—'}</span>
                       </div>
-                      <span className="font-medium text-gray-900">{user.businessName || '—'}</span>
-                    </div>
-                  </td>
-                  <td className="px-4 py-3 text-gray-700">{user.name}</td>
-                  <td className="px-4 py-3 text-gray-600">{user.phone || '—'}</td>
-                  <td className="px-4 py-3 text-gray-600 text-xs">{user.email}</td>
-                  <td className="px-4 py-3 font-semibold text-brand-accent">{balance} Maal</td>
-                  <td className="px-4 py-3 text-center">
-                    <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
-                      {orders.length}
-                    </span>
-                  </td>
-                </tr>
-              ))}
+                    </td>
+                    <td className="px-4 py-3 text-gray-700">{user.name || user.ownerName || '—'}</td>
+                    <td className="px-4 py-3 text-gray-600">{user.phone || '—'}</td>
+                    <td className="px-4 py-3 text-gray-600 text-xs">{user.email}</td>
+                    <td className="px-4 py-3 font-semibold text-brand-accent">
+                      {(user.maalBalance ?? 0).toLocaleString()} Maal
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
+                        {userOrderCount}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${
+                        user.role === 'admin'
+                          ? 'bg-purple-100 text-purple-700'
+                          : 'bg-gray-100 text-gray-600'
+                      }`}>
+                        {user.role || 'client'}
+                      </span>
+                    </td>
+                  </tr>
+                )
+              })}
               {users.length === 0 && (
                 <tr>
-                  <td colSpan={7} className="px-4 py-12 text-center">
+                  <td colSpan={8} className="px-4 py-12 text-center">
                     <FiUsers className="mx-auto text-gray-300 mb-2" size={32} />
                     <p className="text-gray-400">No registered users yet</p>
                   </td>

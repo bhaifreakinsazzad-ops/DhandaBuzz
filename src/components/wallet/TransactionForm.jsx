@@ -19,7 +19,7 @@ export default function TransactionForm({ selectedPkg }) {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (!selectedPkg) {
       toast.error('প্রথমে একটি প্যাকেজ সিলেক্ট করুন।')
@@ -35,8 +35,8 @@ export default function TransactionForm({ selectedPkg }) {
     }
 
     setLoading(true)
-    setTimeout(() => {
-      addTransaction({
+    try {
+      await addTransaction({
         txId: form.txId.trim(),
         businessName: form.businessName || user?.businessName || '',
         amountPaid: Number(form.amountPaid),
@@ -45,8 +45,10 @@ export default function TransactionForm({ selectedPkg }) {
       })
       toast.success('রিচার্জ রিকোয়েস্ট সাবমিট হয়েছে! অ্যাপ্রুভালের জন্য অপেক্ষা করুন।')
       setForm({ businessName: '', txId: '', amountPaid: '', note: '' })
-      setLoading(false)
-    }, 800)
+    } catch {
+      toast.error('রিকোয়েস্ট সাবমিট ব্যর্থ হয়েছে। আবার চেষ্টা করুন।')
+    }
+    setLoading(false)
   }
 
   return (

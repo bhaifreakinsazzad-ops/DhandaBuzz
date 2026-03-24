@@ -16,13 +16,13 @@ export default function OrderRevisions({ order }) {
   const canRequestRevision = order.status === 'Preview Ready'
   const hasEnoughBalance = balance >= revisionCost
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!message.trim()) return
     if (!isFirstRevision && !showConfirm) {
       setShowConfirm(true)
       return
     }
-    addRevision(order.id, message.trim())
+    await addRevision(order.id, message.trim())
     setMessage('')
     setShowConfirm(false)
   }

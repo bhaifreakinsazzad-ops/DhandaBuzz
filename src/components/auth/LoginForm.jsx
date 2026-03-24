@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
-import { ADMIN_EMAIL } from '../../data/constants'
 import Button from '../ui/Button'
 import Input from '../ui/Input'
 import toast from 'react-hot-toast'
@@ -10,23 +9,23 @@ export default function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
-  const { login } = useAuth()
+  const { login, isAdmin } = useAuth()
   const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
-
-    setTimeout(() => {
-      const result = login(email, password)
-      if (result.success) {
-        toast.success('সফলভাবে লগইন হয়েছে!')
-        navigate(email === ADMIN_EMAIL ? '/admin/dashboard' : '/dashboard')
-      } else {
-        toast.error(result.message)
-      }
-      setLoading(false)
-    }, 500)
+    const result = await login(email, password)
+    if (result.success) {
+      toast.success('সফলভাবে লগইন হয়েছে!')
+      // isAdmin won't be updated yet here (profile loads async),
+      // so we do a short delay then check or just go to dashboard
+      // The dashboard will redirect admin automatically via AdminProtectedRoute
+      navigate('/dashboard')
+    } else {
+      toast.error(result.message)
+    }
+    setLoading(false)
   }
 
   return (

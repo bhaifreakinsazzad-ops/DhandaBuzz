@@ -17,8 +17,8 @@ export default function AdminDashboardPage() {
 
   const pendingRecharges = transactions.filter(t => t.status === 'Pending')
   const totalMaalDistributed = transactions
-    .filter(t => t.status === 'Approved')
-    .reduce((sum, t) => sum + t.amount, 0)
+    .filter(t => t.status === 'Approved' && t.type !== 'bonus')
+    .reduce((sum, t) => sum + (t.amount || 0), 0)
 
   const stats = [
     { label: 'Total Users', value: users.length, icon: FiUsers, color: 'text-blue-500', bg: 'bg-blue-50' },

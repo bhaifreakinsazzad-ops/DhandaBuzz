@@ -22,20 +22,17 @@ export default function RegisterForm() {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
-
-    setTimeout(() => {
-      const result = register(form)
-      if (result.success) {
-        toast.success(`স্বাগতম! ${SIGNUP_BONUS} Maal বোনাস যোগ হয়েছে!`)
-        navigate('/dashboard')
-      } else {
-        toast.error(result.message)
-      }
-      setLoading(false)
-    }, 500)
+    const result = await register(form)
+    if (result.success) {
+      toast.success(`স্বাগতম! ${SIGNUP_BONUS} Maal বোনাস যোগ হয়েছে!`)
+      navigate('/dashboard')
+    } else {
+      toast.error(result.message)
+    }
+    setLoading(false)
   }
 
   return (

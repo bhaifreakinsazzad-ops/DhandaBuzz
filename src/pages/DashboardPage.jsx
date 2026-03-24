@@ -1,8 +1,20 @@
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../hooks/useAuth'
 import StatsOverview from '../components/dashboard/StatsOverview'
 import QuickActions from '../components/dashboard/QuickActions'
 import RecentOrders from '../components/dashboard/RecentOrders'
 
 export default function DashboardPage() {
+  const { isAdmin } = useAuth()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (isAdmin) navigate('/admin/dashboard', { replace: true })
+  }, [isAdmin, navigate])
+
+  if (isAdmin) return null
+
   return (
     <div className="space-y-6">
       <div>

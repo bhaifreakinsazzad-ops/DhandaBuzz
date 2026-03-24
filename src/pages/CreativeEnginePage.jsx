@@ -32,7 +32,7 @@ export default function CreativeEnginePage() {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (!selectedPkg) {
       toast.error('প্রথমে একটি প্যাকেজ সিলেক্ট করুন।')
@@ -44,8 +44,8 @@ export default function CreativeEnginePage() {
     }
 
     setLoading(true)
-    setTimeout(() => {
-      addOrder({
+    try {
+      await addOrder({
         service: service.name,
         title: `${selectedPkg.label} — ${form.productName || form.businessName}`,
         maalCost: selectedPkg.maal,
@@ -53,8 +53,10 @@ export default function CreativeEnginePage() {
       })
       toast.success('অর্ডার সফলভাবে সাবমিট হয়েছে!')
       navigate('/orders')
-      setLoading(false)
-    }, 800)
+    } catch {
+      toast.error('অর্ডার সাবমিট ব্যর্থ হয়েছে। আবার চেষ্টা করুন।')
+    }
+    setLoading(false)
   }
 
   return (

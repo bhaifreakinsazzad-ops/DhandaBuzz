@@ -13,18 +13,17 @@ function formatDate(isoString) {
 export default function AdminRechargesPage() {
   const { transactions, adminApproveRecharge, adminRejectRecharge } = useAuth()
 
-  const handleApprove = (txId) => {
-    adminApproveRecharge(txId)
-    toast.success(`Recharge ${txId} approved`)
+  const handleApprove = async (docId, displayId) => {
+    await adminApproveRecharge(docId)
+    toast.success(`Recharge ${displayId} approved`)
   }
 
-  const handleReject = (txId) => {
-    adminRejectRecharge(txId)
-    toast.success(`Recharge ${txId} rejected`)
+  const handleReject = async (docId, displayId) => {
+    await adminRejectRecharge(docId)
+    toast.success(`Recharge ${displayId} rejected`)
   }
 
   const pending = transactions.filter(t => t.status === 'Pending')
-  const others = transactions.filter(t => t.status !== 'Pending')
 
   return (
     <div className="space-y-6">
@@ -63,9 +62,9 @@ export default function AdminRechargesPage() {
                 </thead>
                 <tbody className="divide-y divide-gray-50">
                   {pending.map((tx, i) => (
-                    <tr key={`${tx.id}-${i}`} className="hover:bg-yellow-50/30">
+                    <tr key={`${tx.docId}-${i}`} className="hover:bg-yellow-50/30">
                       <td className="px-4 py-3 text-xs text-gray-500 whitespace-nowrap">{formatDate(tx.date)}</td>
-                      <td className="px-4 py-3 font-mono text-xs text-gray-500">{tx.id}</td>
+                      <td className="px-4 py-3 font-mono text-xs text-gray-500">{tx.id || tx.trxId}</td>
                       <td className="px-4 py-3 text-gray-700">{tx.businessName || '—'}</td>
                       <td className="px-4 py-3 text-gray-600">{tx.description}</td>
                       <td className="px-4 py-3 text-gray-600 whitespace-nowrap">৳{tx.amountPaid || tx.bdt || '—'}</td>
@@ -74,13 +73,13 @@ export default function AdminRechargesPage() {
                       <td className="px-4 py-3">
                         <div className="flex gap-2">
                           <button
-                            onClick={() => handleApprove(tx.id)}
+                            onClick={() => handleApprove(tx.docId, tx.id || tx.trxId)}
                             className="text-xs bg-emerald-500 text-white px-3 py-1.5 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
                           >
                             Approve
                           </button>
                           <button
-                            onClick={() => handleReject(tx.id)}
+                            onClick={() => handleReject(tx.docId, tx.id || tx.trxId)}
                             className="text-xs bg-red-500 text-white px-3 py-1.5 rounded-lg hover:bg-red-600 transition-colors font-medium"
                           >
                             Reject
@@ -106,6 +105,7 @@ export default function AdminRechargesPage() {
                 <tr>
                   <th className="text-left px-4 py-3 font-medium text-gray-500">Date</th>
                   <th className="text-left px-4 py-3 font-medium text-gray-500">TX ID</th>
+                  <th className="text-left px-4 py-3 font-medium text-gray-500">Business</th>
                   <th className="text-left px-4 py-3 font-medium text-gray-500">Type</th>
                   <th className="text-left px-4 py-3 font-medium text-gray-500">Description</th>
                   <th className="text-left px-4 py-3 font-medium text-gray-500">BDT</th>
@@ -115,9 +115,10 @@ export default function AdminRechargesPage() {
               </thead>
               <tbody className="divide-y divide-gray-50">
                 {transactions.map((tx, i) => (
-                  <tr key={`${tx.id}-all-${i}`} className="hover:bg-gray-50/50">
+                  <tr key={`${tx.docId}-all-${i}`} className="hover:bg-gray-50/50">
                     <td className="px-4 py-3 text-xs text-gray-500 whitespace-nowrap">{formatDate(tx.date)}</td>
-                    <td className="px-4 py-3 font-mono text-xs text-gray-500">{tx.id}</td>
+                    <td className="px-4 py-3 font-mono text-xs text-gray-500">{tx.id || tx.trxId}</td>
+                    <td className="px-4 py-3 text-gray-700 text-xs">{tx.businessName || '—'}</td>
                     <td className="px-4 py-3 text-xs text-gray-600 capitalize">{tx.type}</td>
                     <td className="px-4 py-3 text-gray-700">{tx.description}</td>
                     <td className="px-4 py-3 text-gray-600 whitespace-nowrap">
@@ -138,7 +139,7 @@ export default function AdminRechargesPage() {
                   </tr>
                 ))}
                 {transactions.length === 0 && (
-                  <tr><td colSpan={7} className="px-4 py-8 text-center text-gray-400">No transactions yet</td></tr>
+                  <tr><td colSpan={8} className="px-4 py-8 text-center text-gray-400">No transactions yet</td></tr>
                 )}
               </tbody>
             </table>
