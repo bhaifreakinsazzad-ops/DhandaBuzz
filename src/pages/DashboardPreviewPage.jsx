@@ -36,7 +36,7 @@ export default function DashboardPreviewPage() {
       <div className="bg-white border-b border-gray-200 px-4 sm:px-6 py-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src="/logo-icon-green.svg" alt={BRAND_NAME} className="w-8 h-8" />
+            <img src={`${import.meta.env.BASE_URL}logo-icon-green.svg`} alt={BRAND_NAME} className="w-8 h-8" />
             <span className="font-heading font-bold text-brand-dark">{BRAND_NAME}</span>
             <span className="text-xs bg-brand-primary/10 text-brand-primary px-2 py-0.5 rounded-full font-medium">Preview</span>
           </div>
@@ -136,7 +136,7 @@ export default function DashboardPreviewPage() {
         <div className="fixed inset-0 pointer-events-none z-10 flex items-end justify-center pb-8 sm:pb-12">
           <div className="pointer-events-auto bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-200 p-6 sm:p-8 text-center max-w-md mx-4">
             <div className="w-14 h-14 bg-brand-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <img src="/logo-icon-green.svg" alt={BRAND_NAME} className="w-8 h-8" />
+              <img src={`${import.meta.env.BASE_URL}logo-icon-green.svg`} alt={BRAND_NAME} className="w-8 h-8" />
             </div>
             <h3 className="text-xl font-bold font-heading text-brand-dark mb-2">
               আপনার নিজের ড্যাশবোর্ড পান!

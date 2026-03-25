@@ -37,7 +37,7 @@ export default function AdminSidebar({ isOpen, onClose }) {
       >
         <div className="flex items-center justify-between p-5 border-b border-gray-700">
           <div className="flex items-center gap-2">
-            <img src="/logo-icon-green.svg" alt="DhandaBuzz" className="w-8 h-8 object-contain" />
+            <img src={`${import.meta.env.BASE_URL}logo-icon-green.svg`} alt="DhandaBuzz" className="w-8 h-8 object-contain" />
             <span className="font-heading font-bold text-white">DB <span className="text-red-400">Admin</span></span>
           </div>
           <button className="lg:hidden text-gray-400 hover:text-white" onClick={onClose}>

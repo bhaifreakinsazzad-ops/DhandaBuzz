@@ -22,7 +22,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
             <img
-              src="/logo-icon-green.svg"
+              src={`${import.meta.env.BASE_URL}logo-icon-green.svg`}
               alt="DhandaBuzz"
               className="w-10 h-10 object-contain"
             />
@@ -45,7 +45,7 @@ export default function Navbar() {
               Services
             </button>
             <button onClick={() => scrollToSection('how-it-works')} className="text-gray-600 hover:text-brand-primary transition-colors font-medium">
-              কিভাবে কাজ করে
+              How It Works
             </button>
             {isAuthenticated ? (
               <Button size="sm" onClick={() => navigate('/dashboard')} className="group">
@@ -83,7 +83,7 @@ export default function Navbar() {
             Services
           </button>
           <button onClick={() => scrollToSection('how-it-works')} className="block py-2 text-gray-600 font-medium w-full text-left">
-            কিভাবে কাজ করে
+            How It Works
           </button>
           {isAuthenticated ? (
             <Button className="w-full" size="sm" onClick={() => { navigate('/dashboard'); setMobileOpen(false) }}>

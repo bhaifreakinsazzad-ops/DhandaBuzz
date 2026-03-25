@@ -21,7 +21,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-5">
             <div className="flex items-center gap-3 mb-5">
-              <img src="/logo-icon-green.svg" alt="DhandaBuzz" className="w-10 h-10 object-contain" />
+              <img src={`${import.meta.env.BASE_URL}logo-icon-green.svg`} alt="DhandaBuzz" className="w-10 h-10 object-contain" />
               <div>
                 <span className="font-heading font-bold text-xl text-white">
                   Dhanda<span className="text-brand-primary">Buzz</span>

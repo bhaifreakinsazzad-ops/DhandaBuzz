@@ -43,7 +43,7 @@ export default function Sidebar({ isOpen, onClose }) {
       >
         <div className="flex items-center justify-between p-5 border-b border-brand-dark-border">
           <div className="flex items-center gap-2">
-            <img src="/logo-icon-green.svg" alt="DhandaBuzz" className="w-8 h-8 object-contain" />
+            <img src={`${import.meta.env.BASE_URL}logo-icon-green.svg`} alt="DhandaBuzz" className="w-8 h-8 object-contain" />
             <span className="font-heading font-bold text-white">
               Dhanda<span className="text-brand-primary">Buzz</span>
             </span>
