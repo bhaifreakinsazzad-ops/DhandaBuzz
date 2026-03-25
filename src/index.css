@@ -2,15 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Hind+Siliguri:wght@400;500;600;700&display=swap');
+
 @layer base {
   html {
     scroll-behavior: smooth;
   }
-
   body {
     font-family: 'Hind Siliguri', sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
-
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Inter', 'Hind Siliguri', sans-serif;
   }
@@ -18,10 +19,52 @@
 
 @layer components {
   .gradient-primary {
-    @apply bg-gradient-to-r from-brand-primary to-purple-500;
+    @apply bg-gradient-to-r from-brand-primary to-brand-secondary;
+  }
+  .gradient-hero {
+    background: linear-gradient(135deg, #060F1E 0%, #0A1628 40%, #0F2B1A 70%, #0A1628 100%);
+  }
+  .gradient-text-green {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-brand-accent to-brand-neon;
+  }
+  .gradient-border {
+    border-image: linear-gradient(135deg, #2ECC71, #C4E538) 1;
   }
 
-  .gradient-hero {
-    @apply bg-gradient-to-br from-brand-darker via-brand-dark to-brand-primary;
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
   }
+  .glass-dark {
+    @apply bg-brand-dark/80 backdrop-blur-xl border border-brand-dark-border;
+  }
+
+  .glow-green {
+    box-shadow: 0 0 30px rgba(46, 204, 113, 0.15), 0 0 60px rgba(46, 204, 113, 0.05);
+  }
+  .glow-green-strong {
+    box-shadow: 0 0 20px rgba(46, 204, 113, 0.3), 0 0 60px rgba(46, 204, 113, 0.1);
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(46, 204, 113, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(46, 204, 113, 0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .bg-dots {
+    background-image: radial-gradient(circle, rgba(46, 204, 113, 0.1) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0A1628;
+}
+::-webkit-scrollbar-thumb {
+  background: #2ECC71;
+  border-radius: 3px;
 }

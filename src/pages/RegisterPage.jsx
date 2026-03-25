@@ -6,9 +6,11 @@ export default function RegisterPage() {
     <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="w-14 h-14 rounded-2xl bg-brand-primary flex items-center justify-center mx-auto mb-4">
-            <span className="text-white font-bold text-xl font-heading">DB</span>
-          </div>
+          <img
+            src="/logo-icon-green.svg"
+            alt="DhandaBuzz"
+            className="w-16 h-16 mx-auto mb-4"
+          />
           <h1 className="text-2xl font-bold font-heading text-brand-dark">
             বিজনেস অ্যাকাউন্ট তৈরি করুন
           </h1>

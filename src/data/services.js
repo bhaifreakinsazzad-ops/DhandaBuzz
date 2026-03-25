@@ -7,7 +7,7 @@ export const services = [
     nameBn: 'ক্রিয়েটিভ ইঞ্জিন',
     description: 'কনটেন্ট, গ্রাফিক্স, সোশ্যাল মিডিয়া ক্রিয়েটিভ — সব এক জায়গায়।',
     icon: FiImage,
-    color: 'from-purple-500 to-pink-500',
+    color: 'from-emerald-500 to-teal-500',
     startingMaal: 5,
     path: '/services/creative-engine',
     pricing: [

@@ -35,8 +35,8 @@ export default function StatsOverview() {
       label: 'Total Orders',
       value: orders.length,
       icon: FiShoppingBag,
-      color: 'bg-purple-50 text-purple-500',
-      iconBg: 'bg-purple-500',
+      color: 'bg-teal-50 text-teal-500',
+      iconBg: 'bg-teal-500',
     },
   ]
 

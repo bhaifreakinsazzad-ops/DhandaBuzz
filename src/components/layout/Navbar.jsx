@@ -3,32 +3,52 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FiMenu, FiX } from 'react-icons/fi'
 import { useAuth } from '../../hooks/useAuth'
 import Button from '../ui/Button'
-import { BRAND_NAME } from '../../data/constants'
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const { isAuthenticated } = useAuth()
   const navigate = useNavigate()
 
+  const scrollToSection = (id) => {
+    setMobileOpen(false)
+    const el = document.getElementById(id)
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  }
+
   return (
-    <nav className="sticky top-0 z-40 bg-white/80 backdrop-blur-lg border-b border-gray-100">
+    <nav className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-gray-100/50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-lg bg-brand-primary flex items-center justify-center">
-              <span className="text-white font-bold text-sm font-heading">DB</span>
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-3">
+            <img
+              src="/logo-icon-green.svg"
+              alt="DhandaBuzz"
+              className="w-10 h-10 object-contain"
+            />
+            <div className="flex flex-col">
+              <span className="font-heading font-bold text-xl text-brand-dark leading-none">
+                Dhanda<span className="text-brand-primary">Buzz</span>
+              </span>
+              <span className="text-[10px] text-brand-muted font-medium tracking-wider uppercase hidden sm:block">
+                AI-Powered Digital Agency
+              </span>
             </div>
-            <span className="font-heading font-bold text-xl text-brand-dark">
-              {BRAND_NAME}
-            </span>
           </Link>
 
+          {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-6">
             <Link to="/" className="text-gray-600 hover:text-brand-primary transition-colors font-medium">
               Home
             </Link>
+            <button onClick={() => scrollToSection('services')} className="text-gray-600 hover:text-brand-primary transition-colors font-medium">
+              Services
+            </button>
+            <button onClick={() => scrollToSection('how-it-works')} className="text-gray-600 hover:text-brand-primary transition-colors font-medium">
+              কিভাবে কাজ করে
+            </button>
             {isAuthenticated ? (
-              <Button size="sm" onClick={() => navigate('/dashboard')}>
+              <Button size="sm" onClick={() => navigate('/dashboard')} className="group">
                 Dashboard
               </Button>
             ) : (
@@ -37,12 +57,13 @@ export default function Navbar() {
                   Login
                 </Button>
                 <Button size="sm" onClick={() => navigate('/register')}>
-                  ফ্রি অ্যাকাউন্ট খুলুন
+                  ফ্রি শুরু করুন
                 </Button>
               </div>
             )}
           </div>
 
+          {/* Mobile Toggle */}
           <button
             className="md:hidden p-2 rounded-lg hover:bg-gray-100"
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -52,15 +73,18 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-3">
-          <Link
-            to="/"
-            className="block py-2 text-gray-600 font-medium"
-            onClick={() => setMobileOpen(false)}
-          >
+        <div className="md:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-3 animate-slide-up">
+          <Link to="/" className="block py-2 text-gray-600 font-medium" onClick={() => setMobileOpen(false)}>
             Home
           </Link>
+          <button onClick={() => scrollToSection('services')} className="block py-2 text-gray-600 font-medium w-full text-left">
+            Services
+          </button>
+          <button onClick={() => scrollToSection('how-it-works')} className="block py-2 text-gray-600 font-medium w-full text-left">
+            কিভাবে কাজ করে
+          </button>
           {isAuthenticated ? (
             <Button className="w-full" size="sm" onClick={() => { navigate('/dashboard'); setMobileOpen(false) }}>
               Dashboard
@@ -71,7 +95,7 @@ export default function Navbar() {
                 Login
               </Button>
               <Button className="w-full" size="sm" onClick={() => { navigate('/register'); setMobileOpen(false) }}>
-                ফ্রি অ্যাকাউন্ট খুলুন
+                ফ্রি শুরু করুন
               </Button>
             </>
           )}

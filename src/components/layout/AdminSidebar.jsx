@@ -24,10 +24,7 @@ export default function AdminSidebar({ isOpen, onClose }) {
   return (
     <>
       {isOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-          onClick={onClose}
-        />
+        <div className="fixed inset-0 bg-black/50 z-40 lg:hidden" onClick={onClose} />
       )}
 
       <aside
@@ -40,10 +37,8 @@ export default function AdminSidebar({ isOpen, onClose }) {
       >
         <div className="flex items-center justify-between p-5 border-b border-gray-700">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center">
-              <span className="text-white font-bold text-xs font-heading">DB</span>
-            </div>
-            <span className="font-heading font-bold text-white">DB Admin</span>
+            <img src="/logo-icon-green.svg" alt="DhandaBuzz" className="w-8 h-8 object-contain" />
+            <span className="font-heading font-bold text-white">DB <span className="text-red-400">Admin</span></span>
           </div>
           <button className="lg:hidden text-gray-400 hover:text-white" onClick={onClose}>
             <FiX size={20} />

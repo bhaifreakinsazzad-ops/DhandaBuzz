@@ -6,7 +6,7 @@ export default function BonusHighlight() {
   const navigate = useNavigate()
 
   return (
-    <section className="py-12 bg-gradient-to-r from-brand-primary to-purple-600">
+    <section className="py-12 bg-gradient-to-r from-brand-primary to-brand-secondary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
@@ -17,7 +17,7 @@ export default function BonusHighlight() {
               <h3 className="text-xl sm:text-2xl font-bold text-white font-heading">
                 সাইনআপ বোনাস — <span className="text-brand-accent">১০০ Maal ফ্রি!</span>
               </h3>
-              <p className="text-purple-200 text-sm mt-1">
+              <p className="text-green-100 text-sm mt-1">
                 এখনই অ্যাকাউন্ট খুলুন এবং ১০০ Maal ক্রেডিট পান একদম ফ্রিতে।
               </p>
             </div>

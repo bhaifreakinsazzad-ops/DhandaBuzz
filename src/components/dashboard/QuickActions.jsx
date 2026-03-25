@@ -15,7 +15,8 @@ export default function QuickActions() {
             <Card
               key={service.id}
               dark
-              className="cursor-pointer hover:scale-[1.02] transition-transform"
+              glow
+              className="cursor-pointer hover:scale-[1.02] transition-all duration-300"
               onClick={() => navigate(service.path)}
             >
               <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-3`}>

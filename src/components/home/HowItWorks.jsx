@@ -29,9 +29,10 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="py-16 sm:py-20 bg-white">
+    <section id="how-it-works" className="py-16 sm:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
+          <span className="inline-block text-brand-primary text-sm font-semibold tracking-wider uppercase mb-2">Process</span>
           <h2 className="text-2xl sm:text-3xl font-bold font-heading text-brand-dark mb-3">
             কিভাবে কাজ করে?
           </h2>
@@ -46,10 +47,10 @@ export default function HowItWorks() {
             return (
               <div key={index} className="text-center group">
                 <div className="relative mx-auto mb-5">
-                  <div className="w-16 h-16 rounded-2xl bg-brand-light flex items-center justify-center mx-auto group-hover:bg-brand-primary/10 transition-colors">
+                  <div className="w-16 h-16 rounded-2xl bg-brand-primary/10 flex items-center justify-center mx-auto group-hover:bg-brand-primary/20 group-hover:scale-110 transition-all duration-300">
                     <Icon className="text-brand-primary" size={28} />
                   </div>
-                  <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-brand-primary text-white text-xs font-bold flex items-center justify-center font-heading">
+                  <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-brand-primary text-white text-xs font-bold flex items-center justify-center font-heading shadow-lg shadow-brand-primary/30">
                     {item.step}
                   </span>
                 </div>

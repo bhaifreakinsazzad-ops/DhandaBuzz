@@ -1,11 +1,11 @@
-export default function Card({ children, dark = false, className = '', ...props }) {
+export default function Card({ children, dark = false, glow = false, className = '', ...props }) {
   return (
     <div
       className={`
-        rounded-2xl p-6 shadow-lg transition-all duration-200
+        rounded-2xl p-6 transition-all duration-300
         ${dark
-          ? 'bg-brand-dark text-white'
-          : 'bg-white text-gray-800 border border-gray-100'
+          ? `bg-brand-dark-card text-white border border-brand-dark-border ${glow ? 'glow-green' : ''} hover:border-brand-primary/30`
+          : 'bg-white text-gray-800 border border-gray-100 shadow-sm hover:shadow-lg'
         }
         ${className}
       `}
