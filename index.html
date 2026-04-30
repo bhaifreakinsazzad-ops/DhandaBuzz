@@ -19,9 +19,7 @@
     <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
     <ul class="navbar-nav">
       <li><a href="#" data-page="home" class="active">Services</a></li>
-      <li><a href="#" data-page="creative-engine">Creative Engine</a></li>
-      <li><a href="#" data-page="web-launch-lab">Web Launch Lab</a></li>
-      <li><a href="#" data-page="adscale-engine">AdScale Engine</a></li>
+      <li><a href="#" data-page="dashboard">📊 Dashboard</a></li>
       <li>
         <div class="maal-badge">
           <span class="maal-icon">&#9733;</span>
@@ -44,6 +42,15 @@
       </div>
 
       <div class="services-grid">
+
+        <!-- Dashboard -->
+        <div class="service-card" onclick="App.showPage('dashboard')" style="background: rgba(108,92,231,0.1); border: 1px solid var(--primary);">
+          <div class="service-card-icon" style="background: rgba(108,92,231,0.15); color: var(--primary-light);">📊</div>
+          <h3>Dashboard</h3>
+          <p>View your request history, Maal balance, and manage your active projects.</p>
+          <span class="price-tag">Free</span>
+          <div class="card-arrow">&rarr;</div>
+        </div>
 
         <!-- Creative Engine -->
         <div class="service-card" onclick="App.showPage('creative-engine')">
@@ -72,47 +79,58 @@
           <div class="card-arrow">&rarr;</div>
         </div>
 
-        <!-- COMING SOON CARDS -->
-        <div class="service-card coming-soon">
-          <span class="coming-soon-badge">Coming Soon</span>
-          <div class="service-card-icon" style="background: rgba(255,255,255,0.05); color: var(--text-muted);">&#9830;</div>
+        <!-- Branding -->
+        <div class="service-card" onclick="App.showPage('branding')">
+          <div class="service-card-icon" style="background: rgba(255,192,203,0.15); color: #ff69b4;">🎨</div>
           <h3>Branding</h3>
           <p>Complete brand identity design — logo, colors, typography, and brand guidelines for your business.</p>
+          <span class="price-tag">Starting at 500 Maal</span>
+          <div class="card-arrow">&rarr;</div>
         </div>
 
-        <div class="service-card coming-soon">
-          <span class="coming-soon-badge">Coming Soon</span>
-          <div class="service-card-icon" style="background: rgba(255,255,255,0.05); color: var(--text-muted);">&#128270;</div>
+        <!-- SEO -->
+        <div class="service-card" onclick="App.showPage('seo')">
+          <div class="service-card-icon" style="background: rgba(0,255,100,0.15); color: #00ff64;">🔍</div>
           <h3>SEO</h3>
           <p>Search engine optimization to rank your business higher on Google and drive organic traffic.</p>
+          <span class="price-tag">Starting at 200 Maal</span>
+          <div class="card-arrow">&rarr;</div>
         </div>
 
-        <div class="service-card coming-soon">
-          <span class="coming-soon-badge">Coming Soon</span>
-          <div class="service-card-icon" style="background: rgba(255,255,255,0.05); color: var(--text-muted);">&#128172;</div>
+        <!-- WhatsApp Automation -->
+        <div class="service-card" onclick="App.showPage('whatsapp-automation')">
+          <div class="service-card-icon" style="background: rgba(37,211,102,0.15); color: #25d366;">💬</div>
           <h3>WhatsApp Automation</h3>
           <p>Automated WhatsApp messaging, chatbots, and customer engagement tools for your business.</p>
+          <span class="price-tag">Starting at 150 Maal</span>
+          <div class="card-arrow">&rarr;</div>
         </div>
 
-        <div class="service-card coming-soon">
-          <span class="coming-soon-badge">Coming Soon</span>
-          <div class="service-card-icon" style="background: rgba(255,255,255,0.05); color: var(--text-muted);">&#128203;</div>
+        <!-- CRM Setup -->
+        <div class="service-card" onclick="App.showPage('crm-setup')">
+          <div class="service-card-icon" style="background: rgba(100,150,255,0.15); color: #6496ff;">👥</div>
           <h3>CRM Setup</h3>
           <p>Customer relationship management setup to track leads, sales, and customer interactions.</p>
+          <span class="price-tag">Starting at 300 Maal</span>
+          <div class="card-arrow">&rarr;</div>
         </div>
 
-        <div class="service-card coming-soon">
-          <span class="coming-soon-badge">Coming Soon</span>
-          <div class="service-card-icon" style="background: rgba(255,255,255,0.05); color: var(--text-muted);">&#128722;</div>
+        <!-- E-commerce Growth -->
+        <div class="service-card" onclick="App.showPage('ecommerce-growth')">
+          <div class="service-card-icon" style="background: rgba(255,165,0,0.15); color: #ffa500;">🛒</div>
           <h3>E-commerce Growth</h3>
           <p>Scale your online store with product optimization, marketing funnels, and conversion strategies.</p>
+          <span class="price-tag">Starting at 250 Maal</span>
+          <div class="card-arrow">&rarr;</div>
         </div>
 
-        <div class="service-card coming-soon">
-          <span class="coming-soon-badge">Coming Soon</span>
-          <div class="service-card-icon" style="background: rgba(255,255,255,0.05); color: var(--text-muted);">&#128161;</div>
+        <!-- Consultation -->
+        <div class="service-card" onclick="App.showPage('consultation')">
+          <div class="service-card-icon" style="background: rgba(186,85,211,0.15); color: #ba55d3;">💡</div>
           <h3>Consultation</h3>
           <p>One-on-one business consulting sessions to plan growth, strategy, and digital transformation.</p>
+          <span class="price-tag">Starting at 100 Maal</span>
+          <div class="card-arrow">&rarr;</div>
         </div>
 
       </div>
@@ -551,7 +569,482 @@
       </form>
     </div>
 
+    <!-- ==========================================
+         DASHBOARD PAGE
+         ========================================== -->
+    <div id="dashboard" class="page">
+      <div class="service-page-header">
+        <h1>📊 Dashboard</h1>
+        <p>Manage your account, track orders, and purchase Maal</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 40px;">
+        <div class="stats-card">
+          <div class="stats-label">Current Balance</div>
+          <div class="stats-value"><span class="maal-balance-value">500</span> Maal</div>
+          <button class="btn btn-primary" style="width: 100%; margin-top: 12px; padding: 10px;" onclick="App.showMaalTopup()">Top Up Maal ⭐</button>
+        </div>
+        <div class="stats-card">
+          <div class="stats-label">Total Requests</div>
+          <div class="stats-value" id="total-requests">0</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 12px;">All submitted requests</div>
+        </div>
+        <div class="stats-card">
+          <div class="stats-label">Pending</div>
+          <div class="stats-value" id="pending-requests">0</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 12px;">Awaiting team review</div>
+        </div>
+        <div class="stats-card">
+          <div class="stats-label">Completed</div>
+          <div class="stats-value" id="completed-requests">0</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 12px;">Finished projects</div>
+        </div>
+      </div>
+
+      <h2 style="margin-bottom: 20px;">Request History</h2>
+      <div id="orders-list" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; text-align: center; color: var(--text-muted);">
+        <p>No requests yet. Start by ordering a service!</p>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         BRANDING PAGE
+         ========================================== -->
+    <div id="branding" class="page">
+      <div class="service-page-header">
+        <button class="back-btn" data-page="home">&larr; Back to Services</button>
+        <h1>🎨 Branding</h1>
+        <p>Complete brand identity design and guidelines</p>
+      </div>
+
+      <div class="pricing-section">
+        <h2>Packages</h2>
+        <div class="pricing-grid">
+          <div class="pricing-item" data-type="logo-design" onclick="Services.selectPackage('branding', this, 300)">
+            <div class="item-name">Logo Design</div>
+            <div class="item-price">300 Maal</div>
+          </div>
+          <div class="pricing-item" data-type="full-branding" onclick="Services.selectPackage('branding', this, 500)">
+            <div class="item-name">Full Branding Package</div>
+            <div class="item-price">500 Maal</div>
+          </div>
+          <div class="pricing-item" data-type="brand-guidelines" onclick="Services.selectPackage('branding', this, 400)">
+            <div class="item-name">Brand Guidelines</div>
+            <div class="item-price">400 Maal</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="maal-cost-display">
+        <div>
+          <div class="cost-label">Estimated Cost</div>
+          <div class="cost-value" id="branding-cost">-- Maal</div>
+        </div>
+        <div class="balance-info">
+          <span class="current-balance">Balance: <strong class="maal-balance-value">500</strong> Maal</span>
+          <span class="remaining-balance" id="branding-remaining"></span>
+        </div>
+      </div>
+
+      <form class="service-form" id="branding-form">
+        <h2>Submit Your Request</h2>
+        <div class="form-group">
+          <label>Business Name <span class="required">*</span></label>
+          <input type="text" name="business-name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Industry / Business Type</label>
+          <input type="text" name="industry" class="form-control" placeholder="e.g. E-commerce, Consulting, Food">
+        </div>
+        <div class="form-group">
+          <label>Brand Description / Vision</label>
+          <textarea name="description" class="form-control" placeholder="Describe your brand personality and values..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Target Audience</label>
+          <input type="text" name="target-audience" class="form-control" placeholder="Who are your customers?">
+        </div>
+        <div class="form-group">
+          <label>Reference Links or Inspiration</label>
+          <textarea name="notes" class="form-control" placeholder="Brands or designs you like..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Submit Request &#10140;</button>
+      </form>
+    </div>
+
+    <!-- ==========================================
+         SEO PAGE
+         ========================================== -->
+    <div id="seo" class="page">
+      <div class="service-page-header">
+        <button class="back-btn" data-page="home">&larr; Back to Services</button>
+        <h1>🔍 SEO Services</h1>
+        <p>Improve your search engine rankings and drive organic traffic</p>
+      </div>
+
+      <div class="pricing-section">
+        <h2>SEO Packages</h2>
+        <div class="pricing-grid">
+          <div class="pricing-item" onclick="Services.selectPackage('seo', this, 200)">
+            <div class="item-name">SEO Audit</div>
+            <div class="item-price">200 Maal</div>
+          </div>
+          <div class="pricing-item" onclick="Services.selectPackage('seo', this, 350)">
+            <div class="item-name">Keyword Research & Strategy</div>
+            <div class="item-price">350 Maal</div>
+          </div>
+          <div class="pricing-item" onclick="Services.selectPackage('seo', this, 500)">
+            <div class="item-name">Full SEO Optimization</div>
+            <div class="item-price">500 Maal</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="maal-cost-display">
+        <div>
+          <div class="cost-label">Estimated Cost</div>
+          <div class="cost-value" id="seo-cost">-- Maal</div>
+        </div>
+        <div class="balance-info">
+          <span class="current-balance">Balance: <strong class="maal-balance-value">500</strong> Maal</span>
+          <span class="remaining-balance" id="seo-remaining"></span>
+        </div>
+      </div>
+
+      <form class="service-form" id="seo-form">
+        <h2>Submit Your Request</h2>
+        <div class="form-group">
+          <label>Business Name <span class="required">*</span></label>
+          <input type="text" name="business-name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Website URL</label>
+          <input type="url" name="website-url" class="form-control" placeholder="https://yourwebsite.com">
+        </div>
+        <div class="form-group">
+          <label>Target Keywords / Phrases</label>
+          <textarea name="keywords" class="form-control" placeholder="e.g. digital marketing, web design in Dhaka..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Current Challenges</label>
+          <textarea name="challenges" class="form-control" placeholder="What SEO issues are you facing?"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Goals</label>
+          <input type="text" name="goals" class="form-control" placeholder="e.g. Rank in top 10 for main keywords">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Submit Request &#10140;</button>
+      </form>
+    </div>
+
+    <!-- ==========================================
+         WHATSAPP AUTOMATION PAGE
+         ========================================== -->
+    <div id="whatsapp-automation" class="page">
+      <div class="service-page-header">
+        <button class="back-btn" data-page="home">&larr; Back to Services</button>
+        <h1>💬 WhatsApp Automation</h1>
+        <p>Automate customer communication and engagement</p>
+      </div>
+
+      <div class="pricing-section">
+        <h2>Plans</h2>
+        <div class="pricing-grid">
+          <div class="pricing-item" onclick="Services.selectPackage('whatsapp-automation', this, 150)">
+            <div class="item-name">Basic Setup</div>
+            <div class="item-price">150 Maal</div>
+          </div>
+          <div class="pricing-item" onclick="Services.selectPackage('whatsapp-automation', this, 300)">
+            <div class="item-name">Chatbot Setup</div>
+            <div class="item-price">300 Maal</div>
+          </div>
+          <div class="pricing-item" onclick="Services.selectPackage('whatsapp-automation', this, 450)">
+            <div class="item-name">Full Automation Suite</div>
+            <div class="item-price">450 Maal</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="maal-cost-display">
+        <div>
+          <div class="cost-label">Estimated Cost</div>
+          <div class="cost-value" id="whatsapp-automation-cost">-- Maal</div>
+        </div>
+        <div class="balance-info">
+          <span class="current-balance">Balance: <strong class="maal-balance-value">500</strong> Maal</span>
+          <span class="remaining-balance" id="whatsapp-automation-remaining"></span>
+        </div>
+      </div>
+
+      <form class="service-form" id="whatsapp-automation-form">
+        <h2>Submit Your Request</h2>
+        <div class="form-group">
+          <label>Business Name <span class="required">*</span></label>
+          <input type="text" name="business-name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>WhatsApp Business Account Phone</label>
+          <input type="tel" name="phone" class="form-control" placeholder="+880...">
+        </div>
+        <div class="form-group">
+          <label>Use Case</label>
+          <select name="use-case" class="form-control">
+            <option value="">Select...</option>
+            <option value="order-updates">Order Updates & Tracking</option>
+            <option value="customer-support">Customer Support</option>
+            <option value="marketing">Marketing Messages</option>
+            <option value="appointment">Appointment Booking</option>
+            <option value="broadcast">Broadcast Messages</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Current Volume (monthly messages)</label>
+          <input type="number" name="volume" class="form-control" placeholder="e.g. 1000">
+        </div>
+        <div class="form-group">
+          <label>Additional Notes</label>
+          <textarea name="notes" class="form-control" placeholder="Any specific automation needs..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Submit Request &#10140;</button>
+      </form>
+    </div>
+
+    <!-- ==========================================
+         CRM SETUP PAGE
+         ========================================== -->
+    <div id="crm-setup" class="page">
+      <div class="service-page-header">
+        <button class="back-btn" data-page="home">&larr; Back to Services</button>
+        <h1>👥 CRM Setup</h1>
+        <p>Manage customers, leads, and sales effectively</p>
+      </div>
+
+      <div class="pricing-section">
+        <h2>CRM Packages</h2>
+        <div class="pricing-grid">
+          <div class="pricing-item" onclick="Services.selectPackage('crm-setup', this, 300)">
+            <div class="item-name">Basic Setup</div>
+            <div class="item-price">300 Maal</div>
+          </div>
+          <div class="pricing-item" onclick="Services.selectPackage('crm-setup', this, 500)">
+            <div class="item-name">Custom Configuration</div>
+            <div class="item-price">500 Maal</div>
+          </div>
+          <div class="pricing-item" onclick="Services.selectPackage('crm-setup', this, 700)">
+            <div class="item-name">Full Implementation + Training</div>
+            <div class="item-price">700 Maal</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="maal-cost-display">
+        <div>
+          <div class="cost-label">Estimated Cost</div>
+          <div class="cost-value" id="crm-setup-cost">-- Maal</div>
+        </div>
+        <div class="balance-info">
+          <span class="current-balance">Balance: <strong class="maal-balance-value">500</strong> Maal</span>
+          <span class="remaining-balance" id="crm-setup-remaining"></span>
+        </div>
+      </div>
+
+      <form class="service-form" id="crm-setup-form">
+        <h2>Submit Your Request</h2>
+        <div class="form-group">
+          <label>Business Name <span class="required">*</span></label>
+          <input type="text" name="business-name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Preferred CRM Platform</label>
+          <select name="crm-platform" class="form-control">
+            <option value="">Select...</option>
+            <option value="pipedrive">Pipedrive</option>
+            <option value="zoho">Zoho CRM</option>
+            <option value="hubspot">HubSpot</option>
+            <option value="salesforce">Salesforce</option>
+            <option value="other">Other (will recommend)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Team Size</label>
+          <input type="number" name="team-size" class="form-control" placeholder="Number of users">
+        </div>
+        <div class="form-group">
+          <label>Current Data Source</label>
+          <input type="text" name="data-source" class="form-control" placeholder="Excel, Google Sheets, etc.">
+        </div>
+        <div class="form-group">
+          <label>Key Features Needed</label>
+          <textarea name="features" class="form-control" placeholder="Lead tracking, sales pipeline, reporting..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Submit Request &#10140;</button>
+      </form>
+    </div>
+
+    <!-- ==========================================
+         ECOMMERCE GROWTH PAGE
+         ========================================== -->
+    <div id="ecommerce-growth" class="page">
+      <div class="service-page-header">
+        <button class="back-btn" data-page="home">&larr; Back to Services</button>
+        <h1>🛒 E-commerce Growth</h1>
+        <p>Scale your online store and increase conversions</p>
+      </div>
+
+      <div class="pricing-section">
+        <h2>Growth Packages</h2>
+        <div class="pricing-grid">
+          <div class="pricing-item" onclick="Services.selectPackage('ecommerce-growth', this, 250)">
+            <div class="item-name">Store Optimization</div>
+            <div class="item-price">250 Maal</div>
+          </div>
+          <div class="pricing-item" onclick="Services.selectPackage('ecommerce-growth', this, 400)">
+            <div class="item-name">Marketing Strategy</div>
+            <div class="item-price">400 Maal</div>
+          </div>
+          <div class="pricing-item" onclick="Services.selectPackage('ecommerce-growth', this, 600)">
+            <div class="item-name">Full Growth Suite</div>
+            <div class="item-price">600 Maal</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="maal-cost-display">
+        <div>
+          <div class="cost-label">Estimated Cost</div>
+          <div class="cost-value" id="ecommerce-growth-cost">-- Maal</div>
+        </div>
+        <div class="balance-info">
+          <span class="current-balance">Balance: <strong class="maal-balance-value">500</strong> Maal</span>
+          <span class="remaining-balance" id="ecommerce-growth-remaining"></span>
+        </div>
+      </div>
+
+      <form class="service-form" id="ecommerce-growth-form">
+        <h2>Submit Your Request</h2>
+        <div class="form-group">
+          <label>Business Name <span class="required">*</span></label>
+          <input type="text" name="business-name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Store Platform</label>
+          <select name="platform" class="form-control">
+            <option value="">Select...</option>
+            <option value="shopify">Shopify</option>
+            <option value="woocommerce">WooCommerce</option>
+            <option value="custom">Custom Site</option>
+            <option value="facebook">Facebook Shop</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Monthly Revenue</label>
+          <input type="text" name="revenue" class="form-control" placeholder="e.g. 50,000 BDT">
+        </div>
+        <div class="form-group">
+          <label>Main Challenges</label>
+          <textarea name="challenges" class="form-control" placeholder="Low traffic, high bounce rate, slow conversion..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Growth Goals</label>
+          <textarea name="goals" class="form-control" placeholder="Target revenue increase, customer base growth..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Submit Request &#10140;</button>
+      </form>
+    </div>
+
+    <!-- ==========================================
+         CONSULTATION PAGE
+         ========================================== -->
+    <div id="consultation" class="page">
+      <div class="service-page-header">
+        <button class="back-btn" data-page="home">&larr; Back to Services</button>
+        <h1>💡 Business Consultation</h1>
+        <p>Expert guidance for business growth and digital transformation</p>
+      </div>
+
+      <div class="pricing-section">
+        <h2>Consultation Sessions</h2>
+        <div class="pricing-grid">
+          <div class="pricing-item" onclick="Services.selectPackage('consultation', this, 100)">
+            <div class="item-name">Single Session (1 hour)</div>
+            <div class="item-price">100 Maal</div>
+          </div>
+          <div class="pricing-item" onclick="Services.selectPackage('consultation', this, 250)">
+            <div class="item-name">3-Session Package</div>
+            <div class="item-price">250 Maal</div>
+          </div>
+          <div class="pricing-item" onclick="Services.selectPackage('consultation', this, 400)">
+            <div class="item-name">Monthly Consulting</div>
+            <div class="item-price">400 Maal</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="maal-cost-display">
+        <div>
+          <div class="cost-label">Estimated Cost</div>
+          <div class="cost-value" id="consultation-cost">-- Maal</div>
+        </div>
+        <div class="balance-info">
+          <span class="current-balance">Balance: <strong class="maal-balance-value">500</strong> Maal</span>
+          <span class="remaining-balance" id="consultation-remaining"></span>
+        </div>
+      </div>
+
+      <form class="service-form" id="consultation-form">
+        <h2>Submit Your Request</h2>
+        <div class="form-group">
+          <label>Your Name <span class="required">*</span></label>
+          <input type="text" name="name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Business Name <span class="required">*</span></label>
+          <input type="text" name="business-name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Consultation Topics</label>
+          <textarea name="topics" class="form-control" placeholder="e.g. Growth strategy, Digital marketing, E-commerce..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Preferred Time Zone / Meeting Schedule</label>
+          <input type="text" name="schedule" class="form-control" placeholder="e.g. UTC+6, Weekday evenings">
+        </div>
+        <div class="form-group">
+          <label>Your Current Situation</label>
+          <textarea name="situation" class="form-control" placeholder="Tell us about your business and what you need help with..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Submit Request &#10140;</button>
+      </form>
+    </div>
+
   </main>
+
+  <!-- ===== MAAL TOPUP MODAL ===== -->
+  <div class="modal-overlay" id="maalTopupModal">
+    <div class="modal-box">
+      <h3>Purchase Maal ⭐</h3>
+      <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 20px;">Add credit to your account</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+        <div class="topup-card" onclick="App.addMaal(500)">
+          <div style="font-size: 1.2rem; font-weight: 700;">500</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">500 Maal</div>
+        </div>
+        <div class="topup-card" onclick="App.addMaal(1000)">
+          <div style="font-size: 1.2rem; font-weight: 700;">1,000</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Best Value</div>
+        </div>
+        <div class="topup-card" onclick="App.addMaal(2500)">
+          <div style="font-size: 1.2rem; font-weight: 700;">2,500</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">2,500 Maal</div>
+        </div>
+        <div class="topup-card" onclick="App.addMaal(5000)">
+          <div style="font-size: 1.2rem; font-weight: 700;">5,000</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Premium</div>
+        </div>
+      </div>
+      <button class="btn btn-primary" style="width: 100%;" onclick="App.closeMaalModal()">Close</button>
+    </div>
+  </div>
 
   <!-- ===== SUCCESS MODAL ===== -->
   <div class="modal-overlay" id="successModal">
@@ -567,6 +1060,13 @@
   <footer class="footer">
     <p>&copy; 2026 DhandaBuzz &mdash; AI-Powered Business Services Portal</p>
   </footer>
+
+  <!-- ===== WHATSAPP BUTTON ===== -->
+  <a href="https://wa.me/8801700000000?text=Hi%20DhandaBuzz!%20I'm%20interested%20in%20your%20services." target="_blank" class="whatsapp-button" title="Chat with us on WhatsApp">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.272-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.946 1.347l-.383.214-.39-.067C5.362 6.004 3.917 3.506 3.917 3.506S3.15 1.854 4.593.474c.574.556 1.42 1.457 2.045 2.5 1.09 1.758 1.742 3.65 1.82 4.816.04.62.02 1.203-.058 1.723l2.006-.004zm0 0"/>
+    </svg>
+  </a>
 
   <script src="js/app.js"></script>
 </body>
