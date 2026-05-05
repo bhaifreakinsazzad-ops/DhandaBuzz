@@ -55,7 +55,7 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: linear-gradient(to bottom, var(--bg-darker), var(--bg-dark));
   color: var(--text-primary);
   line-height: 1.6;
@@ -1043,5 +1043,176 @@ select.form-control {
 
   .modal-box {
     padding: 32px 24px;
+  }
+}
+
+/* ========================================
+   TOAST NOTIFICATIONS
+   ======================================== */
+
+.toast-container {
+  position: fixed;
+  top: 88px;
+  right: 24px;
+  z-index: 3000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+  max-width: 380px;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  pointer-events: all;
+  animation: toastIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: var(--shadow-lg);
+  line-height: 1.4;
+}
+
+.toast-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+}
+
+.toast-success { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+.toast-error   { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+.toast-warning { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+.toast-info    { background: var(--gradient-primary); }
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(110%); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.toast-exit {
+  animation: toastOut 0.35s ease forwards;
+}
+
+@keyframes toastOut {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(110%); }
+}
+
+@media (max-width: 480px) {
+  .toast-container {
+    right: 12px;
+    left: 12px;
+    max-width: none;
+  }
+}
+
+/* ========================================
+   ORDER CARDS (Dashboard)
+   ======================================== */
+
+.order-card {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  transition: var(--transition);
+}
+
+.order-card:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  background: rgba(99, 102, 241, 0.04);
+}
+
+.order-card:last-child {
+  margin-bottom: 0;
+}
+
+.order-service {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.order-meta {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.order-card-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.order-cost {
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+
+.order-status {
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.order-status--done    { color: var(--success); }
+.order-status--pending { color: var(--warning); }
+
+.empty-state {
+  color: var(--text-muted);
+  text-align: center;
+  padding: 8px 0;
+}
+
+/* ========================================
+   QUICK SETUP GRID (AdScale)
+   ======================================== */
+
+.quick-setup-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.quick-setup-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+}
+
+.quick-setup-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.quick-setup-item .option-group {
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.quick-setup-item .option-pill label {
+  padding: 4px 12px;
+  font-size: 0.82rem;
+}
+
+@media (max-width: 640px) {
+  .quick-setup-grid {
+    grid-template-columns: 1fr;
   }
 }
