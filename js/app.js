@@ -1,520 +1,476 @@
-/* ========================================
-   DhandaBuzz Portal - Main Application
-   ======================================== */
+/* ================================================
+   DhandaBuzz Development Department
+   Main Application Script
+   ================================================ */
 
-const App = {
-  currentPage: 'home',
-  maalBalance: 500,
-  orders: [],
+const WHATSAPP_NUMBER = '8801700000000'; // Update with real number
 
+/* ------------------------------------------------
+   DATA — Services
+   ------------------------------------------------ */
+const SERVICES = [
+  { icon: '🌐', title: 'Business Website', desc: 'Professional corporate, portfolio বা landing page website।' },
+  { icon: '🛒', title: 'Ecommerce Store', desc: 'Full-featured online shop with payment, inventory ও order management।' },
+  { icon: '📱', title: 'Mobile App', desc: 'Android ও iOS-এর জন্য native বা cross-platform mobile app।' },
+  { icon: '💻', title: 'Web Application', desc: 'Complex business logic সহ custom web-based application।' },
+  { icon: '⚙️', title: 'Custom Software', desc: 'আপনার specific business process-এর জন্য tailor-made software।' },
+  { icon: '📊', title: 'Admin Dashboard', desc: 'Business data manage করার জন্য powerful admin panel।' },
+  { icon: '🏪', title: 'Multi-vendor Platform', desc: 'Daraz-এর মতো multiple seller manage করার marketplace।' },
+  { icon: '🚚', title: 'Delivery Management', desc: 'Order tracking ও delivery management system।' },
+  { icon: '📩', title: 'CRM System', desc: 'Customer relationship ও sales pipeline management।' },
+  { icon: '🔗', title: 'API & Integration', desc: 'Third-party service integration ও custom API development।' },
+  { icon: '🎨', title: 'UI/UX Design', desc: 'Figma-তে premium design — development-এর আগে দেখুন।' },
+  { icon: '🔒', title: 'Maintenance & Support', desc: 'Launch-এর পরে ongoing support, update ও security।' },
+];
+
+/* ------------------------------------------------
+   DATA — Pricing
+   ------------------------------------------------ */
+const PRICING = {
+  website: [
+    {
+      name: 'Starter', price: '৳4,999', period: 'একবার',
+      highlight: false, tag: null,
+      features: ['৫-পেজ Website', 'Mobile Responsive', 'Contact Form', 'SSL Certificate', 'Google Analytics', '১ বছর Hosting Free', '৭ দিনে Delivery'],
+    },
+    {
+      name: 'Professional', price: '৳12,999', period: 'একবার',
+      highlight: true, tag: 'সবচেয়ে জনপ্রিয়',
+      features: ['১৫-পেজ Website', 'CMS/Blog সহ', 'SEO Optimized', 'Speed Optimized', 'WhatsApp Button', 'Admin Panel', '১ বছর Hosting Free', '১০ দিনে Delivery'],
+    },
+    {
+      name: 'Premium', price: '৳24,999', period: 'একবার',
+      highlight: false, tag: null,
+      features: ['Unlimited পেজ', 'Custom Design', 'Advanced SEO', 'Multi-language', 'Newsletter Integration', 'Priority Support', '১ বছর Hosting Free', '১৫ দিনে Delivery'],
+    },
+  ],
+  ecommerce: [
+    {
+      name: 'Basic Shop', price: '৳14,999', period: 'একবার',
+      highlight: false, tag: null,
+      features: ['৫০০ Product', 'bKash/Nagad Payment', 'Order Management', 'Inventory Tracking', 'Mobile App (Basic)', 'SMS Notification', '১৪ দিনে Delivery'],
+    },
+    {
+      name: 'Power Store', price: '৳29,999', period: 'একবার',
+      highlight: true, tag: 'Best Value',
+      features: ['Unlimited Products', 'সব Payment Gateway', 'Advanced Analytics', 'Coupon & Discount', 'Multi-category', 'Delivery Integration', 'Mobile App সহ', '২১ দিনে Delivery'],
+    },
+    {
+      name: 'Enterprise', price: '৳59,999', period: 'একবার',
+      highlight: false, tag: null,
+      features: ['Multi-vendor Support', 'Custom Checkout Flow', 'ERP Integration', 'Dedicated Server', 'White-label App', '১ বছর Support', 'Custom Timeline'],
+    },
+  ],
+  app: [
+    {
+      name: 'MVP App', price: '৳34,999', period: 'একবার',
+      highlight: false, tag: null,
+      features: ['Android App', 'Core Features', 'Admin Panel', 'Push Notification', 'Play Store Publish', '৩০ দিনে Delivery'],
+    },
+    {
+      name: 'Full App', price: '৳69,999', period: 'একবার',
+      highlight: true, tag: 'সবচেয়ে জনপ্রিয়',
+      features: ['Android + iOS', 'Custom UI/UX', 'Backend API', 'Analytics Dashboard', 'Payment Gateway', 'Play Store + App Store', '৪৫ দিনে Delivery'],
+    },
+    {
+      name: 'Enterprise Software', price: 'Custom', period: 'আলোচনাসাপেক্ষ',
+      highlight: false, tag: null,
+      features: ['Complex Business Logic', 'Multi-platform', 'Dedicated Team', 'Agile Development', 'NDA সহ', 'Long-term Support', 'Custom Timeline'],
+    },
+  ],
+};
+
+/* ------------------------------------------------
+   DATA — Preview Flow Steps
+   ------------------------------------------------ */
+const FLOW_STEPS = [
+  { num: '০১', title: 'Requirement Submit', desc: 'নিচের ফর্মে আপনার project-এর বিস্তারিত জমা দিন।' },
+  { num: '০২', title: 'Initial Consultation', desc: 'আমাদের team ২৪ ঘণ্টার মধ্যে WhatsApp-এ যোগাযোগ করবে।' },
+  { num: '০৩', title: 'Requirement Analysis', desc: 'আপনার চাহিদা বিশ্লেষণ করে detailed scope তৈরি করা হবে।' },
+  { num: '০৪', title: 'Design Mockup', desc: 'আপনার project-এর জন্য custom UI design তৈরি করব।' },
+  { num: '০৫', title: 'Free Preview', desc: 'Design ও basic structure সহ একটি live preview দেখানো হবে।' },
+  { num: '০৬', title: 'Feedback & Revision', desc: 'Preview দেখে feedback দিন, আমরা revise করব।' },
+  { num: '০৭', title: 'Project Confirmation', desc: 'সন্তুষ্ট হলে project confirm করুন, তারপর advance নিই।' },
+  { num: '০৮', title: 'Development & Delivery', desc: 'Agreed timeline-এ full project develop করে deliver করি।' },
+];
+
+/* ------------------------------------------------
+   DATA — Why DhandaBuzz
+   ------------------------------------------------ */
+const WHY_POINTS = [
+  { icon: '🎯', title: 'আগে Preview, তারপর Advance', desc: 'কোনো টাকা না দিয়েই আপনার project-এর design দেখুন।' },
+  { icon: '⚡', title: 'দ্রুত Delivery', desc: 'Basic website ৭ দিনে, complex project-ও agreed timeline-এ।' },
+  { icon: '💰', title: '১১% Cashback অফার', desc: 'নির্দিষ্ট packages-এ ১১% cashback পাবেন — guaranteed।' },
+  { icon: '🔒', title: 'Source Code আপনার', desc: 'Project শেষে সম্পূর্ণ source code আপনাকে দেওয়া হবে।' },
+  { icon: '📱', title: 'Mobile-First Design', desc: 'সব project মোবাইলে perfect দেখায় — guaranteed।' },
+  { icon: '🛡️', title: '১ বছর Free Maintenance', desc: 'Launch-এর পরে ১ বছর free bug fix ও minor update।' },
+  { icon: '💬', title: '২৪/৭ Support', desc: 'যেকোনো সমস্যায় WhatsApp-এ সাথে সাথে response।' },
+  { icon: '🏆', title: '৫০০+ সফল Project', desc: 'Bangladesh জুড়ে ৫০০-এর বেশি satisfied client।' },
+  { icon: '🔧', title: 'Custom Solution', desc: 'আপনার business-এর জন্য specifically তৈরি solution।' },
+  { icon: '📊', title: 'SEO Optimized', desc: 'Google-এ rank করার জন্য সব project SEO-ready।' },
+  { icon: '🌐', title: 'Free Hosting & Domain', desc: 'প্রথম বছরে hosting ও domain cost আমাদের।' },
+];
+
+/* ------------------------------------------------
+   DATA — Sales Guide
+   ------------------------------------------------ */
+const SALES_GUIDE = [
+  {
+    title: '🎯 Opening Script',
+    type: 'script',
+    content: `"ভাই/আপু, আমি DhandaBuzz Development Team থেকে বলছি। আপনি কি আপনার business-এর জন্য একটি website বা app নিয়ে ভাবছেন? আমরা একটি unique offer করছি — আগে Free Preview দেখুন, পছন্দ হলে তারপর কাজ শুরু করি।"`,
+  },
+  {
+    title: '✅ Key Selling Points',
+    type: 'list',
+    items: [
+      'আগে Free Preview — কোনো Advance ছাড়াই',
+      'Ready Setup মাত্র ৳4,999 থেকে',
+      '১১% Cashback নির্দিষ্ট packages-এ',
+      '৭ দিনে Delivery guarantee',
+      '১ বছর Free Maintenance',
+      'Source code client-এর কাছে থাকবে',
+    ],
+  },
+  {
+    title: '❓ Common Objections & Responses',
+    type: 'qa',
+    items: [
+      { q: '"দাম বেশি মনে হচ্ছে"', a: '"ভাই, আমরা first একটা free preview দেখাই। তারপর budget নিয়ে কথা বলি। অনেক সময় customized package করা যায়।"' },
+      { q: '"আগে কাজ দেখতে চাই"', a: '"অবশ্যই! সেটার জন্যই আমাদের Free Preview — কোনো advance ছাড়াই আপনার project-এর design দেখব।"' },
+      { q: '"অন্য agency আছে সস্তায়"', a: '"দেখুন, সস্তা মানেই ভালো না। আমাদের ৫০০+ satisfied client আছে, source code দিই, ১ বছর support দিই।"' },
+      { q: '"এখন সময় নেই"', a: '"ঠিক আছে, requirement form-টা ৫ মিনিটে fill করুন। আমরা আপনার convenient time-এ contact করব।"' },
+    ],
+  },
+  {
+    title: '📋 Qualification Checklist',
+    type: 'list',
+    items: [
+      'Business type ও industry জানুন',
+      'Current digital presence (কি website আছে?)',
+      'Budget range বুঝুন (direct বা indirect)',
+      'Timeline জানুন (urgent নাকি planned)',
+      'Decision maker কে? (তিনিই কথা বলছেন?)',
+      'Main pain point কী? (speed, design, features?)',
+    ],
+  },
+  {
+    title: '💬 Closing Script',
+    type: 'script',
+    content: `"আচ্ছা ভাই/আপু, তাহলে আমি আপনার জন্য একটা free requirement analysis করি। আপনার WhatsApp number-এ আমি একটা form link পাঠাব — ৫ মিনিট সময় নিয়ে fill করলেই হবে। তারপর আমরা একটা free mockup তৈরি করে দেখাব। চলবে?"`,
+  },
+];
+
+/* ================================================
+   MAIN APP OBJECT
+   ================================================ */
+const DB = {
+  currentPricingTab: 'website',
+
+  /* ------ INIT ------ */
   init() {
-    this.maalBalance = parseInt(localStorage.getItem('dhandabuzz_maal') || '500');
-    this.bindNavigation();
-    this.bindMobileMenu();
-    this.showPage('home');
-    CreativeEngine.init();
-    WebLaunchLab.init();
-    AdScaleEngine.init();
-    this.initNewServices();
-    this.loadOrders();
-    this.updateMaalDisplay();
+    this.renderServices();
+    this.renderPricing('website');
+    this.renderFlowSteps();
+    this.renderWhyPoints();
+    this.renderSalesGuide();
+    this.initNavScroll();
+    this.initNavToggle();
+    this.showFabAfterDelay();
   },
 
-  initNewServices() {
-    ['branding', 'seo', 'whatsapp-automation', 'crm-setup', 'ecommerce-growth', 'consultation'].forEach(svc => {
-      const form = document.getElementById(`${svc}-form`);
-      if (!form) return;
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const bizName = form.querySelector('[name="business-name"]')?.value.trim();
-        if (!bizName) { App.toast('Please enter your Business Name', 'error'); return; }
-        if (!Services.selectedCosts[svc]) { App.toast('Please select a package first', 'warning'); return; }
-        App.submitOrder(svc, Services.selectedCosts[svc]);
-      });
-    });
-  },
-
-  bindNavigation() {
-    document.querySelectorAll('[data-page]').forEach(el => {
-      el.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.showPage(el.dataset.page);
-      });
-    });
-  },
-
-  bindMobileMenu() {
-    const toggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('.navbar-nav');
-    if (toggle) toggle.addEventListener('click', () => nav.classList.toggle('open'));
-  },
-
-  showPage(pageId) {
-    document.querySelector('.navbar-nav')?.classList.remove('open');
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    const target = document.getElementById(pageId);
-    if (target) {
-      target.classList.add('active');
-      this.currentPage = pageId;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+  /* ------ NAVIGATION ------ */
+  scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      const offset = 72;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
-    document.querySelectorAll('.navbar-nav a').forEach(a => {
-      a.classList.toggle('active', a.dataset.page === pageId);
+    return false;
+  },
+
+  navTo(id) {
+    this.closeNav();
+    this.scrollTo(id);
+    return false;
+  },
+
+  toggleNav() {
+    const links = document.getElementById('navLinks');
+    const toggle = document.getElementById('navToggle');
+    if (!links) return;
+    links.classList.toggle('open');
+    toggle.classList.toggle('open');
+  },
+
+  closeNav() {
+    const links = document.getElementById('navLinks');
+    const toggle = document.getElementById('navToggle');
+    if (links) links.classList.remove('open');
+    if (toggle) toggle.classList.remove('open');
+  },
+
+  initNavScroll() {
+    const nav = document.getElementById('navbar');
+    if (!nav) return;
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+  },
+
+  initNavToggle() {
+    document.addEventListener('click', (e) => {
+      const nav = document.getElementById('navLinks');
+      const toggle = document.getElementById('navToggle');
+      if (!nav || !nav.classList.contains('open')) return;
+      if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+        this.closeNav();
+      }
     });
-    if (pageId === 'dashboard') this.updateDashboard();
   },
 
-  updateMaalDisplay() {
-    document.querySelectorAll('.maal-balance-value').forEach(el => {
-      el.textContent = this.maalBalance.toLocaleString();
-    });
-  },
-
-  saveMaalBalance() {
-    localStorage.setItem('dhandabuzz_maal', this.maalBalance.toString());
-  },
-
-  toast(message, type = 'info', duration = 3500) {
-    let container = document.getElementById('toast-container');
-    if (!container) {
-      container = document.createElement('div');
-      container.id = 'toast-container';
-      container.className = 'toast-container';
-      document.body.appendChild(container);
-    }
-    const icons = { success: '✓', error: '✕', warning: '⚠', info: '◆' };
-    const el = document.createElement('div');
-    el.className = `toast toast-${type}`;
-    el.innerHTML = `<span class="toast-icon">${icons[type] ?? icons.info}</span><span>${message}</span>`;
-    container.appendChild(el);
+  showFabAfterDelay() {
+    const fab = document.getElementById('waFab');
+    if (!fab) return;
+    fab.style.opacity = '0';
+    fab.style.transform = 'scale(0.5)';
+    fab.style.transition = 'opacity 0.4s, transform 0.4s';
     setTimeout(() => {
-      el.classList.add('toast-exit');
-      setTimeout(() => el.remove(), 350);
-    }, duration);
+      fab.style.opacity = '';
+      fab.style.transform = '';
+    }, 2000);
   },
 
-  showSuccessModal(serviceName) {
-    const modal = document.getElementById('successModal');
-    const nameEl = modal.querySelector('.service-name');
-    if (nameEl) nameEl.textContent = serviceName;
-    modal.classList.add('show');
-  },
-
-  closeModal() {
-    document.getElementById('successModal').classList.remove('show');
-    this.showPage('home');
-  },
-
-  showMaalTopup() {
-    document.getElementById('maalTopupModal').classList.add('show');
-  },
-
-  closeMaalModal() {
-    document.getElementById('maalTopupModal').classList.remove('show');
-  },
-
-  addMaal(amount) {
-    this.maalBalance += amount;
-    this.saveMaalBalance();
-    this.updateMaalDisplay();
-    this.closeMaalModal();
-    this.toast(`${amount.toLocaleString()} Maal added! New balance: ${this.maalBalance.toLocaleString()} Maal`, 'success');
-  },
-
-  submitOrder(service, cost) {
-    if (this.maalBalance < cost) {
-      this.toast('Insufficient Maal balance. Please top up!', 'error');
-      this.showMaalTopup();
-      return;
-    }
-
-    this.maalBalance -= cost;
-    this.saveMaalBalance();
-    this.updateMaalDisplay();
-
-    const serviceNames = {
-      'branding': 'Branding', 'seo': 'SEO', 'whatsapp-automation': 'WhatsApp Automation',
-      'crm-setup': 'CRM Setup', 'ecommerce-growth': 'E-commerce Growth', 'consultation': 'Consultation'
-    };
-
-    this.orders.unshift({
-      id: 'ORD-' + Date.now(),
-      service: serviceNames[service] || service,
-      cost,
-      date: new Date().toLocaleDateString(),
-      status: 'Pending Review'
-    });
-    localStorage.setItem('dhandabuzz_orders', JSON.stringify(this.orders));
-    this.updateDashboard();
-
-    this.showSuccessModal(serviceNames[service]);
-    document.getElementById(`${service}-form`)?.reset();
-    Services.selectedCosts[service] = 0;
-    document.querySelectorAll(`#${service} .pricing-item`).forEach(el => el.classList.remove('selected'));
-    const costEl = document.getElementById(`${service}-cost`);
-    if (costEl) costEl.textContent = '-- Maal';
-    const remainEl = document.getElementById(`${service}-remaining`);
-    if (remainEl) remainEl.textContent = '';
-  },
-
-  loadOrders() {
-    this.orders = JSON.parse(localStorage.getItem('dhandabuzz_orders') || '[]');
-    this.updateDashboard();
-  },
-
-  updateDashboard() {
-    const total = this.orders.length;
-    const pending = this.orders.filter(o => o.status === 'Pending Review').length;
-    const completed = this.orders.filter(o => o.status === 'Completed').length;
-
-    document.getElementById('total-requests').textContent = total;
-    document.getElementById('pending-requests').textContent = pending;
-    document.getElementById('completed-requests').textContent = completed;
-
-    const list = document.getElementById('orders-list');
-    if (!list) return;
-    if (total === 0) {
-      list.innerHTML = '<p class="empty-state">No requests yet. Start by ordering a service!</p>';
-    } else {
-      list.innerHTML = this.orders.map(o => `
-        <div class="order-card">
-          <div class="order-card-left">
-            <div class="order-service">${o.service}</div>
-            <div class="order-meta">${o.date} &bull; ${o.id}</div>
-          </div>
-          <div class="order-card-right">
-            <div class="order-cost">${o.cost} Maal</div>
-            <div class="order-status order-status--${o.status === 'Completed' ? 'done' : 'pending'}">${o.status}</div>
-          </div>
-        </div>
-      `).join('');
-    }
-  }
-};
-
-/* ========================================
-   Services Helper
-   ======================================== */
-
-const Services = {
-  selectedCosts: {
-    branding: 0, seo: 0, 'whatsapp-automation': 0, 'crm-setup': 0, 'ecommerce-growth': 0, consultation: 0
-  },
-
-  selectPackage(service, element, cost) {
-    this.selectedCosts[service] = cost;
-    document.querySelectorAll(`#${service} .pricing-item`).forEach(el => el.classList.remove('selected'));
-    element.classList.add('selected');
-
-    const costEl = document.getElementById(`${service}-cost`);
-    const remainEl = document.getElementById(`${service}-remaining`);
-    if (costEl) {
-      costEl.textContent = `${cost} Maal`;
-      const remaining = App.maalBalance - cost;
-      remainEl.textContent = `Remaining: ${remaining} Maal`;
-      remainEl.className = 'remaining-balance' + (remaining < 0 ? ' negative' : '');
-    }
-  }
-};
-
-/* ========================================
-   File Upload Helper
-   ======================================== */
-
-function setupFileUpload(areaId, listId) {
-  const area = document.getElementById(areaId);
-  const list = document.getElementById(listId);
-  const input = area?.querySelector('input[type="file"]');
-  const files = [];
-
-  if (!area || !input) return { getFiles: () => files };
-
-  input.addEventListener('change', () => {
-    Array.from(input.files).forEach(f => {
-      if (!files.find(x => x.name === f.name)) files.push(f);
-    });
-    renderFiles();
-    input.value = '';
-  });
-
-  function renderFiles() {
-    list.innerHTML = files.map(f => `
-      <span class="upload-file-item" data-name="${f.name.replace(/"/g, '&quot;')}">
-        📄 ${f.name}
-        <span class="remove-file">&times;</span>
-      </span>
-    `).join('');
-    list.querySelectorAll('.remove-file').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const name = btn.closest('.upload-file-item').dataset.name;
-        const idx = files.findIndex(x => x.name === name);
-        if (idx !== -1) files.splice(idx, 1);
-        renderFiles();
-      });
-    });
-  }
-
-  return { getFiles: () => files };
-}
-
-/* ========================================
-   Creative Engine Module
-   ======================================== */
-
-const CreativeEngine = {
-  selectedType: '', selectedQty: 0, cost: 0,
-  pricing: {
-    'ad-image':          { name: 'Ad Image',            prices: { 1: 10, 5: 45, 10: 80 } },
-    'offer-poster':      { name: 'Offer Poster',         prices: { 1: 10, 5: 45, 10: 80 } },
-    'social-media-post': { name: 'Social Media Post',    prices: { 1: 10, 5: 45, 10: 80 } },
-    'short-promo-video': { name: 'Short Promo Video',    prices: { 1: 50 } },
-    'caption-ad-copy':   { name: 'Caption / Ad Copy',    prices: { 1: 10, 5: 45, 10: 80 } },
-  },
-
-  init() {
-    this.fileUpload = setupFileUpload('ce-upload-area', 'ce-file-list');
-    document.querySelectorAll('#creative-engine input[name="creative-type"]').forEach(el => {
-      el.addEventListener('change', () => {
-        this.selectedType = el.value;
-        this.cost = 0;
-        this.selectedQty = 0;
-        this.updateQuantityOptions();
-        this.updateCost();
-      });
-    });
-    document.getElementById('ce-form')?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.submit();
-    });
-  },
-
-  updateQuantityOptions() {
-    const container = document.getElementById('ce-qty-options');
-    const info = this.pricing[this.selectedType];
-    if (!info) { container.innerHTML = ''; return; }
-    container.innerHTML = Object.entries(info.prices).map(([qty, price]) => `
-      <div class="pricing-item" onclick="CreativeEngine.selectQty(this, ${qty}, ${price})">
-        <div class="item-name">${qty}x ${info.name}</div>
-        <div class="item-price">${price} Maal</div>
-        ${qty > 1 ? `<div class="item-price-sub">${(price / qty).toFixed(0)} Maal each</div>` : ''}
+  /* ------ RENDERING ------ */
+  renderServices() {
+    const grid = document.getElementById('svcGrid');
+    if (!grid) return;
+    grid.innerHTML = SERVICES.map(s => `
+      <div class="svc-card">
+        <div class="svc-icon">${s.icon}</div>
+        <h3 class="svc-title">${s.title}</h3>
+        <p class="svc-desc">${s.desc}</p>
+        <a href="#" class="svc-link" onclick="return DB.navTo('requirement-form')">জানতে চাই →</a>
       </div>
     `).join('');
   },
 
-  selectQty(el, qty, price) {
-    this.selectedQty = qty;
-    this.cost = price;
-    document.querySelectorAll('#ce-qty-options .pricing-item').forEach(item => item.classList.remove('selected'));
-    el.classList.add('selected');
-    this.updateCost();
+  renderPricing(tab) {
+    const container = document.getElementById('pricingPanels');
+    if (!container) return;
+    const plans = PRICING[tab] || [];
+    container.innerHTML = `<div class="p-panels">` + plans.map(p => `
+      <div class="p-card${p.highlight ? ' highlighted' : ''}">
+        ${p.tag ? `<div class="p-tag">${p.tag}</div>` : ''}
+        <div class="p-name">${p.name}</div>
+        <div class="p-price">${p.price}<span class="p-period"> / ${p.period}</span></div>
+        <ul class="p-features">
+          ${p.features.map(f => `<li><span class="p-check">✓</span>${f}</li>`).join('')}
+        </ul>
+        <a href="#" class="btn-primary${p.highlight ? '' : ' btn-outline'}"
+           onclick="return DB.navTo('requirement-form')" data-event="pricing_cta_click">
+          এই Package নিতে চাই
+        </a>
+      </div>
+    `).join('') + `</div>`;
   },
 
-  updateCost() {
-    const costEl = document.getElementById('ce-cost-value');
-    const remainEl = document.getElementById('ce-remaining');
-    if (!costEl) return;
-    costEl.textContent = this.cost ? `${this.cost} Maal` : '-- Maal';
-    if (this.cost) {
-      const remaining = App.maalBalance - this.cost;
-      remainEl.textContent = `Remaining: ${remaining} Maal`;
-      remainEl.className = 'remaining-balance' + (remaining < 0 ? ' negative' : '');
-    } else {
-      remainEl.textContent = '';
+  switchPricingTab(el, tab) {
+    document.querySelectorAll('.p-tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    this.currentPricingTab = tab;
+    this.renderPricing(tab);
+  },
+
+  renderFlowSteps() {
+    const grid = document.getElementById('flowGrid');
+    if (!grid) return;
+    grid.innerHTML = FLOW_STEPS.map(s => `
+      <div class="flow-step">
+        <div class="flow-num">${s.num}</div>
+        <h4 class="flow-title">${s.title}</h4>
+        <p class="flow-desc">${s.desc}</p>
+      </div>
+    `).join('');
+  },
+
+  renderWhyPoints() {
+    const grid = document.getElementById('whyGrid');
+    if (!grid) return;
+    grid.innerHTML = WHY_POINTS.map(p => `
+      <div class="why-card">
+        <div class="why-icon">${p.icon}</div>
+        <div class="why-text">
+          <h4>${p.title}</h4>
+          <p>${p.desc}</p>
+        </div>
+      </div>
+    `).join('');
+  },
+
+  renderSalesGuide() {
+    const body = document.getElementById('guideBody');
+    if (!body) return;
+    body.innerHTML = SALES_GUIDE.map(block => {
+      let content = '';
+      if (block.type === 'script') {
+        content = `<div class="guide-script">${block.content}</div>`;
+      } else if (block.type === 'list') {
+        content = `<ul class="guide-list">${block.items.map(i => `<li>${i}</li>`).join('')}</ul>`;
+      } else if (block.type === 'qa') {
+        content = block.items.map(item => `
+          <div class="guide-qa">
+            <div class="guide-q">${item.q}</div>
+            <div class="guide-a">${item.a}</div>
+          </div>
+        `).join('');
+      }
+      return `<div class="guide-block"><h3>${block.title}</h3>${content}</div>`;
+    }).join('');
+  },
+
+  /* ------ WHATSAPP ------ */
+  openWhatsApp(source) {
+    const msg = encodeURIComponent('আস্সালামুআলাইকুম! DhandaBuzz Development Department-এর সাথে কথা বলতে চাই।');
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
+    this.trackEvent('whatsapp_click', { source });
+  },
+
+  /* ------ FORM SUBMISSION ------ */
+  submitRequirement(e) {
+    e.preventDefault();
+    const form = e.target;
+
+    const name = document.getElementById('clientName').value.trim();
+    const phone = document.getElementById('clientPhone').value.trim();
+    const projectType = (form.querySelector('input[name="projectType"]:checked') || {}).value || '';
+    const budget = (form.querySelector('input[name="budget"]:checked') || {}).value || '';
+    const timeline = (form.querySelector('input[name="timeline"]:checked') || {}).value || '';
+    const features = [...form.querySelectorAll('input[name="features"]:checked')].map(i => i.value);
+    const designStyle = (form.querySelector('input[name="designStyle"]:checked') || {}).value || '';
+    const details = document.getElementById('projectDetails').value.trim();
+    const refLink = document.getElementById('referenceLink').value.trim();
+    const businessName = document.getElementById('businessName').value.trim();
+    const source = (form.querySelector('input[name="source"]:checked') || {}).value || 'উল্লেখ নেই';
+
+    if (!name || !phone) {
+      this.toast('নাম ও WhatsApp নম্বর দিন।', 'error');
+      return;
     }
-  },
-
-  submit() {
-    const form = document.getElementById('ce-form');
-    const bizName = form.querySelector('[name="business-name"]').value.trim();
-    if (!bizName)       { App.toast('Please enter your Business Name', 'error');   return; }
-    if (!this.selectedType) { App.toast('Please select a creative type', 'warning'); return; }
-    if (!this.cost)     { App.toast('Please select a quantity/package', 'warning'); return; }
-    if (App.maalBalance < this.cost) {
-      App.toast('Insufficient Maal balance. Please top up!', 'error');
-      App.showMaalTopup();
+    if (!projectType) {
+      this.toast('Project type বেছে নিন।', 'error');
+      return;
+    }
+    if (!details) {
+      this.toast('Project-এর বিস্তারিত লিখুন।', 'error');
       return;
     }
 
-    App.maalBalance -= this.cost;
-    App.saveMaalBalance();
-    App.orders.unshift({
-      id: 'ORD-' + Date.now(), service: 'Creative Engine', cost: this.cost,
-      date: new Date().toLocaleDateString(), status: 'Pending Review'
-    });
-    localStorage.setItem('dhandabuzz_orders', JSON.stringify(App.orders));
-    App.updateMaalDisplay();
-    App.updateDashboard();
+    const btn = form.querySelector('[type="submit"]');
+    const btnText = document.getElementById('submitBtnText');
+    btn.disabled = true;
+    btnText.textContent = 'পাঠানো হচ্ছে…';
 
-    App.showSuccessModal('Creative Engine');
-    form.reset();
-    this.selectedType = ''; this.selectedQty = 0; this.cost = 0;
-    document.getElementById('ce-qty-options').innerHTML = '';
-    document.getElementById('ce-file-list').innerHTML = '';
-    this.updateCost();
-  }
+    const waMsg = this.buildWhatsAppMessage({
+      name, phone, businessName, projectType, budget, timeline,
+      features, designStyle, details, refLink, source,
+    });
+
+    document.getElementById('modalWaBtn').href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}`;
+
+    setTimeout(() => {
+      btn.disabled = false;
+      btnText.textContent = 'Free Preview Request পাঠান →';
+      this.showModal();
+      this.trackEvent('requirement_submit', { projectType, budget });
+    }, 600);
+  },
+
+  buildWhatsAppMessage(d) {
+    const featureStr = d.features.length ? d.features.join(', ') : 'উল্লেখ নেই';
+    const msg = `🌟 *DhandaBuzz — নতুন Project Requirement*
+
+👤 *নাম:* ${d.name}
+📱 *WhatsApp:* ${d.phone}
+🏢 *Business:* ${d.businessName || 'উল্লেখ নেই'}
+
+📌 *Project Type:* ${d.projectType}
+💰 *Budget:* ${d.budget}
+⏱️ *Timeline:* ${d.timeline}
+🎨 *Design Style:* ${d.designStyle || 'উল্লেখ নেই'}
+
+⚙️ *Features চাই:* ${featureStr}
+
+📝 *Details:*
+${d.details}
+
+🔗 *Reference:* ${d.refLink || 'নেই'}
+📣 *কীভাবে পেলেন:* ${d.source}
+
+_DhandaBuzz Development Department_`;
+    return encodeURIComponent(msg);
+  },
+
+  /* ------ MODAL ------ */
+  showModal() {
+    const modal = document.getElementById('successModal');
+    if (modal) {
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  },
+
+  closeModal() {
+    const modal = document.getElementById('successModal');
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  },
+
+  /* ------ SALES GUIDE ------ */
+  showSalesGuide() {
+    const guide = document.getElementById('salesGuide');
+    if (guide) {
+      guide.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  },
+
+  hideSalesGuide() {
+    const guide = document.getElementById('salesGuide');
+    if (guide) {
+      guide.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  },
+
+  /* ------ TOAST ------ */
+  toast(message, type = 'info', duration = 4000) {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+    const el = document.createElement('div');
+    el.className = `toast toast-${type}`;
+    el.textContent = message;
+    container.appendChild(el);
+    setTimeout(() => {
+      el.classList.add('toast-exit');
+      el.addEventListener('animationend', () => el.remove(), { once: true });
+    }, duration);
+  },
+
+  /* ------ ANALYTICS STUB ------ */
+  trackEvent(name, props = {}) {
+    if (window.gtag) window.gtag('event', name, props);
+    if (window.fbq) window.fbq('trackCustom', name, props);
+  },
 };
 
-/* ========================================
-   Web Launch Lab Module
-   ======================================== */
+/* ------ Close modal on backdrop click ------ */
+document.addEventListener('click', (e) => {
+  if (e.target.id === 'successModal') DB.closeModal();
+  if (e.target.id === 'salesGuide') DB.hideSalesGuide();
+});
 
-const WebLaunchLab = {
-  selectedType: '', cost: 0,
-  pricing: {
-    'landing-page':     { name: 'Landing / Order Page',    price: 300 },
-    'portfolio-site':   { name: 'Portfolio / Profile Site', price: 450 },
-    'business-website': { name: 'Business Website',         price: 700 },
-    'ecommerce-starter':{ name: 'E-commerce Starter',       price: 1200 },
-    'custom-web-app':   { name: 'Custom Web App',           price: 0 },
-  },
-
-  init() {
-    this.fileUpload = setupFileUpload('wll-upload-area', 'wll-file-list');
-    document.querySelectorAll('#web-launch-lab .pricing-item[data-type]').forEach(el => {
-      el.addEventListener('click', () => {
-        this.selectType(el.dataset.type);
-        document.querySelectorAll('#web-launch-lab .pricing-item').forEach(p => p.classList.remove('selected'));
-        el.classList.add('selected');
-      });
-    });
-    document.getElementById('wll-form')?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.submit();
-    });
-  },
-
-  selectType(typeKey) {
-    const info = this.pricing[typeKey];
-    if (!info) return;
-    this.selectedType = typeKey;
-    this.cost = info.price;
-    this.updateCost();
-  },
-
-  updateCost() {
-    const costEl = document.getElementById('wll-cost-value');
-    const remainEl = document.getElementById('wll-remaining');
-    if (!costEl) return;
-    if (this.selectedType === 'custom-web-app') {
-      costEl.textContent = 'Custom Quote';
-      remainEl.textContent = '';
-    } else if (this.cost) {
-      costEl.textContent = `${this.cost} Maal`;
-      const remaining = App.maalBalance - this.cost;
-      remainEl.textContent = `Remaining: ${remaining} Maal`;
-      remainEl.className = 'remaining-balance' + (remaining < 0 ? ' negative' : '');
-    } else {
-      costEl.textContent = '-- Maal';
-      remainEl.textContent = '';
-    }
-  },
-
-  submit() {
-    const form = document.getElementById('wll-form');
-    const bizName = form.querySelector('[name="business-name"]').value.trim();
-    if (!bizName)           { App.toast('Please enter your Business Name', 'error');   return; }
-    if (!this.selectedType) { App.toast('Please select a website type', 'warning');    return; }
-    if (this.selectedType !== 'custom-web-app' && App.maalBalance < this.cost) {
-      App.toast('Insufficient Maal balance. Please top up!', 'error');
-      App.showMaalTopup();
-      return;
-    }
-
-    App.maalBalance -= this.cost;
-    App.saveMaalBalance();
-    App.orders.unshift({
-      id: 'ORD-' + Date.now(), service: 'Web Launch Lab', cost: this.cost,
-      date: new Date().toLocaleDateString(), status: 'Pending Review'
-    });
-    localStorage.setItem('dhandabuzz_orders', JSON.stringify(App.orders));
-    App.updateMaalDisplay();
-    App.updateDashboard();
-
-    App.showSuccessModal('Web Launch Lab');
-    form.reset();
-    this.selectedType = ''; this.cost = 0;
-    document.querySelectorAll('#web-launch-lab .pricing-item').forEach(p => p.classList.remove('selected'));
-    document.getElementById('wll-file-list').innerHTML = '';
-    this.updateCost();
-  }
-};
-
-/* ========================================
-   AdScale Engine Module
-   ======================================== */
-
-const AdScaleEngine = {
-  selectedPlan: '', cost: 0,
-  pricing: {
-    'ad-plan-unlock':       { name: 'Ad Plan Unlock',       price: 50 },
-    'full-planning-bundle': { name: 'Full Planning Bundle',  price: 100 },
-    'campaign-setup':       { name: 'Campaign Setup',        price: 300 },
-    'full-launch-support':  { name: 'Full Launch Support',   price: 700 },
-  },
-
-  init() {
-    document.querySelectorAll('#adscale-engine .pricing-item[data-plan]').forEach(el => {
-      el.addEventListener('click', () => {
-        this.selectPlan(el.dataset.plan);
-        document.querySelectorAll('#adscale-engine .pricing-item').forEach(p => p.classList.remove('selected'));
-        el.classList.add('selected');
-      });
-    });
-    document.getElementById('as-form')?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.submit();
-    });
-  },
-
-  selectPlan(planKey) {
-    const info = this.pricing[planKey];
-    if (!info) return;
-    this.selectedPlan = planKey;
-    this.cost = info.price;
-    this.updateCost();
-  },
-
-  updateCost() {
-    const costEl = document.getElementById('as-cost-value');
-    const remainEl = document.getElementById('as-remaining');
-    if (!costEl) return;
-    costEl.textContent = this.cost ? `${this.cost} Maal` : '-- Maal';
-    if (this.cost) {
-      const remaining = App.maalBalance - this.cost;
-      remainEl.textContent = `Remaining: ${remaining} Maal`;
-      remainEl.className = 'remaining-balance' + (remaining < 0 ? ' negative' : '');
-    } else {
-      remainEl.textContent = '';
-    }
-  },
-
-  submit() {
-    const form = document.getElementById('as-form');
-    const bizName = form.querySelector('[name="business-name"]').value.trim();
-    if (!bizName)           { App.toast('Please enter your Business Name', 'error');  return; }
-    if (!this.selectedPlan) { App.toast('Please select a plan', 'warning');           return; }
-    if (App.maalBalance < this.cost) {
-      App.toast('Insufficient Maal balance. Please top up!', 'error');
-      App.showMaalTopup();
-      return;
-    }
-
-    App.maalBalance -= this.cost;
-    App.saveMaalBalance();
-    App.orders.unshift({
-      id: 'ORD-' + Date.now(), service: 'AdScale Engine', cost: this.cost,
-      date: new Date().toLocaleDateString(), status: 'Pending Review'
-    });
-    localStorage.setItem('dhandabuzz_orders', JSON.stringify(App.orders));
-    App.updateMaalDisplay();
-    App.updateDashboard();
-
-    App.showSuccessModal('AdScale Engine');
-    form.reset();
-    this.selectedPlan = ''; this.cost = 0;
-    document.querySelectorAll('#adscale-engine .pricing-item').forEach(p => p.classList.remove('selected'));
-    this.updateCost();
-  }
-};
-
-document.addEventListener('DOMContentLoaded', () => App.init());
+document.addEventListener('DOMContentLoaded', () => DB.init());
