@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DhandaBuzz Development Department — Website, App & Software Bangladesh</title>
-  <meta name="description" content="আপনার Business-এর জন্য Professional Website, eCommerce Store, Mobile App বা Custom Software তৈরি করুন। আগে Free Premium Preview দেখুন — পছন্দ হলে Project শুরু করুন। ৳4,999 থেকে শুরু।" />
-  <meta name="keywords" content="website development bangladesh, ecommerce development dhaka, mobile app development bangladesh, software development, DhandaBuzz, ওয়েবসাইট তৈরি, অ্যাপ ডেভেলপমেন্ট" />
-  <meta property="og:title" content="DhandaBuzz Development Department" />
-  <meta property="og:description" content="আগে Free Premium Preview দেখুন — পছন্দ হলে Project শুরু করুন। ৳4,999 থেকে।" />
+  <title>DhandaBuzz — Website, App, Software & Digital Marketing Bangladesh</title>
+  <meta name="description" content="Website, App, Software, Ecommerce বা Digital Marketing — DhandaBuzz আপনার পুরো Digital উপস্থিতি তৈরি করে। আগে Free Preview দেখুন, তারপর শুরু করুন। ৳499-তে Business Audit নিন।" />
+  <meta name="keywords" content="website development bangladesh, digital marketing bangladesh, facebook ads bangladesh, ecommerce development dhaka, mobile app development, DhandaBuzz, ওয়েবসাইট তৈরি, ডিজিটাল মার্কেটিং, ফেসবুক অ্যাডস" />
+  <meta property="og:title" content="DhandaBuzz — Website, App & Digital Marketing Bangladesh" />
+  <meta property="og:description" content="Boosting নয়, আসল Digital Marketing। Website থেকে App — সব একই ছাদের নিচে। ৳499-তে Business Growth Audit নিন।" />
   <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#07080b" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -26,12 +27,12 @@
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#" onclick="return DB.navTo('services')">সার্ভিস</a></li>
+      <li><a href="#" onclick="return DB.navTo('services')">Development</a></li>
+      <li><a href="#" onclick="return DB.navTo('digital-marketing')" data-section="dm_nav">Digital Marketing</a></li>
       <li><a href="#" onclick="return DB.navTo('pricing')">প্রাইসিং</a></li>
-      <li><a href="#" onclick="return DB.navTo('preview')">Free Preview</a></li>
       <li><a href="#" onclick="return DB.navTo('why-us')">কেন আমরা?</a></li>
       <li>
-        <a href="#" class="btn-primary" onclick="return DB.navTo('requirement-form')" data-event="nav_cta_click">
+        <a href="#" class="btn-primary" onclick="return DB.navTo('requirement-form')" data-cta="nav_start">
           Project শুরু করুন
         </a>
       </li>
@@ -59,10 +60,10 @@
           পছন্দ হলে Project শুরু করুন। কোনো Advance নয়, কোনো Risk নয়।
         </p>
         <div class="hero-actions">
-          <a href="#" class="btn-primary btn-lg" onclick="return DB.navTo('preview')" data-event="hero_preview_click">
+          <a href="#" class="btn-primary btn-lg" onclick="return DB.navTo('preview')" data-cta="hero_preview">
             Free Preview দেখুন →
           </a>
-          <a href="#" class="btn-outline btn-lg" onclick="return DB.navTo('requirement-form')" data-event="hero_form_click">
+          <a href="#" class="btn-outline btn-lg" onclick="return DB.navTo('requirement-form')" data-cta="hero_form">
             Requirement জমা দিন
           </a>
         </div>
@@ -71,7 +72,7 @@
           <div class="stat-divider"></div>
           <div class="stat-item"><span class="stat-num">৪.৯★</span><span class="stat-label">Client Rating</span></div>
           <div class="stat-divider"></div>
-          <div class="stat-item"><span class="stat-num">৭ দিন</span><span class="stat-label">Delivery গ্যারান্টি</span></div>
+          <div class="stat-item"><span class="stat-num">৭ দিন</span><span class="stat-label">Delivery</span></div>
         </div>
       </div>
       <div class="hero-visual">
@@ -99,17 +100,17 @@
         </div>
         <div class="float-badge fb1">✅ Live হয়ে গেছে!</div>
         <div class="float-badge fb2">⚡ ৭ দিনে Deliver</div>
-        <div class="float-badge fb3">🔒 SSL Certificate Free</div>
+        <div class="float-badge fb3">🔒 SSL Free</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
-<section class="section" id="services">
+<!-- DEVELOPMENT SERVICES -->
+<section class="section" id="services" data-section="services">
   <div class="container">
     <div class="section-head">
-      <span class="section-label">✦ আমাদের সার্ভিস</span>
+      <span class="section-label">✦ Development সার্ভিস</span>
       <h2 class="section-title">আপনার Business-এর জন্য<br /><span class="text-green">যা যা দরকার</span></h2>
       <p class="section-sub">আমরা শুধু Website বানাই না — আপনার পুরো Digital উপস্থিতি তৈরি করি।</p>
     </div>
@@ -118,24 +119,24 @@
 </section>
 
 <!-- PRICING -->
-<section class="section" id="pricing" style="background:var(--bg-card)">
+<section class="section" id="pricing" style="background:var(--bg-card)" data-section="pricing">
   <div class="container">
     <div class="section-head">
-      <span class="section-label">✦ প্রাইসিং</span>
+      <span class="section-label">✦ Development প্রাইসিং</span>
       <h2 class="section-title">স্বচ্ছ মূল্য, <span class="text-green">কোনো Hidden Charge নয়</span></h2>
       <p class="section-sub">আপনার Budget অনুযায়ী সঠিক Package বেছে নিন।</p>
     </div>
     <div class="p-tabs">
-      <button class="p-tab active" onclick="DB.switchPricingTab(this,'website')" data-event="pricing_tab_click">🌐 Website</button>
-      <button class="p-tab" onclick="DB.switchPricingTab(this,'ecommerce')" data-event="pricing_tab_click">🛒 Ecommerce</button>
-      <button class="p-tab" onclick="DB.switchPricingTab(this,'app')" data-event="pricing_tab_click">📱 App &amp; Software</button>
+      <button class="p-tab active" onclick="DB.switchPricingTab(this,'website')" data-cta="pricing_tab_website">🌐 Website</button>
+      <button class="p-tab" onclick="DB.switchPricingTab(this,'ecommerce')" data-cta="pricing_tab_ecommerce">🛒 Ecommerce</button>
+      <button class="p-tab" onclick="DB.switchPricingTab(this,'app')" data-cta="pricing_tab_app">📱 App &amp; Software</button>
     </div>
     <div id="pricingPanels"></div>
   </div>
 </section>
 
 <!-- FREE PREVIEW FLOW -->
-<section class="section" id="preview">
+<section class="section" id="preview" data-section="preview">
   <div class="container">
     <div class="section-head">
       <span class="section-label">✦ Free Preview Process</span>
@@ -144,7 +145,7 @@
     </div>
     <div class="flow-grid" id="flowGrid"></div>
     <div class="flow-cta">
-      <a href="#" class="btn-primary btn-lg" onclick="return DB.navTo('requirement-form')" data-event="preview_cta_click">
+      <a href="#" class="btn-primary btn-lg" onclick="return DB.navTo('requirement-form')" data-cta="preview_cta">
         এখনই Free Preview নিন →
       </a>
     </div>
@@ -152,7 +153,7 @@
 </section>
 
 <!-- WHY DHANDABUZZ -->
-<section class="section" id="why-us" style="background:var(--bg-card)">
+<section class="section" id="why-us" style="background:var(--bg-card)" data-section="why_us">
   <div class="container">
     <div class="section-head">
       <span class="section-label">✦ কেন আমরা?</span>
@@ -162,8 +163,223 @@
   </div>
 </section>
 
+<!-- =============================================
+     DIGITAL MARKETING SECTION
+     ============================================= -->
+<section class="section" id="digital-marketing" data-section="digital_marketing">
+  <div class="container">
+
+    <!-- DM Header -->
+    <div class="section-head">
+      <span class="section-label dm-label">📣 Digital Marketing</span>
+      <h2 class="section-title">Boosting নয়,<br /><span class="text-green">আসল Digital Marketing</span> শুরু করুন</h2>
+      <p class="section-sub">DhandaBuzz-এর সাথে — Business Audit, Strategy, Creative, Campaign Setup, Media Payment Support, Optimization ও Reporting — সব একই জায়গায়।</p>
+    </div>
+
+    <!-- Audit Offer Card -->
+    <div class="audit-offer-card" data-section="audit_offer">
+      <div class="audit-offer-left">
+        <div class="audit-launch-badge">🚀 Launch Offer — সীমিত সময়</div>
+        <h3 class="audit-offer-title">Business Growth Audit<br />+ Marketing Starter Kit</h3>
+        <p class="audit-offer-sub">আপনার Business-কে ভেতর থেকে বিশ্লেষণ করে, আসল সমস্যা ধরিয়ে দেওয়া হবে — এবং কী করলে Sales বাড়বে সেটার Mini Strategy দেওয়া হবে।</p>
+        <div class="audit-price-row">
+          <span class="audit-price-old">৳4,999</span>
+          <span class="audit-price-new">৳499</span>
+          <span class="audit-price-note">মাত্র</span>
+        </div>
+        <div class="audit-actions">
+          <a href="#" class="btn-primary btn-lg" onclick="return DB.navTo('audit-form')" data-cta="audit_form_cta">
+            Audit এখনই নিন →
+          </a>
+          <a href="#" class="btn-wa" onclick="DB.openWhatsAppAudit(); return false;" data-cta="audit_whatsapp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp-এ জিজ্ঞেস করুন
+          </a>
+        </div>
+        <p class="audit-note">* Ad বাজেট সম্পূর্ণ আলাদা। Client নিজে দিতে পারেন বা DhandaBuzz Media Payment Support নিতে পারেন।</p>
+      </div>
+      <div class="audit-offer-right">
+        <h4 class="audit-includes-title">Audit-এ যা যা পাবেন:</h4>
+        <ul class="audit-includes" id="auditIncludesList"></ul>
+      </div>
+    </div>
+
+    <!-- DM Services Grid -->
+    <div class="section-head" style="margin-top: 80px">
+      <span class="section-label">✦ Digital Marketing সার্ভিস</span>
+      <h2 class="section-title" style="font-size:1.9rem">সব ধরনের <span class="text-green">Marketing সার্ভিস</span> একই জায়গায়</h2>
+    </div>
+    <div class="svc-grid" id="dmSvcGrid"></div>
+
+    <!-- Package Ladder -->
+    <div class="pkg-ladder" id="pkgLadder">
+      <div class="section-head" style="margin-bottom: 32px">
+        <span class="section-label">✦ Package</span>
+        <h2 class="section-title" style="font-size:1.9rem">আপনার Budget অনুযায়ী <span class="text-green">শুরু করুন</span></h2>
+      </div>
+      <div class="pkg-cards" id="pkgCards"></div>
+    </div>
+
+    <!-- Coming Soon -->
+    <div class="coming-soon-wrap">
+      <div class="section-head" style="margin-bottom: 32px">
+        <span class="section-label">✦ আসছে শীঘ্রই</span>
+        <h2 class="section-title" style="font-size:1.9rem"><span class="text-green">AI-Powered</span> Automation Tools</h2>
+      </div>
+      <div class="coming-soon-grid" id="comingSoonGrid"></div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-wrap">
+      <div class="section-head" style="margin-bottom: 32px">
+        <span class="section-label">✦ সাধারণ প্রশ্ন</span>
+        <h2 class="section-title" style="font-size:1.9rem">মনে <span class="text-green">প্রশ্ন আছে?</span></h2>
+      </div>
+      <div class="faq-list" id="faqList"></div>
+    </div>
+
+    <!-- Audit Request Form -->
+    <div id="audit-form" style="scroll-margin-top:88px">
+      <div class="section-head" style="margin-top:80px">
+        <span class="section-label">✦ Business Audit Request</span>
+        <h2 class="section-title" style="font-size:2rem">৳499-তে <span class="text-green">Business Audit</span> নিন</h2>
+        <p class="section-sub">ফর্মটি পূরণ করুন — আমরা ২৪ ঘণ্টার মধ্যে WhatsApp-এ যোগাযোগ করব।</p>
+      </div>
+      <div class="req-form-card">
+        <form id="auditForm" onsubmit="DB.submitAudit(event)">
+
+          <div class="form-section">
+            <h3 class="form-section-title">১. আপনার পরিচয় ও Business</h3>
+            <div class="f-row">
+              <div class="f-group">
+                <label class="f-label">Business-এর নাম <span class="req">*</span></label>
+                <input type="text" class="f-control" id="auditBizName" placeholder="আপনার Business-এর নাম" required />
+              </div>
+              <div class="f-group">
+                <label class="f-label">আপনার নাম <span class="req">*</span></label>
+                <input type="text" class="f-control" id="auditName" placeholder="পূর্ণ নাম লিখুন" required />
+              </div>
+            </div>
+            <div class="f-row">
+              <div class="f-group">
+                <label class="f-label">WhatsApp নম্বর <span class="req">*</span></label>
+                <input type="tel" class="f-control" id="auditPhone" placeholder="01XXXXXXXXX" required />
+              </div>
+              <div class="f-group">
+                <label class="f-label">Facebook Page Link <span class="req">*</span></label>
+                <input type="url" class="f-control" id="auditFbPage" placeholder="https://facebook.com/yourpage" required />
+              </div>
+            </div>
+            <div class="f-group">
+              <label class="f-label">Website (যদি থাকে)</label>
+              <input type="url" class="f-control" id="auditWebsite" placeholder="https://yoursite.com" />
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="form-section-title">২. Business Category</h3>
+            <div class="pill-group">
+              <label class="r-pill"><input type="radio" name="auditCategory" value="Fashion & Clothing" required /><span>👗 Fashion &amp; Clothing</span></label>
+              <label class="r-pill"><input type="radio" name="auditCategory" value="Cosmetics & Beauty" /><span>💄 Cosmetics &amp; Beauty</span></label>
+              <label class="r-pill"><input type="radio" name="auditCategory" value="Food & Restaurant" /><span>🍔 Food &amp; Restaurant</span></label>
+              <label class="r-pill"><input type="radio" name="auditCategory" value="Ecommerce" /><span>🛒 Ecommerce</span></label>
+              <label class="r-pill"><input type="radio" name="auditCategory" value="Local Shop" /><span>🏪 Local Shop</span></label>
+              <label class="r-pill"><input type="radio" name="auditCategory" value="Service Business" /><span>🔧 Service Business</span></label>
+              <label class="r-pill"><input type="radio" name="auditCategory" value="Education" /><span>📚 Education</span></label>
+              <label class="r-pill"><input type="radio" name="auditCategory" value="Other" /><span>✨ অন্যান্য</span></label>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="form-section-title">৩. Product / Service ও সমস্যা</h3>
+            <div class="f-group">
+              <label class="f-label">আপনি কী বিক্রি করেন? <span class="req">*</span></label>
+              <textarea class="f-control f-textarea" id="auditProduct" rows="3" placeholder="আপনার product বা service সম্পর্কে সংক্ষেপে লিখুন।" required></textarea>
+            </div>
+            <div class="f-group">
+              <label class="f-label">এখন কোন সমস্যাটা সবচেয়ে বড়? <span class="req">*</span></label>
+              <textarea class="f-control f-textarea" id="auditProblem" rows="3" placeholder="যেমন: Reach কম, Sale হচ্ছে না, Ad থেকে result নেই, কোথা থেকে শুরু করব বুঝছি না..." required></textarea>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="form-section-title">৪. Ad Budget ও অভিজ্ঞতা</h3>
+            <div class="f-group">
+              <label class="f-label">মাসে Ad-এ কত টাকা খরচ করতে পারবেন? (Ad budget আলাদা)</label>
+              <div class="pill-group">
+                <label class="r-pill"><input type="radio" name="auditBudget" value="এখনো নেই" /><span>এখনো নেই</span></label>
+                <label class="r-pill"><input type="radio" name="auditBudget" value="৳1,000–৳5,000" /><span>৳1,000–৳5,000</span></label>
+                <label class="r-pill"><input type="radio" name="auditBudget" value="৳5,000–৳20,000" /><span>৳5,000–৳20,000</span></label>
+                <label class="r-pill"><input type="radio" name="auditBudget" value="৳20,000–৳50,000" /><span>৳20,000–৳50,000</span></label>
+                <label class="r-pill"><input type="radio" name="auditBudget" value="৳50,000+" /><span>৳50,000+</span></label>
+              </div>
+            </div>
+            <div class="f-group">
+              <label class="f-label">আগে কি Facebook/Instagram Ads চালিয়েছেন?</label>
+              <div class="pill-group">
+                <label class="r-pill"><input type="radio" name="auditRanAds" value="হ্যাঁ, নিজে চালিয়েছি" /><span>হ্যাঁ, নিজে</span></label>
+                <label class="r-pill"><input type="radio" name="auditRanAds" value="হ্যাঁ, অন্যকে দিয়ে" /><span>হ্যাঁ, অন্যকে দিয়ে</span></label>
+                <label class="r-pill"><input type="radio" name="auditRanAds" value="না, একদম নতুন" /><span>না, একদম নতুন</span></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="form-section-title">৫. লক্ষ্য ও অন্যান্য</h3>
+            <div class="f-group">
+              <label class="f-label">আপনার মূল লক্ষ্য কী? (একাধিক বেছে নিন)</label>
+              <div class="pill-group">
+                <label class="c-pill"><input type="checkbox" name="auditGoal" value="Sales বাড়ানো" /><span>💰 Sales বাড়ানো</span></label>
+                <label class="c-pill"><input type="checkbox" name="auditGoal" value="Lead Generation" /><span>📋 Lead Generation</span></label>
+                <label class="c-pill"><input type="checkbox" name="auditGoal" value="Brand Awareness" /><span>📣 Brand Awareness</span></label>
+                <label class="c-pill"><input type="checkbox" name="auditGoal" value="Page Followers" /><span>👥 Page Followers</span></label>
+                <label class="c-pill"><input type="checkbox" name="auditGoal" value="Website Traffic" /><span>🌐 Website Traffic</span></label>
+                <label class="c-pill"><input type="checkbox" name="auditGoal" value="Messenger Inbox" /><span>💬 Messenger Inbox</span></label>
+              </div>
+            </div>
+            <div class="f-group">
+              <label class="f-label">Media Payment Support দরকার? (Dollar/Card ছাড়া Ad চালানো)</label>
+              <div class="pill-group">
+                <label class="r-pill"><input type="radio" name="auditMediaPay" value="হ্যাঁ, দরকার" /><span>হ্যাঁ, দরকার</span></label>
+                <label class="r-pill"><input type="radio" name="auditMediaPay" value="না, নিজে দিতে পারব" /><span>না, নিজে দিতে পারব</span></label>
+                <label class="r-pill"><input type="radio" name="auditMediaPay" value="পরে দেখব" /><span>পরে দেখব</span></label>
+              </div>
+            </div>
+            <div class="f-group">
+              <label class="f-label">Automation-এ আগ্রহী? (AI Inbox Reply, Auto Follow-up)</label>
+              <div class="pill-group">
+                <label class="r-pill"><input type="radio" name="auditAuto" value="হ্যাঁ, জানতে চাই" /><span>হ্যাঁ, জানতে চাই</span></label>
+                <label class="r-pill"><input type="radio" name="auditAuto" value="না এখন" /><span>এখন না</span></label>
+              </div>
+            </div>
+            <div class="f-group">
+              <label class="f-label">আর কিছু জানাতে চান?</label>
+              <textarea class="f-control f-textarea" id="auditNotes" rows="3" placeholder="যেকোনো অতিরিক্ত তথ্য বা প্রশ্ন..."></textarea>
+            </div>
+          </div>
+
+          <div class="consent-row">
+            <label class="c-pill consent-pill">
+              <input type="checkbox" id="auditConsent" required />
+              <span>আমি সম্মত আছি যে DhandaBuzz আমার দেওয়া তথ্য Business Audit-এর জন্য ব্যবহার করবে এবং WhatsApp-এ যোগাযোগ করবে।</span>
+            </label>
+          </div>
+
+          <div class="form-submit-row">
+            <button type="submit" class="btn-primary btn-xl" data-cta="audit_submit">
+              <span id="auditBtnText">৳499-তে Audit Request পাঠান →</span>
+            </button>
+            <p class="form-note">✅ ২৪ ঘণ্টার মধ্যে WhatsApp-এ সাড়া দেওয়া হবে</p>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- CTA BAND -->
-<section class="cta-band">
+<section class="cta-band" data-section="cta_band">
   <div class="cta-glow"></div>
   <div class="container">
     <div class="cta-inner">
@@ -172,25 +388,23 @@
         <p>Requirement জমা দিন, ২৪ ঘণ্টার মধ্যে আমরা আপনার সাথে যোগাযোগ করব।</p>
       </div>
       <div class="cta-actions">
-        <a href="#" class="btn-wa" onclick="DB.openWhatsApp('cta'); return false;" data-event="whatsapp_click">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
+        <a href="#" class="btn-wa" onclick="DB.openWhatsApp('cta'); return false;" data-cta="cta_whatsapp">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           WhatsApp-এ কথা বলুন
         </a>
-        <a href="#" class="btn-primary btn-lg" onclick="return DB.navTo('requirement-form')" data-event="cta_form_click">
-          Requirement ফর্ম পূরণ করুন
+        <a href="#" class="btn-primary btn-lg" onclick="return DB.navTo('requirement-form')" data-cta="cta_form">
+          Development Requirement ফর্ম
         </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- REQUIREMENT FORM -->
-<section class="section" id="requirement-form">
+<!-- DEVELOPMENT REQUIREMENT FORM -->
+<section class="section" id="requirement-form" data-section="req_form">
   <div class="container">
     <div class="section-head">
-      <span class="section-label">✦ Project Requirement</span>
+      <span class="section-label">✦ Development Requirement</span>
       <h2 class="section-title">আপনার Project-এর<br /><span class="text-green">বিস্তারিত জানান</span></h2>
       <p class="section-sub">ফর্মটি পূরণ করুন — আমরা ২৪ ঘণ্টার মধ্যে WhatsApp-এ Premium Preview সহ যোগাযোগ করব।</p>
     </div>
@@ -241,7 +455,7 @@
             <label class="r-pill"><input type="radio" name="budget" value="৳25,000–৳49,999" /><span>৳25,000–৳49,999</span></label>
             <label class="r-pill"><input type="radio" name="budget" value="৳50,000–৳99,999" /><span>৳50,000–৳99,999</span></label>
             <label class="r-pill"><input type="radio" name="budget" value="৳1,00,000+" /><span>৳1,00,000+</span></label>
-            <label class="r-pill"><input type="radio" name="budget" value="নিশ্চিত নই" /><span>এখনো নিশ্চিত নই</span></label>
+            <label class="r-pill"><input type="radio" name="budget" value="নিশ্চিত নই" /><span>নিশ্চিত নই</span></label>
           </div>
         </div>
 
@@ -252,7 +466,7 @@
             <label class="r-pill"><input type="radio" name="timeline" value="১৫ দিনের মধ্যে" /><span>১৫ দিনের মধ্যে</span></label>
             <label class="r-pill"><input type="radio" name="timeline" value="১ মাসের মধ্যে" /><span>১ মাসের মধ্যে</span></label>
             <label class="r-pill"><input type="radio" name="timeline" value="২-৩ মাস" /><span>২–৩ মাস</span></label>
-            <label class="r-pill"><input type="radio" name="timeline" value="সময় নেই" /><span>সময় নেই, শুধু ভালো হলেই হবে</span></label>
+            <label class="r-pill"><input type="radio" name="timeline" value="সময় নেই" /><span>সময়সীমা নেই</span></label>
           </div>
         </div>
 
@@ -269,15 +483,15 @@
             <label class="c-pill"><input type="checkbox" name="features" value="SMS/Email Notification" /><span>📩 SMS/Email</span></label>
             <label class="c-pill"><input type="checkbox" name="features" value="Multi-vendor" /><span>🏪 Multi-vendor</span></label>
             <label class="c-pill"><input type="checkbox" name="features" value="Analytics Dashboard" /><span>📊 Analytics</span></label>
-            <label class="c-pill"><input type="checkbox" name="features" value="Mobile App" /><span>📱 Mobile App সহ</span></label>
+            <label class="c-pill"><input type="checkbox" name="features" value="Mobile App" /><span>📱 App সহ</span></label>
             <label class="c-pill"><input type="checkbox" name="features" value="API Integration" /><span>🔗 API Integration</span></label>
           </div>
         </div>
 
         <div class="form-section">
-          <h3 class="form-section-title">৬. Design Style কেমন চান?</h3>
+          <h3 class="form-section-title">৬. Design Style</h3>
           <div class="pill-group">
-            <label class="r-pill"><input type="radio" name="designStyle" value="Minimal & Clean" required /><span>✨ Minimal &amp; Clean</span></label>
+            <label class="r-pill"><input type="radio" name="designStyle" value="Minimal & Clean" /><span>✨ Minimal &amp; Clean</span></label>
             <label class="r-pill"><input type="radio" name="designStyle" value="Bold & Colorful" /><span>🎨 Bold &amp; Colorful</span></label>
             <label class="r-pill"><input type="radio" name="designStyle" value="Corporate & Professional" /><span>💼 Corporate</span></label>
             <label class="r-pill"><input type="radio" name="designStyle" value="Dark & Premium" /><span>🌙 Dark &amp; Premium</span></label>
@@ -293,7 +507,7 @@
           </div>
           <div class="f-group">
             <label class="f-label">Project সম্পর্কে বিস্তারিত লিখুন <span class="req">*</span></label>
-            <textarea class="f-control f-textarea" id="projectDetails" rows="5" placeholder="আপনার Project-এর idea, main features, target audience — যা মনে চায় লিখুন। যত বেশি লিখবেন, আমরা তত ভালো বুঝতে পারব।" required></textarea>
+            <textarea class="f-control f-textarea" id="projectDetails" rows="5" placeholder="আপনার Project-এর idea, main features, target audience — যা মনে চায় লিখুন।" required></textarea>
           </div>
         </div>
 
@@ -316,7 +530,7 @@
         </div>
 
         <div class="form-submit-row">
-          <button type="submit" class="btn-primary btn-xl" data-event="requirement_submit">
+          <button type="submit" class="btn-primary btn-xl" data-cta="dev_form_submit">
             <span id="submitBtnText">Free Preview Request পাঠান →</span>
           </button>
           <p class="form-note">✅ ২৪ ঘণ্টার মধ্যে WhatsApp-এ সাড়া দেওয়া হবে</p>
@@ -337,15 +551,16 @@
         <p>আপনার Digital Dream-কে Reality-তে রূপ দিন।</p>
       </div>
       <div class="footer-links">
-        <a href="#" onclick="return DB.navTo('services')">সার্ভিস</a>
+        <a href="#" onclick="return DB.navTo('services')">Development</a>
+        <a href="#" onclick="return DB.navTo('digital-marketing')">Digital Marketing</a>
         <a href="#" onclick="return DB.navTo('pricing')">প্রাইসিং</a>
-        <a href="#" onclick="return DB.navTo('preview')">Free Preview</a>
+        <a href="#" onclick="return DB.navTo('audit-form')">Business Audit</a>
         <a href="#" onclick="return DB.navTo('requirement-form')">যোগাযোগ</a>
-        <a href="#" onclick="DB.showSalesGuide(); return false;" style="color:var(--text-muted);font-size:0.8rem">Team Guide</a>
+        <a href="#" onclick="DB.showSalesGuide(); return false;" class="footer-team-link">Team Guide</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 DhandaBuzz Development Department. All rights reserved.</p>
+      <p>© 2025 DhandaBuzz. All rights reserved. · <a href="#" onclick="return DB.navTo('requirement-form')" style="color:var(--primary)">Project শুরু করুন</a></p>
     </div>
   </div>
 </footer>
@@ -365,13 +580,11 @@
 <div class="modal-overlay" id="successModal" style="display:none">
   <div class="modal-box">
     <div class="modal-icon">🎉</div>
-    <h3 class="modal-title">Request সফলভাবে পাঠানো হয়েছে!</h3>
-    <p class="modal-sub">আমরা আপনার WhatsApp-এ ২৪ ঘণ্টার মধ্যে Premium Preview সহ যোগাযোগ করব।</p>
+    <h3 class="modal-title" id="modalTitle">Request সফলভাবে পাঠানো হয়েছে!</h3>
+    <p class="modal-sub" id="modalSub">আমরা আপনার WhatsApp-এ ২৪ ঘণ্টার মধ্যে যোগাযোগ করব।</p>
     <div class="modal-actions">
-      <a href="#" class="btn-wa" id="modalWaBtn" data-event="whatsapp_click">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
+      <a href="#" class="btn-wa" id="modalWaBtn" data-cta="modal_whatsapp">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         WhatsApp-এ কথা বলুন
       </a>
       <button class="btn-outline" onclick="DB.closeModal()">বন্ধ করুন</button>
@@ -380,12 +593,17 @@
 </div>
 
 <!-- WHATSAPP FAB -->
-<a href="#" class="wa-fab" id="waFab" onclick="DB.openWhatsApp('fab'); return false;" data-event="whatsapp_click" aria-label="WhatsApp">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-  </svg>
+<a href="#" class="wa-fab" id="waFab" onclick="DB.openWhatsApp('fab'); return false;" data-cta="fab_whatsapp" aria-label="WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   <span class="wa-tooltip">WhatsApp-এ কথা বলুন</span>
 </a>
+
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <a href="#" class="sticky-cta-btn" onclick="return DB.navTo('audit-form')" data-cta="sticky_audit">
+    🔥 ৳499-তে Business Audit নিন →
+  </a>
+</div>
 
 <div class="toast-container" id="toastContainer"></div>
 

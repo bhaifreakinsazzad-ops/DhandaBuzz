@@ -897,7 +897,7 @@ button { font-family: inherit; }
   padding-bottom: 36px;
   border-bottom: 1px solid var(--border);
 }
-.form-section:last-of-type { border-bottom: none; margin-bottom: 0; }
+.form-section:last-child { border-bottom: none; margin-bottom: 0; }
 
 .form-section-title {
   font-size: 0.88rem;
@@ -960,6 +960,7 @@ button { font-family: inherit; }
 }
 
 .r-pill, .c-pill {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -978,8 +979,9 @@ button { font-family: inherit; }
   position: absolute;
   opacity: 0;
   pointer-events: none;
-  width: 0;
-  height: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 .r-pill span, .c-pill span { pointer-events: none; }
 
@@ -1334,6 +1336,292 @@ button { font-family: inherit; }
 }
 
 /* ================================================
+   DIGITAL MARKETING — Audit Offer
+   ================================================ */
+
+.dm-label { color: #f59e0b; background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.25); }
+
+.audit-offer-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--primary-border);
+  border-radius: var(--r-xl);
+  padding: 40px;
+  box-shadow: var(--shadow-green);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.audit-offer-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--grad-primary);
+}
+
+.audit-launch-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(245,158,11,0.1);
+  border: 1px solid rgba(245,158,11,0.3);
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #f59e0b;
+  margin-bottom: 18px;
+  width: fit-content;
+}
+
+.audit-offer-title {
+  font-size: 1.7rem;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 14px;
+  letter-spacing: -0.3px;
+}
+
+.audit-offer-sub {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.audit-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.audit-price-old {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.audit-price-new {
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.audit-price-note {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.audit-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.audit-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.audit-includes-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--primary);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.audit-includes {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.audit-includes li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.audit-includes li::before {
+  content: '✓';
+  color: var(--primary);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ================================================
+   DM PACKAGES
+   ================================================ */
+
+.pkg-ladder { margin-top: 80px; }
+
+.pkg-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.p-note-small {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  margin: 4px 0 16px;
+  font-style: italic;
+}
+
+/* ================================================
+   COMING SOON
+   ================================================ */
+
+.coming-soon-wrap { margin-top: 80px; }
+
+.coming-soon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.cs-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 26px;
+  position: relative;
+  opacity: 0.72;
+}
+
+.cs-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  background: rgba(96,165,250,0.1);
+  border: 1px solid rgba(96,165,250,0.25);
+  border-radius: 50px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #60a5fa;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ================================================
+   FAQ
+   ================================================ */
+
+.faq-wrap { margin-top: 80px; }
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  transition: var(--t);
+}
+.faq-item:hover { border-color: var(--border-light); }
+.faq-item.open { border-color: var(--primary-border); }
+
+.faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.93rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+.faq-q:hover { color: var(--primary); }
+.faq-item.open .faq-q { color: var(--primary); }
+
+.faq-icon {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  line-height: 1;
+  transition: var(--t);
+}
+.faq-item.open .faq-icon { color: var(--primary); }
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 22px;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  transition: max-height 0.35s ease, padding 0.2s ease;
+}
+.faq-item.open .faq-a {
+  max-height: 400px;
+  padding: 0 22px 20px;
+}
+
+/* ================================================
+   STICKY MOBILE CTA
+   ================================================ */
+
+.sticky-cta {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 998;
+  padding: 12px 16px;
+  background: rgba(7,8,11,0.97);
+  border-top: 1px solid var(--primary-border);
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+}
+.sticky-cta.visible { transform: translateY(0); }
+
+.sticky-cta-btn {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  background: var(--grad-primary);
+  color: #03100a;
+  font-weight: 800;
+  font-size: 1rem;
+  text-align: center;
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-green);
+}
+
+/* footer team link */
+.footer-team-link { color: var(--text-muted) !important; font-size: 0.8rem; }
+
+/* scroll margin for anchors under fixed nav */
+section[id], div[id] { scroll-margin-top: 80px; }
+
+/* ================================================
    RESPONSIVE
    ================================================ */
 
@@ -1375,26 +1663,32 @@ button { font-family: inherit; }
 
   .svc-grid { grid-template-columns: 1fr 1fr; }
   .p-panels { grid-template-columns: 1fr; }
+  .pkg-cards { grid-template-columns: 1fr; }
   .flow-grid { grid-template-columns: 1fr 1fr; }
   .why-grid { grid-template-columns: 1fr; }
   .f-row { grid-template-columns: 1fr; }
   .req-form-card { padding: 24px; }
   .modal-box { padding: 32px 24px; }
-
+  .audit-offer-card { grid-template-columns: 1fr; padding: 28px; }
   .cta-text h2 { font-size: 1.7rem; }
   .section-title { font-size: 1.8rem; }
   .guide-body { padding: 20px; }
   .guide-header { padding: 18px 20px; }
-
   .fb1, .fb2, .fb3 { display: none; }
+  .sticky-cta { display: block; }
+  body { padding-bottom: 80px; }
 }
 
 @media (max-width: 480px) {
   .svc-grid { grid-template-columns: 1fr; }
   .flow-grid { grid-template-columns: 1fr; }
+  .coming-soon-grid { grid-template-columns: 1fr; }
   .hero-actions { flex-direction: column; }
   .hero-actions .btn-primary,
   .hero-actions .btn-outline { width: 100%; justify-content: center; }
+  .audit-actions { flex-direction: column; }
+  .audit-actions .btn-primary,
+  .audit-actions .btn-wa { width: 100%; justify-content: center; }
   .p-tabs { width: 100%; justify-content: center; }
   .p-tab { padding: 10px 16px; font-size: 0.82rem; }
   .hero-stats { flex-wrap: wrap; gap: 12px; }
@@ -1406,4 +1700,5 @@ button { font-family: inherit; }
   .modal-actions .btn-wa,
   .modal-actions .btn-outline { width: 100%; justify-content: center; }
   .btn-xl { padding: 18px 32px; }
+  .audit-offer-title { font-size: 1.35rem; }
 }
