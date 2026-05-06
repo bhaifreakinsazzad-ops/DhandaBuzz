@@ -1,9 +1,9 @@
 /* ================================================
    DhandaBuzz — Main Application
-   Update WHATSAPP_NUMBER before going live
    ================================================ */
 
-const WHATSAPP_NUMBER = '8801700000000'; // ⚠️ Replace with real number before publishing
+const WHATSAPP_NUMBER = '8801778307704';
+const BKASH_NUMBER = '01778307704';
 
 /* -----------------------------------------------
    DATA — Dev Services
@@ -595,6 +595,8 @@ _DhandaBuzz Development_`);
   },
 
   /* ------ FORM — Audit ------ */
+  _pendingAudit: null,
+
   submitAudit(e) {
     e.preventDefault();
     const form = e.target;
@@ -621,24 +623,22 @@ _DhandaBuzz Development_`);
     const btn = form.querySelector('[type="submit"]');
     const btnText = document.getElementById('auditBtnText');
     btn.disabled = true;
-    btnText.textContent = 'পাঠানো হচ্ছে…';
+    btnText.textContent = 'প্রস্তুত হচ্ছে…';
 
-    const waMsg = this.buildAuditWaMsg({ bizName, name, phone, fbPage, website, category, product, problem, budget, ranAds, goals, mediaPay, auto, notes });
-    document.getElementById('modalWaBtn').href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}`;
-    document.getElementById('modalTitle').textContent = 'Audit Request পাঠানো হয়েছে! 🎉';
-    document.getElementById('modalSub').textContent = 'আমরা ২৪ ঘণ্টার মধ্যে WhatsApp-এ যোগাযোগ করব এবং ৳499 Audit-এর পরবর্তী ধাপ জানাব।';
+    this._pendingAudit = { bizName, name, phone, fbPage, website, category, product, problem, budget, ranAds, goals, mediaPay, auto, notes };
 
     setTimeout(() => {
       btn.disabled = false;
       btnText.textContent = '৳499-তে Audit Request পাঠান →';
-      this.showModal();
-      this.track('audit_submit', { category, budget });
-    }, 600);
+      this.openBkashModal();
+      this.track('audit_form_submit', { category, budget });
+    }, 500);
   },
 
-  buildAuditWaMsg(d) {
+  buildAuditWaMsg(d, trxId) {
     const goalStr = d.goals.length ? d.goals.join(', ') : 'উল্লেখ নেই';
-    return encodeURIComponent(`📊 *DhandaBuzz — Business Audit Request (৳499)*
+    const payLine = trxId ? `\n✅ *bKash TrxID:* ${trxId}` : '';
+    return encodeURIComponent(`📊 *DhandaBuzz — Business Audit (৳499)*${payLine}
 
 🏢 *Business:* ${d.bizName}
 👤 *নাম:* ${d.name}
@@ -658,6 +658,55 @@ _DhandaBuzz Development_`);
 📝 *Notes:* ${d.notes || 'নেই'}
 
 _DhandaBuzz Digital Marketing_`);
+  },
+
+  /* ------ BKASH PAYMENT FLOW ------ */
+  openBkashModal() {
+    document.getElementById('bkashModal').style.display = 'flex';
+    document.getElementById('bkashStep1').style.display = 'block';
+    document.getElementById('bkashStep2').style.display = 'none';
+    document.getElementById('bkashStep3').style.display = 'none';
+    document.getElementById('bkashTrxId').value = '';
+    document.body.style.overflow = 'hidden';
+  },
+
+  closeBkashModal() {
+    document.getElementById('bkashModal').style.display = 'none';
+    document.body.style.overflow = '';
+  },
+
+  bkashNext() {
+    document.getElementById('bkashStep1').style.display = 'none';
+    document.getElementById('bkashStep2').style.display = 'block';
+    document.getElementById('bkashTrxId').focus();
+  },
+
+  bkashBack() {
+    document.getElementById('bkashStep2').style.display = 'none';
+    document.getElementById('bkashStep1').style.display = 'block';
+  },
+
+  copyBkashNum() {
+    navigator.clipboard.writeText(BKASH_NUMBER).then(() => {
+      this.toast('নম্বর কপি হয়েছে! ✓', 'success');
+    }).catch(() => {
+      this.toast(BKASH_NUMBER, 'success');
+    });
+  },
+
+  confirmBkash() {
+    const trxId = document.getElementById('bkashTrxId').value.trim().toUpperCase();
+    if (!trxId || trxId.length < 6) { this.toast('সঠিক bKash TrxID দিন (কমপক্ষে ৬ অক্ষর)।', 'error'); return; }
+    if (!this._pendingAudit) { this.toast('কিছু একটা সমস্যা হয়েছে, পেজ reload করুন।', 'error'); return; }
+
+    const waMsg = this.buildAuditWaMsg(this._pendingAudit, trxId);
+    document.getElementById('bkashConfirmedTrx').textContent = trxId;
+    document.getElementById('bkashWaBtn').href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}`;
+    document.getElementById('bkashStep2').style.display = 'none';
+    document.getElementById('bkashStep3').style.display = 'block';
+
+    this.track('audit_payment_confirm', { trxId });
+    if (window.fbq) fbq('track', 'Purchase', { value: 499, currency: 'BDT', content_name: 'Business Audit' });
   },
 
   /* ------ MODAL ------ */
