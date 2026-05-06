@@ -1,13 +1,14 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import {
   FiGrid, FiZap, FiCreditCard, FiShoppingBag, FiHeadphones,
-  FiUser, FiLogOut, FiX
+  FiUser, FiLogOut, FiX, FiEdit3
 } from 'react-icons/fi'
 import { useAuth } from '../../hooks/useAuth'
 import LiveCallButton from '../ui/LiveCallButton'
 
 const navItems = [
   { to: '/dashboard', icon: FiGrid, label: 'Dashboard' },
+  { to: '/create', icon: FiEdit3, label: 'AI Create' },
   { to: '/services', icon: FiZap, label: 'Services' },
   { to: '/wallet', icon: FiCreditCard, label: 'Wallet' },
   { to: '/orders', icon: FiShoppingBag, label: 'Orders' },
