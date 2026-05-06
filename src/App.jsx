@@ -22,6 +22,8 @@ import AdminRechargesPage from './pages/admin/AdminRechargesPage'
 import AdminUsersPage from './pages/admin/AdminUsersPage'
 import AdminCRMPage from './pages/admin/AdminCRMPage'
 import DashboardPreviewPage from './pages/DashboardPreviewPage'
+import StartProjectPage from './pages/StartProjectPage'
+import CreateAIPage from './pages/CreateAIPage'
 
 function AuthGate({ children }) {
   const { authLoading } = useAuth()
@@ -58,6 +60,7 @@ export default function App() {
       <Routes>
         <Route element={<PublicLayout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/start-project" element={<StartProjectPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/preview" element={<DashboardPreviewPage />} />
@@ -66,6 +69,7 @@ export default function App() {
         <Route element={<ProtectedRoute />}>
           <Route element={<DashboardLayout />}>
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/create" element={<CreateAIPage />} />
             <Route path="/wallet" element={<WalletPage />} />
             <Route path="/orders" element={<OrdersPage />} />
             <Route path="/orders/:orderId" element={<OrderDetailPage />} />
