@@ -6,15 +6,15 @@ import { AuthProvider } from './context/AuthContext'
 import { Toaster } from 'react-hot-toast'
 import './index.css'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const container = document.getElementById('root')
+const app = ReactDOM.createRoot(container)
+
+app.render(
   <React.StrictMode>
-    <BrowserRouter basename="/DhandaBuzz">
+    <BrowserRouter>
       <AuthProvider>
         <App />
-        <Toaster position="top-right" toastOptions={{
-          duration: 3000,
-          style: { fontFamily: 'Hind Siliguri, sans-serif' }
-        }} />
+        <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
