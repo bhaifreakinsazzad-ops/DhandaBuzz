@@ -1,1073 +1,690 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DhandaBuzz - AI Business Services Portal</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DhandaBuzz — Website, App, Software & Digital Marketing Bangladesh</title>
+  <meta name="description" content="Website, App, Software, Ecommerce বা Digital Marketing — DhandaBuzz আপনার পুরো Digital উপস্থিতি তৈরি করে। আগে Free Preview দেখুন, তারপর শুরু করুন। ৳499-তে Business Audit নিন।" />
+  <meta name="keywords" content="website development bangladesh, digital marketing bangladesh, facebook ads bangladesh, ecommerce development dhaka, mobile app development, DhandaBuzz, ওয়েবসাইট তৈরি, ডিজিটাল মার্কেটিং, ফেসবুক অ্যাডস" />
+  <meta property="og:title" content="DhandaBuzz — Website, App & Digital Marketing Bangladesh" />
+  <meta property="og:description" content="Boosting নয়, আসল Digital Marketing। Website থেকে App — সব একই ছাদের নিচে। ৳499-তে Business Growth Audit নিন।" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#07080b" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <!-- Meta Pixel -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window,document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','1509086124159551');
+  fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1509086124159551&ev=PageView&noscript=1"/></noscript>
 </head>
 <body>
 
-  <!-- ===== NAVBAR ===== -->
-  <nav class="navbar">
-    <div class="navbar-brand" onclick="App.showPage('home')">
-      <div class="logo-icon">DB</div>
-      <span>DhandaBuzz</span>
-    </div>
-    <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
-    <ul class="navbar-nav">
-      <li><a href="#" data-page="home" class="active">Services</a></li>
-      <li><a href="#" data-page="dashboard">📊 Dashboard</a></li>
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner container">
+    <a class="nav-brand" href="#" onclick="return DB.scrollTo('hero')">
+      <span class="brand-dot"></span>DhandaBuzz <span>Dev</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" onclick="DB.toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#" onclick="return DB.navTo('services')">Development</a></li>
+      <li><a href="#" onclick="return DB.navTo('digital-marketing')" data-section="dm_nav">Digital Marketing</a></li>
+      <li><a href="#" onclick="return DB.navTo('pricing')">প্রাইসিং</a></li>
+      <li><a href="#" onclick="return DB.navTo('why-us')">কেন আমরা?</a></li>
       <li>
-        <div class="maal-badge">
-          <span class="maal-icon">&#9733;</span>
-          <span class="maal-balance-value">500</span> Maal
-        </div>
+        <a href="#" class="btn-primary" onclick="return DB.navTo('requirement-form')" data-cta="nav_start">
+          Project শুরু করুন
+        </a>
       </li>
     </ul>
-  </nav>
+  </div>
+</nav>
 
-  <!-- ===== MAIN CONTENT ===== -->
-  <main class="main-content">
-
-    <!-- ==========================================
-         HOME PAGE - Services Grid
-         ========================================== -->
-    <div id="home" class="page active">
-      <div class="hero">
-        <h1>Grow Your <span class="highlight">Dhanda</span> With AI</h1>
-        <p>Professional business services powered by AI. Request creatives, websites, ad campaigns &mdash; all from one portal.</p>
-      </div>
-
-      <div class="services-grid">
-
-        <!-- Dashboard -->
-        <div class="service-card" onclick="App.showPage('dashboard')" style="background: rgba(108,92,231,0.1); border: 1px solid var(--primary);">
-          <div class="service-card-icon" style="background: rgba(108,92,231,0.15); color: var(--primary-light);">📊</div>
-          <h3>Dashboard</h3>
-          <p>View your request history, Maal balance, and manage your active projects.</p>
-          <span class="price-tag">Free</span>
-          <div class="card-arrow">&rarr;</div>
+<!-- HERO -->
+<section class="hero section" id="hero">
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="badge-row">
+          <span class="hero-badge">🔥 ১১% Cashback</span>
+          <span class="hero-badge-outline">⚡ Ready Setup ৳4,999 থেকে</span>
         </div>
-
-        <!-- Creative Engine -->
-        <div class="service-card" onclick="App.showPage('creative-engine')">
-          <div class="service-card-icon" style="background: rgba(108,92,231,0.15); color: #a29bfe;">&#9998;</div>
-          <h3>Creative Engine</h3>
-          <p>Request ad creatives, marketing visuals, social media posts, offer posters, and promo videos for your business.</p>
-          <span class="price-tag">Starting at 10 Maal</span>
-          <div class="card-arrow">&rarr;</div>
+        <h1 class="hero-title">
+          আপনার Business-এর জন্য<br />
+          <span class="text-green">Website, App, Software</span><br />
+          বা Ecommerce Store দরকার?
+        </h1>
+        <p class="hero-sub">
+          আগে <strong>Free Premium Preview</strong> দেখুন —<br />
+          পছন্দ হলে Project শুরু করুন। কোনো Advance নয়, কোনো Risk নয়।
+        </p>
+        <div class="hero-actions">
+          <a href="#" class="btn-primary btn-lg" onclick="return DB.navTo('preview')" data-cta="hero_preview">
+            Free Preview দেখুন →
+          </a>
+          <a href="#" class="btn-outline btn-lg" onclick="return DB.navTo('requirement-form')" data-cta="hero_form">
+            Requirement জমা দিন
+          </a>
         </div>
-
-        <!-- Web Launch Lab -->
-        <div class="service-card" onclick="App.showPage('web-launch-lab')">
-          <div class="service-card-icon" style="background: rgba(0,206,201,0.15); color: #55efc4;">&#9881;</div>
-          <h3>Web Launch Lab</h3>
-          <p>Get landing pages, portfolio sites, business websites, or full e-commerce stores built for your brand.</p>
-          <span class="price-tag">Starting at 300 Maal</span>
-          <div class="card-arrow">&rarr;</div>
-        </div>
-
-        <!-- AdScale Engine -->
-        <div class="service-card" onclick="App.showPage('adscale-engine')">
-          <div class="service-card-icon" style="background: rgba(249,202,36,0.15); color: #f9ca24;">&#9889;</div>
-          <h3>AdScale Engine</h3>
-          <p>Facebook advertising support — from ad planning to full campaign setup and launch management.</p>
-          <span class="price-tag">Starting at 50 Maal</span>
-          <div class="card-arrow">&rarr;</div>
-        </div>
-
-        <!-- Branding -->
-        <div class="service-card" onclick="App.showPage('branding')">
-          <div class="service-card-icon" style="background: rgba(255,192,203,0.15); color: #ff69b4;">🎨</div>
-          <h3>Branding</h3>
-          <p>Complete brand identity design — logo, colors, typography, and brand guidelines for your business.</p>
-          <span class="price-tag">Starting at 500 Maal</span>
-          <div class="card-arrow">&rarr;</div>
-        </div>
-
-        <!-- SEO -->
-        <div class="service-card" onclick="App.showPage('seo')">
-          <div class="service-card-icon" style="background: rgba(0,255,100,0.15); color: #00ff64;">🔍</div>
-          <h3>SEO</h3>
-          <p>Search engine optimization to rank your business higher on Google and drive organic traffic.</p>
-          <span class="price-tag">Starting at 200 Maal</span>
-          <div class="card-arrow">&rarr;</div>
-        </div>
-
-        <!-- WhatsApp Automation -->
-        <div class="service-card" onclick="App.showPage('whatsapp-automation')">
-          <div class="service-card-icon" style="background: rgba(37,211,102,0.15); color: #25d366;">💬</div>
-          <h3>WhatsApp Automation</h3>
-          <p>Automated WhatsApp messaging, chatbots, and customer engagement tools for your business.</p>
-          <span class="price-tag">Starting at 150 Maal</span>
-          <div class="card-arrow">&rarr;</div>
-        </div>
-
-        <!-- CRM Setup -->
-        <div class="service-card" onclick="App.showPage('crm-setup')">
-          <div class="service-card-icon" style="background: rgba(100,150,255,0.15); color: #6496ff;">👥</div>
-          <h3>CRM Setup</h3>
-          <p>Customer relationship management setup to track leads, sales, and customer interactions.</p>
-          <span class="price-tag">Starting at 300 Maal</span>
-          <div class="card-arrow">&rarr;</div>
-        </div>
-
-        <!-- E-commerce Growth -->
-        <div class="service-card" onclick="App.showPage('ecommerce-growth')">
-          <div class="service-card-icon" style="background: rgba(255,165,0,0.15); color: #ffa500;">🛒</div>
-          <h3>E-commerce Growth</h3>
-          <p>Scale your online store with product optimization, marketing funnels, and conversion strategies.</p>
-          <span class="price-tag">Starting at 250 Maal</span>
-          <div class="card-arrow">&rarr;</div>
-        </div>
-
-        <!-- Consultation -->
-        <div class="service-card" onclick="App.showPage('consultation')">
-          <div class="service-card-icon" style="background: rgba(186,85,211,0.15); color: #ba55d3;">💡</div>
-          <h3>Consultation</h3>
-          <p>One-on-one business consulting sessions to plan growth, strategy, and digital transformation.</p>
-          <span class="price-tag">Starting at 100 Maal</span>
-          <div class="card-arrow">&rarr;</div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ==========================================
-         CREATIVE ENGINE PAGE
-         ========================================== -->
-    <div id="creative-engine" class="page">
-      <div class="service-page-header">
-        <button class="back-btn" data-page="home">&larr; Back to Services</button>
-        <h1>&#9998; Creative Engine</h1>
-        <p>Request ad creatives and marketing visuals for your business</p>
-      </div>
-
-      <!-- Pricing -->
-      <div class="pricing-section">
-        <h2>Pricing</h2>
-        <div class="pricing-grid">
-          <div class="pricing-item">
-            <div class="item-name">1 Image</div>
-            <div class="item-price">10 Maal</div>
-          </div>
-          <div class="pricing-item">
-            <div class="item-name">5 Images</div>
-            <div class="item-price">45 Maal</div>
-            <div class="item-price-sub">9 Maal each</div>
-          </div>
-          <div class="pricing-item">
-            <div class="item-name">10 Images</div>
-            <div class="item-price">80 Maal</div>
-            <div class="item-price-sub">8 Maal each</div>
-          </div>
-          <div class="pricing-item">
-            <div class="item-name">1 Short Video</div>
-            <div class="item-price">50 Maal</div>
-          </div>
+        <div class="hero-stats">
+          <div class="stat-item"><span class="stat-num">৫০০+</span><span class="stat-label">সফল Project</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat-item"><span class="stat-num">৪.৯★</span><span class="stat-label">Client Rating</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat-item"><span class="stat-num">৭ দিন</span><span class="stat-label">Delivery</span></div>
         </div>
       </div>
-
-      <!-- Cost Display -->
-      <div class="maal-cost-display">
-        <div>
-          <div class="cost-label">Estimated Cost</div>
-          <div class="cost-value" id="ce-cost-value">-- Maal</div>
-        </div>
-        <div class="balance-info">
-          <span class="current-balance">Balance: <strong class="maal-balance-value">500</strong> Maal</span>
-          <span class="remaining-balance" id="ce-remaining"></span>
-        </div>
-      </div>
-
-      <!-- Form -->
-      <form class="service-form" id="ce-form">
-        <h2>Submit Your Request</h2>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>Business Name <span class="required">*</span></label>
-            <input type="text" name="business-name" class="form-control" placeholder="Your business name" required>
+      <div class="hero-visual">
+        <div class="mockup-card">
+          <div class="mockup-header">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <span class="mockup-url">yourstore.dhandabuzz.com</span>
           </div>
-          <div class="form-group">
-            <label>Product / Service Name <span class="required">*</span></label>
-            <input type="text" name="product-name" class="form-control" placeholder="What are you promoting?" required>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Target Audience</label>
-          <input type="text" name="target-audience" class="form-control" placeholder="e.g. Young professionals aged 25-35 in Dhaka">
-        </div>
-
-        <div class="form-group">
-          <label>Creative Type <span class="required">*</span></label>
-          <div class="option-group">
-            <div class="option-pill">
-              <input type="radio" name="creative-type" value="ad-image" id="ct-ad-image">
-              <label for="ct-ad-image">Ad Image</label>
-            </div>
-            <div class="option-pill">
-              <input type="radio" name="creative-type" value="offer-poster" id="ct-offer-poster">
-              <label for="ct-offer-poster">Offer Poster</label>
-            </div>
-            <div class="option-pill">
-              <input type="radio" name="creative-type" value="social-media-post" id="ct-social">
-              <label for="ct-social">Social Media Post</label>
-            </div>
-            <div class="option-pill">
-              <input type="radio" name="creative-type" value="short-promo-video" id="ct-video">
-              <label for="ct-video">Short Promo Video</label>
-            </div>
-            <div class="option-pill">
-              <input type="radio" name="creative-type" value="caption-ad-copy" id="ct-copy">
-              <label for="ct-copy">Caption / Ad Copy</label>
-            </div>
-          </div>
-        </div>
-
-        <!-- Dynamic Quantity Options -->
-        <div class="form-group">
-          <label>Select Package</label>
-          <div class="pricing-grid" id="ce-qty-options">
-            <p style="color: var(--text-muted); font-size: 0.88rem;">Select a creative type above to see packages</p>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Preferred Style</label>
-          <select name="preferred-style" class="form-control">
-            <option value="">Select a style...</option>
-            <option value="modern-minimal">Modern & Minimal</option>
-            <option value="bold-colorful">Bold & Colorful</option>
-            <option value="professional">Professional / Corporate</option>
-            <option value="playful">Playful / Fun</option>
-            <option value="luxury">Luxury / Premium</option>
-            <option value="desi-vibrant">Desi Vibrant</option>
-            <option value="other">Other (describe in notes)</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Reference Links or Notes</label>
-          <textarea name="notes" class="form-control" placeholder="Share any reference links, inspirations, text you want on the creative, or special instructions..."></textarea>
-        </div>
-
-        <div class="form-group">
-          <label>Upload Files</label>
-          <div class="upload-area" id="ce-upload-area">
-            <input type="file" multiple accept="image/*,.pdf,.doc,.docx">
-            <div class="upload-icon">&#128206;</div>
-            <div class="upload-text"><strong>Click to upload</strong> or drag files here<br>Images, PDFs, Docs up to 10MB</div>
-          </div>
-          <div class="upload-file-list" id="ce-file-list"></div>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-block">
-          Submit Request &#10140;
-        </button>
-      </form>
-    </div>
-
-    <!-- ==========================================
-         WEB LAUNCH LAB PAGE
-         ========================================== -->
-    <div id="web-launch-lab" class="page">
-      <div class="service-page-header">
-        <button class="back-btn" data-page="home">&larr; Back to Services</button>
-        <h1>&#9881; Web Launch Lab</h1>
-        <p>Request websites or landing pages for your business</p>
-      </div>
-
-      <!-- Pricing -->
-      <div class="pricing-section">
-        <h2>Choose Website Type</h2>
-        <div class="pricing-grid">
-          <div class="pricing-item" data-type="landing-page">
-            <div class="item-name">Landing / Order Page</div>
-            <div class="item-price">300 Maal</div>
-          </div>
-          <div class="pricing-item" data-type="portfolio-site">
-            <div class="item-name">Portfolio / Profile Site</div>
-            <div class="item-price">450 Maal</div>
-          </div>
-          <div class="pricing-item" data-type="business-website">
-            <div class="item-name">Business Website</div>
-            <div class="item-price">700 Maal</div>
-          </div>
-          <div class="pricing-item" data-type="ecommerce-starter">
-            <div class="item-name">E-commerce Starter</div>
-            <div class="item-price">1200 Maal</div>
-          </div>
-          <div class="pricing-item" data-type="custom-web-app">
-            <div class="item-name">Custom Web App</div>
-            <div class="item-price">Custom Quote</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Cost Display -->
-      <div class="maal-cost-display">
-        <div>
-          <div class="cost-label">Estimated Cost</div>
-          <div class="cost-value" id="wll-cost-value">-- Maal</div>
-        </div>
-        <div class="balance-info">
-          <span class="current-balance">Balance: <strong class="maal-balance-value">500</strong> Maal</span>
-          <span class="remaining-balance" id="wll-remaining"></span>
-        </div>
-      </div>
-
-      <!-- Form -->
-      <form class="service-form" id="wll-form">
-        <h2>Submit Your Request</h2>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>Business Name <span class="required">*</span></label>
-            <input type="text" name="business-name" class="form-control" placeholder="Your business name" required>
-          </div>
-          <div class="form-group">
-            <label>Website Type <span class="required">*</span></label>
-            <select name="website-type" class="form-control">
-              <option value="">Select from pricing above or here...</option>
-              <option value="landing-page">Landing / Order Page</option>
-              <option value="portfolio-site">Portfolio / Profile Site</option>
-              <option value="business-website">Business Website</option>
-              <option value="ecommerce-starter">E-commerce Starter</option>
-              <option value="custom-web-app">Custom Web App</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Reference Links</label>
-          <textarea name="reference-links" class="form-control" placeholder="Share links to websites you like or want as inspiration..." rows="3"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label>Required Pages / Features</label>
-          <textarea name="required-pages" class="form-control" placeholder="e.g. Home, About, Contact, Product Gallery, Order Form, WhatsApp integration..."></textarea>
-        </div>
-
-        <div class="form-group">
-          <label>Design Style</label>
-          <select name="design-style" class="form-control">
-            <option value="">Select a style...</option>
-            <option value="modern-minimal">Modern & Minimal</option>
-            <option value="bold-colorful">Bold & Colorful</option>
-            <option value="professional">Professional / Corporate</option>
-            <option value="creative">Creative / Unique</option>
-            <option value="ecommerce">E-commerce Focused</option>
-            <option value="other">Other (describe in notes)</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Upload Files</label>
-          <div class="upload-area" id="wll-upload-area">
-            <input type="file" multiple accept="image/*,.pdf,.doc,.docx,.zip">
-            <div class="upload-icon">&#128206;</div>
-            <div class="upload-text"><strong>Click to upload</strong> or drag files here<br>Logos, images, content docs, wireframes</div>
-          </div>
-          <div class="upload-file-list" id="wll-file-list"></div>
-        </div>
-
-        <div class="form-group">
-          <label>Additional Notes</label>
-          <textarea name="notes" class="form-control" placeholder="Any other details, timeline preferences, or special requirements..."></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-block">
-          Submit Request &#10140;
-        </button>
-      </form>
-    </div>
-
-    <!-- ==========================================
-         ADSCALE ENGINE PAGE
-         ========================================== -->
-    <div id="adscale-engine" class="page">
-      <div class="service-page-header">
-        <button class="back-btn" data-page="home">&larr; Back to Services</button>
-        <h1>&#9889; AdScale Engine</h1>
-        <p>Facebook advertising support for your business</p>
-      </div>
-
-      <!-- Pricing -->
-      <div class="pricing-section">
-        <h2>Choose Your Plan</h2>
-        <div class="pricing-grid">
-          <div class="pricing-item" data-plan="ad-plan-unlock">
-            <div class="item-name">Ad Plan Unlock</div>
-            <div class="item-price">50 Maal</div>
-          </div>
-          <div class="pricing-item" data-plan="full-planning-bundle">
-            <div class="item-name">Full Planning Bundle</div>
-            <div class="item-price">100 Maal</div>
-          </div>
-          <div class="pricing-item" data-plan="campaign-setup">
-            <div class="item-name">Campaign Setup</div>
-            <div class="item-price">300 Maal</div>
-          </div>
-          <div class="pricing-item" data-plan="full-launch-support">
-            <div class="item-name">Full Launch Support</div>
-            <div class="item-price">700 Maal</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Cost Display -->
-      <div class="maal-cost-display">
-        <div>
-          <div class="cost-label">Estimated Cost</div>
-          <div class="cost-value" id="as-cost-value">-- Maal</div>
-        </div>
-        <div class="balance-info">
-          <span class="current-balance">Balance: <strong class="maal-balance-value">500</strong> Maal</span>
-          <span class="remaining-balance" id="as-remaining"></span>
-        </div>
-      </div>
-
-      <!-- Form -->
-      <form class="service-form" id="as-form">
-        <h2>Submit Your Request</h2>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>Business Name <span class="required">*</span></label>
-            <input type="text" name="business-name" class="form-control" placeholder="Your business name" required>
-          </div>
-          <div class="form-group">
-            <label>Product / Service <span class="required">*</span></label>
-            <input type="text" name="product-service" class="form-control" placeholder="What are you advertising?" required>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>Objective <span class="required">*</span></label>
-            <select name="objective" class="form-control" required>
-              <option value="">Select objective...</option>
-              <option value="brand-awareness">Brand Awareness</option>
-              <option value="reach">Reach</option>
-              <option value="traffic">Traffic / Website Visits</option>
-              <option value="engagement">Engagement</option>
-              <option value="leads">Lead Generation</option>
-              <option value="messages">Messages / WhatsApp</option>
-              <option value="sales">Sales / Conversions</option>
-              <option value="app-installs">App Installs</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Monthly Budget (BDT)</label>
-            <input type="text" name="budget" class="form-control" placeholder="e.g. 5,000 - 20,000 BDT">
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>Target Location</label>
-            <input type="text" name="target-location" class="form-control" placeholder="e.g. Dhaka, Chittagong, All Bangladesh">
-          </div>
-          <div class="form-group">
-            <label>Age Range</label>
-            <div class="form-row" style="gap: 10px;">
-              <input type="number" name="age-min" class="form-control" placeholder="Min (e.g. 18)" min="13" max="65">
-              <input type="number" name="age-max" class="form-control" placeholder="Max (e.g. 45)" min="13" max="65">
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Gender</label>
-          <div class="option-group">
-            <div class="option-pill">
-              <input type="radio" name="gender" value="all" id="gender-all" checked>
-              <label for="gender-all">All</label>
-            </div>
-            <div class="option-pill">
-              <input type="radio" name="gender" value="male" id="gender-male">
-              <label for="gender-male">Male</label>
-            </div>
-            <div class="option-pill">
-              <input type="radio" name="gender" value="female" id="gender-female">
-              <label for="gender-female">Female</label>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Quick Setup Questions</label>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px;">
-            <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px;">
-              <span style="font-size: 0.9rem; color: var(--text-secondary);">Existing Facebook Page?</span>
-              <div class="option-group" style="gap: 6px;">
-                <div class="option-pill">
-                  <input type="radio" name="existing-page" value="yes" id="ep-yes">
-                  <label for="ep-yes" style="padding: 4px 12px; font-size: 0.82rem;">Yes</label>
-                </div>
-                <div class="option-pill">
-                  <input type="radio" name="existing-page" value="no" id="ep-no">
-                  <label for="ep-no" style="padding: 4px 12px; font-size: 0.82rem;">No</label>
-                </div>
+          <div class="mockup-body">
+            <div class="mock-nav-bar"></div>
+            <div class="mock-hero-block">
+              <div class="mock-line wide"></div>
+              <div class="mock-line mid"></div>
+              <div class="mock-btn-row">
+                <div class="mock-btn green-btn"></div>
+                <div class="mock-btn outline-btn"></div>
               </div>
             </div>
-            <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px;">
-              <span style="font-size: 0.9rem; color: var(--text-secondary);">Existing Ad Account?</span>
-              <div class="option-group" style="gap: 6px;">
-                <div class="option-pill">
-                  <input type="radio" name="existing-ad-account" value="yes" id="eaa-yes">
-                  <label for="eaa-yes" style="padding: 4px 12px; font-size: 0.82rem;">Yes</label>
-                </div>
-                <div class="option-pill">
-                  <input type="radio" name="existing-ad-account" value="no" id="eaa-no">
-                  <label for="eaa-no" style="padding: 4px 12px; font-size: 0.82rem;">No</label>
-                </div>
-              </div>
-            </div>
-            <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px;">
-              <span style="font-size: 0.9rem; color: var(--text-secondary);">Need card support?</span>
-              <div class="option-group" style="gap: 6px;">
-                <div class="option-pill">
-                  <input type="radio" name="need-card" value="yes" id="nc-yes">
-                  <label for="nc-yes" style="padding: 4px 12px; font-size: 0.82rem;">Yes</label>
-                </div>
-                <div class="option-pill">
-                  <input type="radio" name="need-card" value="no" id="nc-no">
-                  <label for="nc-no" style="padding: 4px 12px; font-size: 0.82rem;">No</label>
-                </div>
-              </div>
-            </div>
-            <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px;">
-              <span style="font-size: 0.9rem; color: var(--text-secondary);">Need creative support?</span>
-              <div class="option-group" style="gap: 6px;">
-                <div class="option-pill">
-                  <input type="radio" name="need-creative" value="yes" id="ncs-yes">
-                  <label for="ncs-yes" style="padding: 4px 12px; font-size: 0.82rem;">Yes</label>
-                </div>
-                <div class="option-pill">
-                  <input type="radio" name="need-creative" value="no" id="ncs-no">
-                  <label for="ncs-no" style="padding: 4px 12px; font-size: 0.82rem;">No</label>
-                </div>
-              </div>
+            <div class="mock-card-row">
+              <div class="mock-card"></div>
+              <div class="mock-card"></div>
+              <div class="mock-card"></div>
             </div>
           </div>
         </div>
-
-        <div class="form-group">
-          <label>Additional Notes</label>
-          <textarea name="notes" class="form-control" placeholder="Any other details about your ad requirements, past campaigns, or special instructions..."></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-block">
-          Submit Request &#10140;
-        </button>
-      </form>
-    </div>
-
-    <!-- ==========================================
-         DASHBOARD PAGE
-         ========================================== -->
-    <div id="dashboard" class="page">
-      <div class="service-page-header">
-        <h1>📊 Dashboard</h1>
-        <p>Manage your account, track orders, and purchase Maal</p>
+        <div class="float-badge fb1">✅ Live হয়ে গেছে!</div>
+        <div class="float-badge fb2">⚡ ৭ দিনে Deliver</div>
+        <div class="float-badge fb3">🔒 SSL Free</div>
       </div>
-
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 40px;">
-        <div class="stats-card">
-          <div class="stats-label">Current Balance</div>
-          <div class="stats-value"><span class="maal-balance-value">500</span> Maal</div>
-          <button class="btn btn-primary" style="width: 100%; margin-top: 12px; padding: 10px;" onclick="App.showMaalTopup()">Top Up Maal ⭐</button>
-        </div>
-        <div class="stats-card">
-          <div class="stats-label">Total Requests</div>
-          <div class="stats-value" id="total-requests">0</div>
-          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 12px;">All submitted requests</div>
-        </div>
-        <div class="stats-card">
-          <div class="stats-label">Pending</div>
-          <div class="stats-value" id="pending-requests">0</div>
-          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 12px;">Awaiting team review</div>
-        </div>
-        <div class="stats-card">
-          <div class="stats-label">Completed</div>
-          <div class="stats-value" id="completed-requests">0</div>
-          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 12px;">Finished projects</div>
-        </div>
-      </div>
-
-      <h2 style="margin-bottom: 20px;">Request History</h2>
-      <div id="orders-list" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; text-align: center; color: var(--text-muted);">
-        <p>No requests yet. Start by ordering a service!</p>
-      </div>
-    </div>
-
-    <!-- ==========================================
-         BRANDING PAGE
-         ========================================== -->
-    <div id="branding" class="page">
-      <div class="service-page-header">
-        <button class="back-btn" data-page="home">&larr; Back to Services</button>
-        <h1>🎨 Branding</h1>
-        <p>Complete brand identity design and guidelines</p>
-      </div>
-
-      <div class="pricing-section">
-        <h2>Packages</h2>
-        <div class="pricing-grid">
-          <div class="pricing-item" data-type="logo-design" onclick="Services.selectPackage('branding', this, 300)">
-            <div class="item-name">Logo Design</div>
-            <div class="item-price">300 Maal</div>
-          </div>
-          <div class="pricing-item" data-type="full-branding" onclick="Services.selectPackage('branding', this, 500)">
-            <div class="item-name">Full Branding Package</div>
-            <div class="item-price">500 Maal</div>
-          </div>
-          <div class="pricing-item" data-type="brand-guidelines" onclick="Services.selectPackage('branding', this, 400)">
-            <div class="item-name">Brand Guidelines</div>
-            <div class="item-price">400 Maal</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="maal-cost-display">
-        <div>
-          <div class="cost-label">Estimated Cost</div>
-          <div class="cost-value" id="branding-cost">-- Maal</div>
-        </div>
-        <div class="balance-info">
-          <span class="current-balance">Balance: <strong class="maal-balance-value">500</strong> Maal</span>
-          <span class="remaining-balance" id="branding-remaining"></span>
-        </div>
-      </div>
-
-      <form class="service-form" id="branding-form">
-        <h2>Submit Your Request</h2>
-        <div class="form-group">
-          <label>Business Name <span class="required">*</span></label>
-          <input type="text" name="business-name" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label>Industry / Business Type</label>
-          <input type="text" name="industry" class="form-control" placeholder="e.g. E-commerce, Consulting, Food">
-        </div>
-        <div class="form-group">
-          <label>Brand Description / Vision</label>
-          <textarea name="description" class="form-control" placeholder="Describe your brand personality and values..."></textarea>
-        </div>
-        <div class="form-group">
-          <label>Target Audience</label>
-          <input type="text" name="target-audience" class="form-control" placeholder="Who are your customers?">
-        </div>
-        <div class="form-group">
-          <label>Reference Links or Inspiration</label>
-          <textarea name="notes" class="form-control" placeholder="Brands or designs you like..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Submit Request &#10140;</button>
-      </form>
-    </div>
-
-    <!-- ==========================================
-         SEO PAGE
-         ========================================== -->
-    <div id="seo" class="page">
-      <div class="service-page-header">
-        <button class="back-btn" data-page="home">&larr; Back to Services</button>
-        <h1>🔍 SEO Services</h1>
-        <p>Improve your search engine rankings and drive organic traffic</p>
-      </div>
-
-      <div class="pricing-section">
-        <h2>SEO Packages</h2>
-        <div class="pricing-grid">
-          <div class="pricing-item" onclick="Services.selectPackage('seo', this, 200)">
-            <div class="item-name">SEO Audit</div>
-            <div class="item-price">200 Maal</div>
-          </div>
-          <div class="pricing-item" onclick="Services.selectPackage('seo', this, 350)">
-            <div class="item-name">Keyword Research & Strategy</div>
-            <div class="item-price">350 Maal</div>
-          </div>
-          <div class="pricing-item" onclick="Services.selectPackage('seo', this, 500)">
-            <div class="item-name">Full SEO Optimization</div>
-            <div class="item-price">500 Maal</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="maal-cost-display">
-        <div>
-          <div class="cost-label">Estimated Cost</div>
-          <div class="cost-value" id="seo-cost">-- Maal</div>
-        </div>
-        <div class="balance-info">
-          <span class="current-balance">Balance: <strong class="maal-balance-value">500</strong> Maal</span>
-          <span class="remaining-balance" id="seo-remaining"></span>
-        </div>
-      </div>
-
-      <form class="service-form" id="seo-form">
-        <h2>Submit Your Request</h2>
-        <div class="form-group">
-          <label>Business Name <span class="required">*</span></label>
-          <input type="text" name="business-name" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label>Website URL</label>
-          <input type="url" name="website-url" class="form-control" placeholder="https://yourwebsite.com">
-        </div>
-        <div class="form-group">
-          <label>Target Keywords / Phrases</label>
-          <textarea name="keywords" class="form-control" placeholder="e.g. digital marketing, web design in Dhaka..."></textarea>
-        </div>
-        <div class="form-group">
-          <label>Current Challenges</label>
-          <textarea name="challenges" class="form-control" placeholder="What SEO issues are you facing?"></textarea>
-        </div>
-        <div class="form-group">
-          <label>Goals</label>
-          <input type="text" name="goals" class="form-control" placeholder="e.g. Rank in top 10 for main keywords">
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Submit Request &#10140;</button>
-      </form>
-    </div>
-
-    <!-- ==========================================
-         WHATSAPP AUTOMATION PAGE
-         ========================================== -->
-    <div id="whatsapp-automation" class="page">
-      <div class="service-page-header">
-        <button class="back-btn" data-page="home">&larr; Back to Services</button>
-        <h1>💬 WhatsApp Automation</h1>
-        <p>Automate customer communication and engagement</p>
-      </div>
-
-      <div class="pricing-section">
-        <h2>Plans</h2>
-        <div class="pricing-grid">
-          <div class="pricing-item" onclick="Services.selectPackage('whatsapp-automation', this, 150)">
-            <div class="item-name">Basic Setup</div>
-            <div class="item-price">150 Maal</div>
-          </div>
-          <div class="pricing-item" onclick="Services.selectPackage('whatsapp-automation', this, 300)">
-            <div class="item-name">Chatbot Setup</div>
-            <div class="item-price">300 Maal</div>
-          </div>
-          <div class="pricing-item" onclick="Services.selectPackage('whatsapp-automation', this, 450)">
-            <div class="item-name">Full Automation Suite</div>
-            <div class="item-price">450 Maal</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="maal-cost-display">
-        <div>
-          <div class="cost-label">Estimated Cost</div>
-          <div class="cost-value" id="whatsapp-automation-cost">-- Maal</div>
-        </div>
-        <div class="balance-info">
-          <span class="current-balance">Balance: <strong class="maal-balance-value">500</strong> Maal</span>
-          <span class="remaining-balance" id="whatsapp-automation-remaining"></span>
-        </div>
-      </div>
-
-      <form class="service-form" id="whatsapp-automation-form">
-        <h2>Submit Your Request</h2>
-        <div class="form-group">
-          <label>Business Name <span class="required">*</span></label>
-          <input type="text" name="business-name" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label>WhatsApp Business Account Phone</label>
-          <input type="tel" name="phone" class="form-control" placeholder="+880...">
-        </div>
-        <div class="form-group">
-          <label>Use Case</label>
-          <select name="use-case" class="form-control">
-            <option value="">Select...</option>
-            <option value="order-updates">Order Updates & Tracking</option>
-            <option value="customer-support">Customer Support</option>
-            <option value="marketing">Marketing Messages</option>
-            <option value="appointment">Appointment Booking</option>
-            <option value="broadcast">Broadcast Messages</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Current Volume (monthly messages)</label>
-          <input type="number" name="volume" class="form-control" placeholder="e.g. 1000">
-        </div>
-        <div class="form-group">
-          <label>Additional Notes</label>
-          <textarea name="notes" class="form-control" placeholder="Any specific automation needs..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Submit Request &#10140;</button>
-      </form>
-    </div>
-
-    <!-- ==========================================
-         CRM SETUP PAGE
-         ========================================== -->
-    <div id="crm-setup" class="page">
-      <div class="service-page-header">
-        <button class="back-btn" data-page="home">&larr; Back to Services</button>
-        <h1>👥 CRM Setup</h1>
-        <p>Manage customers, leads, and sales effectively</p>
-      </div>
-
-      <div class="pricing-section">
-        <h2>CRM Packages</h2>
-        <div class="pricing-grid">
-          <div class="pricing-item" onclick="Services.selectPackage('crm-setup', this, 300)">
-            <div class="item-name">Basic Setup</div>
-            <div class="item-price">300 Maal</div>
-          </div>
-          <div class="pricing-item" onclick="Services.selectPackage('crm-setup', this, 500)">
-            <div class="item-name">Custom Configuration</div>
-            <div class="item-price">500 Maal</div>
-          </div>
-          <div class="pricing-item" onclick="Services.selectPackage('crm-setup', this, 700)">
-            <div class="item-name">Full Implementation + Training</div>
-            <div class="item-price">700 Maal</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="maal-cost-display">
-        <div>
-          <div class="cost-label">Estimated Cost</div>
-          <div class="cost-value" id="crm-setup-cost">-- Maal</div>
-        </div>
-        <div class="balance-info">
-          <span class="current-balance">Balance: <strong class="maal-balance-value">500</strong> Maal</span>
-          <span class="remaining-balance" id="crm-setup-remaining"></span>
-        </div>
-      </div>
-
-      <form class="service-form" id="crm-setup-form">
-        <h2>Submit Your Request</h2>
-        <div class="form-group">
-          <label>Business Name <span class="required">*</span></label>
-          <input type="text" name="business-name" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label>Preferred CRM Platform</label>
-          <select name="crm-platform" class="form-control">
-            <option value="">Select...</option>
-            <option value="pipedrive">Pipedrive</option>
-            <option value="zoho">Zoho CRM</option>
-            <option value="hubspot">HubSpot</option>
-            <option value="salesforce">Salesforce</option>
-            <option value="other">Other (will recommend)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Team Size</label>
-          <input type="number" name="team-size" class="form-control" placeholder="Number of users">
-        </div>
-        <div class="form-group">
-          <label>Current Data Source</label>
-          <input type="text" name="data-source" class="form-control" placeholder="Excel, Google Sheets, etc.">
-        </div>
-        <div class="form-group">
-          <label>Key Features Needed</label>
-          <textarea name="features" class="form-control" placeholder="Lead tracking, sales pipeline, reporting..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Submit Request &#10140;</button>
-      </form>
-    </div>
-
-    <!-- ==========================================
-         ECOMMERCE GROWTH PAGE
-         ========================================== -->
-    <div id="ecommerce-growth" class="page">
-      <div class="service-page-header">
-        <button class="back-btn" data-page="home">&larr; Back to Services</button>
-        <h1>🛒 E-commerce Growth</h1>
-        <p>Scale your online store and increase conversions</p>
-      </div>
-
-      <div class="pricing-section">
-        <h2>Growth Packages</h2>
-        <div class="pricing-grid">
-          <div class="pricing-item" onclick="Services.selectPackage('ecommerce-growth', this, 250)">
-            <div class="item-name">Store Optimization</div>
-            <div class="item-price">250 Maal</div>
-          </div>
-          <div class="pricing-item" onclick="Services.selectPackage('ecommerce-growth', this, 400)">
-            <div class="item-name">Marketing Strategy</div>
-            <div class="item-price">400 Maal</div>
-          </div>
-          <div class="pricing-item" onclick="Services.selectPackage('ecommerce-growth', this, 600)">
-            <div class="item-name">Full Growth Suite</div>
-            <div class="item-price">600 Maal</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="maal-cost-display">
-        <div>
-          <div class="cost-label">Estimated Cost</div>
-          <div class="cost-value" id="ecommerce-growth-cost">-- Maal</div>
-        </div>
-        <div class="balance-info">
-          <span class="current-balance">Balance: <strong class="maal-balance-value">500</strong> Maal</span>
-          <span class="remaining-balance" id="ecommerce-growth-remaining"></span>
-        </div>
-      </div>
-
-      <form class="service-form" id="ecommerce-growth-form">
-        <h2>Submit Your Request</h2>
-        <div class="form-group">
-          <label>Business Name <span class="required">*</span></label>
-          <input type="text" name="business-name" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label>Store Platform</label>
-          <select name="platform" class="form-control">
-            <option value="">Select...</option>
-            <option value="shopify">Shopify</option>
-            <option value="woocommerce">WooCommerce</option>
-            <option value="custom">Custom Site</option>
-            <option value="facebook">Facebook Shop</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Monthly Revenue</label>
-          <input type="text" name="revenue" class="form-control" placeholder="e.g. 50,000 BDT">
-        </div>
-        <div class="form-group">
-          <label>Main Challenges</label>
-          <textarea name="challenges" class="form-control" placeholder="Low traffic, high bounce rate, slow conversion..."></textarea>
-        </div>
-        <div class="form-group">
-          <label>Growth Goals</label>
-          <textarea name="goals" class="form-control" placeholder="Target revenue increase, customer base growth..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Submit Request &#10140;</button>
-      </form>
-    </div>
-
-    <!-- ==========================================
-         CONSULTATION PAGE
-         ========================================== -->
-    <div id="consultation" class="page">
-      <div class="service-page-header">
-        <button class="back-btn" data-page="home">&larr; Back to Services</button>
-        <h1>💡 Business Consultation</h1>
-        <p>Expert guidance for business growth and digital transformation</p>
-      </div>
-
-      <div class="pricing-section">
-        <h2>Consultation Sessions</h2>
-        <div class="pricing-grid">
-          <div class="pricing-item" onclick="Services.selectPackage('consultation', this, 100)">
-            <div class="item-name">Single Session (1 hour)</div>
-            <div class="item-price">100 Maal</div>
-          </div>
-          <div class="pricing-item" onclick="Services.selectPackage('consultation', this, 250)">
-            <div class="item-name">3-Session Package</div>
-            <div class="item-price">250 Maal</div>
-          </div>
-          <div class="pricing-item" onclick="Services.selectPackage('consultation', this, 400)">
-            <div class="item-name">Monthly Consulting</div>
-            <div class="item-price">400 Maal</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="maal-cost-display">
-        <div>
-          <div class="cost-label">Estimated Cost</div>
-          <div class="cost-value" id="consultation-cost">-- Maal</div>
-        </div>
-        <div class="balance-info">
-          <span class="current-balance">Balance: <strong class="maal-balance-value">500</strong> Maal</span>
-          <span class="remaining-balance" id="consultation-remaining"></span>
-        </div>
-      </div>
-
-      <form class="service-form" id="consultation-form">
-        <h2>Submit Your Request</h2>
-        <div class="form-group">
-          <label>Your Name <span class="required">*</span></label>
-          <input type="text" name="name" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label>Business Name <span class="required">*</span></label>
-          <input type="text" name="business-name" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label>Consultation Topics</label>
-          <textarea name="topics" class="form-control" placeholder="e.g. Growth strategy, Digital marketing, E-commerce..."></textarea>
-        </div>
-        <div class="form-group">
-          <label>Preferred Time Zone / Meeting Schedule</label>
-          <input type="text" name="schedule" class="form-control" placeholder="e.g. UTC+6, Weekday evenings">
-        </div>
-        <div class="form-group">
-          <label>Your Current Situation</label>
-          <textarea name="situation" class="form-control" placeholder="Tell us about your business and what you need help with..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Submit Request &#10140;</button>
-      </form>
-    </div>
-
-  </main>
-
-  <!-- ===== MAAL TOPUP MODAL ===== -->
-  <div class="modal-overlay" id="maalTopupModal">
-    <div class="modal-box">
-      <h3>Purchase Maal ⭐</h3>
-      <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 20px;">Add credit to your account</p>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
-        <div class="topup-card" onclick="App.addMaal(500)">
-          <div style="font-size: 1.2rem; font-weight: 700;">500</div>
-          <div style="font-size: 0.8rem; color: var(--text-muted);">500 Maal</div>
-        </div>
-        <div class="topup-card" onclick="App.addMaal(1000)">
-          <div style="font-size: 1.2rem; font-weight: 700;">1,000</div>
-          <div style="font-size: 0.8rem; color: var(--text-muted);">Best Value</div>
-        </div>
-        <div class="topup-card" onclick="App.addMaal(2500)">
-          <div style="font-size: 1.2rem; font-weight: 700;">2,500</div>
-          <div style="font-size: 0.8rem; color: var(--text-muted);">2,500 Maal</div>
-        </div>
-        <div class="topup-card" onclick="App.addMaal(5000)">
-          <div style="font-size: 1.2rem; font-weight: 700;">5,000</div>
-          <div style="font-size: 0.8rem; color: var(--text-muted);">Premium</div>
-        </div>
-      </div>
-      <button class="btn btn-primary" style="width: 100%;" onclick="App.closeMaalModal()">Close</button>
     </div>
   </div>
+</section>
 
-  <!-- ===== SUCCESS MODAL ===== -->
-  <div class="modal-overlay" id="successModal">
-    <div class="modal-box">
-      <div class="modal-icon">&#10003;</div>
-      <h3>Request Submitted!</h3>
-      <p>Your <span class="service-name">service</span> request has been received. Our team will review and get back to you shortly.</p>
-      <button class="btn btn-primary" onclick="App.closeModal()">Back to Services</button>
+<!-- DEVELOPMENT SERVICES -->
+<section class="section" id="services" data-section="services">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">✦ Development সার্ভিস</span>
+      <h2 class="section-title">আপনার Business-এর জন্য<br /><span class="text-green">যা যা দরকার</span></h2>
+      <p class="section-sub">আমরা শুধু Website বানাই না — আপনার পুরো Digital উপস্থিতি তৈরি করি।</p>
+    </div>
+    <div class="svc-grid" id="svcGrid"></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing" style="background:var(--bg-card)" data-section="pricing">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">✦ Development প্রাইসিং</span>
+      <h2 class="section-title">স্বচ্ছ মূল্য, <span class="text-green">কোনো Hidden Charge নয়</span></h2>
+      <p class="section-sub">আপনার Budget অনুযায়ী সঠিক Package বেছে নিন।</p>
+    </div>
+    <div class="p-tabs">
+      <button class="p-tab active" onclick="DB.switchPricingTab(this,'website')" data-cta="pricing_tab_website">🌐 Website</button>
+      <button class="p-tab" onclick="DB.switchPricingTab(this,'ecommerce')" data-cta="pricing_tab_ecommerce">🛒 Ecommerce</button>
+      <button class="p-tab" onclick="DB.switchPricingTab(this,'app')" data-cta="pricing_tab_app">📱 App &amp; Software</button>
+    </div>
+    <div id="pricingPanels"></div>
+  </div>
+</section>
+
+<!-- FREE PREVIEW FLOW -->
+<section class="section" id="preview" data-section="preview">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">✦ Free Preview Process</span>
+      <h2 class="section-title">আগে দেখুন, <span class="text-green">তারপর সিদ্ধান্ত নিন</span></h2>
+      <p class="section-sub">আমাদের ৮-ধাপ Preview Process-এ কোনো Advance নেই, কোনো Risk নেই।</p>
+    </div>
+    <div class="flow-grid" id="flowGrid"></div>
+    <div class="flow-cta">
+      <a href="#" class="btn-primary btn-lg" onclick="return DB.navTo('requirement-form')" data-cta="preview_cta">
+        এখনই Free Preview নিন →
+      </a>
     </div>
   </div>
+</section>
 
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <p>&copy; 2026 DhandaBuzz &mdash; AI-Powered Business Services Portal</p>
-  </footer>
+<!-- WHY DHANDABUZZ -->
+<section class="section" id="why-us" style="background:var(--bg-card)" data-section="why_us">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">✦ কেন আমরা?</span>
+      <h2 class="section-title">১১টি কারণ কেন<br /><span class="text-green">DhandaBuzz বেছে নেবেন</span></h2>
+    </div>
+    <div class="why-grid" id="whyGrid"></div>
+  </div>
+</section>
 
-  <!-- ===== WHATSAPP BUTTON ===== -->
-  <a href="https://wa.me/8801700000000?text=Hi%20DhandaBuzz!%20I'm%20interested%20in%20your%20services." target="_blank" class="whatsapp-button" title="Chat with us on WhatsApp">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.272-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.946 1.347l-.383.214-.39-.067C5.362 6.004 3.917 3.506 3.917 3.506S3.15 1.854 4.593.474c.574.556 1.42 1.457 2.045 2.5 1.09 1.758 1.742 3.65 1.82 4.816.04.62.02 1.203-.058 1.723l2.006-.004zm0 0"/>
-    </svg>
+<!-- =============================================
+     DIGITAL MARKETING SECTION
+     ============================================= -->
+<section class="section" id="digital-marketing" data-section="digital_marketing">
+  <div class="container">
+
+    <!-- DM Header -->
+    <div class="section-head">
+      <span class="section-label dm-label">📣 Digital Marketing</span>
+      <h2 class="section-title">Boosting নয়,<br /><span class="text-green">আসল Digital Marketing</span> শুরু করুন</h2>
+      <p class="section-sub">DhandaBuzz-এর সাথে — Business Audit, Strategy, Creative, Campaign Setup, Media Payment Support, Optimization ও Reporting — সব একই জায়গায়।</p>
+    </div>
+
+    <!-- Audit Offer Card -->
+    <div class="audit-offer-card" data-section="audit_offer">
+      <div class="audit-offer-left">
+        <div class="audit-launch-badge">🚀 Launch Offer — সীমিত সময়</div>
+        <h3 class="audit-offer-title">Business Growth Audit<br />+ Marketing Starter Kit</h3>
+        <p class="audit-offer-sub">আপনার Business-কে ভেতর থেকে বিশ্লেষণ করে, আসল সমস্যা ধরিয়ে দেওয়া হবে — এবং কী করলে Sales বাড়বে সেটার Mini Strategy দেওয়া হবে।</p>
+        <div class="audit-price-row">
+          <span class="audit-price-old">৳4,999</span>
+          <span class="audit-price-new">৳499</span>
+          <span class="audit-price-note">মাত্র</span>
+        </div>
+        <div class="audit-actions">
+          <a href="#" class="btn-primary btn-lg" onclick="return DB.navTo('audit-form')" data-cta="audit_form_cta">
+            Audit এখনই নিন →
+          </a>
+          <a href="#" class="btn-wa" onclick="DB.openWhatsAppAudit(); return false;" data-cta="audit_whatsapp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp-এ জিজ্ঞেস করুন
+          </a>
+        </div>
+        <p class="audit-note">* Ad বাজেট সম্পূর্ণ আলাদা। Client নিজে দিতে পারেন বা DhandaBuzz Media Payment Support নিতে পারেন।</p>
+      </div>
+      <div class="audit-offer-right">
+        <h4 class="audit-includes-title">Audit-এ যা যা পাবেন:</h4>
+        <ul class="audit-includes" id="auditIncludesList"></ul>
+      </div>
+    </div>
+
+    <!-- DM Services Grid -->
+    <div class="section-head" style="margin-top: 80px">
+      <span class="section-label">✦ Digital Marketing সার্ভিস</span>
+      <h2 class="section-title" style="font-size:1.9rem">সব ধরনের <span class="text-green">Marketing সার্ভিস</span> একই জায়গায়</h2>
+    </div>
+    <div class="svc-grid" id="dmSvcGrid"></div>
+
+    <!-- Package Ladder -->
+    <div class="pkg-ladder" id="pkgLadder">
+      <div class="section-head" style="margin-bottom: 32px">
+        <span class="section-label">✦ Package</span>
+        <h2 class="section-title" style="font-size:1.9rem">আপনার Budget অনুযায়ী <span class="text-green">শুরু করুন</span></h2>
+      </div>
+      <div class="pkg-cards" id="pkgCards"></div>
+    </div>
+
+    <!-- Coming Soon -->
+    <div class="coming-soon-wrap">
+      <div class="section-head" style="margin-bottom: 32px">
+        <span class="section-label">✦ আসছে শীঘ্রই</span>
+        <h2 class="section-title" style="font-size:1.9rem"><span class="text-green">AI-Powered</span> Automation Tools</h2>
+      </div>
+      <div class="coming-soon-grid" id="comingSoonGrid"></div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-wrap">
+      <div class="section-head" style="margin-bottom: 32px">
+        <span class="section-label">✦ সাধারণ প্রশ্ন</span>
+        <h2 class="section-title" style="font-size:1.9rem">মনে <span class="text-green">প্রশ্ন আছে?</span></h2>
+      </div>
+      <div class="faq-list" id="faqList"></div>
+    </div>
+
+    <!-- Audit Request Form -->
+    <div id="audit-form" style="scroll-margin-top:88px">
+      <div class="section-head" style="margin-top:80px">
+        <span class="section-label">✦ Business Audit Request</span>
+        <h2 class="section-title" style="font-size:2rem">৳499-তে <span class="text-green">Business Audit</span> নিন</h2>
+        <p class="section-sub">ফর্মটি পূরণ করুন — আমরা ২৪ ঘণ্টার মধ্যে WhatsApp-এ যোগাযোগ করব।</p>
+      </div>
+      <div class="req-form-card">
+        <form id="auditForm" onsubmit="DB.submitAudit(event)">
+
+          <div class="form-section">
+            <h3 class="form-section-title">১. আপনার পরিচয় ও Business</h3>
+            <div class="f-row">
+              <div class="f-group">
+                <label class="f-label">Business-এর নাম <span class="req">*</span></label>
+                <input type="text" class="f-control" id="auditBizName" placeholder="আপনার Business-এর নাম" required />
+              </div>
+              <div class="f-group">
+                <label class="f-label">আপনার নাম <span class="req">*</span></label>
+                <input type="text" class="f-control" id="auditName" placeholder="পূর্ণ নাম লিখুন" required />
+              </div>
+            </div>
+            <div class="f-row">
+              <div class="f-group">
+                <label class="f-label">WhatsApp নম্বর <span class="req">*</span></label>
+                <input type="tel" class="f-control" id="auditPhone" placeholder="01XXXXXXXXX" required />
+              </div>
+              <div class="f-group">
+                <label class="f-label">Facebook Page Link <span class="req">*</span></label>
+                <input type="url" class="f-control" id="auditFbPage" placeholder="https://facebook.com/yourpage" required />
+              </div>
+            </div>
+            <div class="f-group">
+              <label class="f-label">Website (যদি থাকে)</label>
+              <input type="url" class="f-control" id="auditWebsite" placeholder="https://yoursite.com" />
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="form-section-title">২. Business Category</h3>
+            <div class="pill-group">
+              <label class="r-pill"><input type="radio" name="auditCategory" value="Fashion & Clothing" required /><span>👗 Fashion &amp; Clothing</span></label>
+              <label class="r-pill"><input type="radio" name="auditCategory" value="Cosmetics & Beauty" /><span>💄 Cosmetics &amp; Beauty</span></label>
+              <label class="r-pill"><input type="radio" name="auditCategory" value="Food & Restaurant" /><span>🍔 Food &amp; Restaurant</span></label>
+              <label class="r-pill"><input type="radio" name="auditCategory" value="Ecommerce" /><span>🛒 Ecommerce</span></label>
+              <label class="r-pill"><input type="radio" name="auditCategory" value="Local Shop" /><span>🏪 Local Shop</span></label>
+              <label class="r-pill"><input type="radio" name="auditCategory" value="Service Business" /><span>🔧 Service Business</span></label>
+              <label class="r-pill"><input type="radio" name="auditCategory" value="Education" /><span>📚 Education</span></label>
+              <label class="r-pill"><input type="radio" name="auditCategory" value="Other" /><span>✨ অন্যান্য</span></label>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="form-section-title">৩. Product / Service ও সমস্যা</h3>
+            <div class="f-group">
+              <label class="f-label">আপনি কী বিক্রি করেন? <span class="req">*</span></label>
+              <textarea class="f-control f-textarea" id="auditProduct" rows="3" placeholder="আপনার product বা service সম্পর্কে সংক্ষেপে লিখুন।" required></textarea>
+            </div>
+            <div class="f-group">
+              <label class="f-label">এখন কোন সমস্যাটা সবচেয়ে বড়? <span class="req">*</span></label>
+              <textarea class="f-control f-textarea" id="auditProblem" rows="3" placeholder="যেমন: Reach কম, Sale হচ্ছে না, Ad থেকে result নেই, কোথা থেকে শুরু করব বুঝছি না..." required></textarea>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="form-section-title">৪. Ad Budget ও অভিজ্ঞতা</h3>
+            <div class="f-group">
+              <label class="f-label">মাসে Ad-এ কত টাকা খরচ করতে পারবেন? (Ad budget আলাদা)</label>
+              <div class="pill-group">
+                <label class="r-pill"><input type="radio" name="auditBudget" value="এখনো নেই" /><span>এখনো নেই</span></label>
+                <label class="r-pill"><input type="radio" name="auditBudget" value="৳1,000–৳5,000" /><span>৳1,000–৳5,000</span></label>
+                <label class="r-pill"><input type="radio" name="auditBudget" value="৳5,000–৳20,000" /><span>৳5,000–৳20,000</span></label>
+                <label class="r-pill"><input type="radio" name="auditBudget" value="৳20,000–৳50,000" /><span>৳20,000–৳50,000</span></label>
+                <label class="r-pill"><input type="radio" name="auditBudget" value="৳50,000+" /><span>৳50,000+</span></label>
+              </div>
+            </div>
+            <div class="f-group">
+              <label class="f-label">আগে কি Facebook/Instagram Ads চালিয়েছেন?</label>
+              <div class="pill-group">
+                <label class="r-pill"><input type="radio" name="auditRanAds" value="হ্যাঁ, নিজে চালিয়েছি" /><span>হ্যাঁ, নিজে</span></label>
+                <label class="r-pill"><input type="radio" name="auditRanAds" value="হ্যাঁ, অন্যকে দিয়ে" /><span>হ্যাঁ, অন্যকে দিয়ে</span></label>
+                <label class="r-pill"><input type="radio" name="auditRanAds" value="না, একদম নতুন" /><span>না, একদম নতুন</span></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="form-section-title">৫. লক্ষ্য ও অন্যান্য</h3>
+            <div class="f-group">
+              <label class="f-label">আপনার মূল লক্ষ্য কী? (একাধিক বেছে নিন)</label>
+              <div class="pill-group">
+                <label class="c-pill"><input type="checkbox" name="auditGoal" value="Sales বাড়ানো" /><span>💰 Sales বাড়ানো</span></label>
+                <label class="c-pill"><input type="checkbox" name="auditGoal" value="Lead Generation" /><span>📋 Lead Generation</span></label>
+                <label class="c-pill"><input type="checkbox" name="auditGoal" value="Brand Awareness" /><span>📣 Brand Awareness</span></label>
+                <label class="c-pill"><input type="checkbox" name="auditGoal" value="Page Followers" /><span>👥 Page Followers</span></label>
+                <label class="c-pill"><input type="checkbox" name="auditGoal" value="Website Traffic" /><span>🌐 Website Traffic</span></label>
+                <label class="c-pill"><input type="checkbox" name="auditGoal" value="Messenger Inbox" /><span>💬 Messenger Inbox</span></label>
+              </div>
+            </div>
+            <div class="f-group">
+              <label class="f-label">Media Payment Support দরকার? (Dollar/Card ছাড়া Ad চালানো)</label>
+              <div class="pill-group">
+                <label class="r-pill"><input type="radio" name="auditMediaPay" value="হ্যাঁ, দরকার" /><span>হ্যাঁ, দরকার</span></label>
+                <label class="r-pill"><input type="radio" name="auditMediaPay" value="না, নিজে দিতে পারব" /><span>না, নিজে দিতে পারব</span></label>
+                <label class="r-pill"><input type="radio" name="auditMediaPay" value="পরে দেখব" /><span>পরে দেখব</span></label>
+              </div>
+            </div>
+            <div class="f-group">
+              <label class="f-label">Automation-এ আগ্রহী? (AI Inbox Reply, Auto Follow-up)</label>
+              <div class="pill-group">
+                <label class="r-pill"><input type="radio" name="auditAuto" value="হ্যাঁ, জানতে চাই" /><span>হ্যাঁ, জানতে চাই</span></label>
+                <label class="r-pill"><input type="radio" name="auditAuto" value="না এখন" /><span>এখন না</span></label>
+              </div>
+            </div>
+            <div class="f-group">
+              <label class="f-label">আর কিছু জানাতে চান?</label>
+              <textarea class="f-control f-textarea" id="auditNotes" rows="3" placeholder="যেকোনো অতিরিক্ত তথ্য বা প্রশ্ন..."></textarea>
+            </div>
+          </div>
+
+          <div class="consent-row">
+            <label class="c-pill consent-pill">
+              <input type="checkbox" id="auditConsent" required />
+              <span>আমি সম্মত আছি যে DhandaBuzz আমার দেওয়া তথ্য Business Audit-এর জন্য ব্যবহার করবে এবং WhatsApp-এ যোগাযোগ করবে।</span>
+            </label>
+          </div>
+
+          <div class="form-submit-row">
+            <button type="submit" class="btn-primary btn-xl" data-cta="audit_submit">
+              <span id="auditBtnText">৳499-তে Audit Request পাঠান →</span>
+            </button>
+            <p class="form-note">✅ ২৪ ঘণ্টার মধ্যে WhatsApp-এ সাড়া দেওয়া হবে</p>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band" data-section="cta_band">
+  <div class="cta-glow"></div>
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-text">
+        <h2>আজই শুরু করুন — <span class="text-green">Free Preview দিয়ে</span></h2>
+        <p>Requirement জমা দিন, ২৪ ঘণ্টার মধ্যে আমরা আপনার সাথে যোগাযোগ করব।</p>
+      </div>
+      <div class="cta-actions">
+        <a href="#" class="btn-wa" onclick="DB.openWhatsApp('cta'); return false;" data-cta="cta_whatsapp">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp-এ কথা বলুন
+        </a>
+        <a href="#" class="btn-primary btn-lg" onclick="return DB.navTo('requirement-form')" data-cta="cta_form">
+          Development Requirement ফর্ম
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEVELOPMENT REQUIREMENT FORM -->
+<section class="section" id="requirement-form" data-section="req_form">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">✦ Development Requirement</span>
+      <h2 class="section-title">আপনার Project-এর<br /><span class="text-green">বিস্তারিত জানান</span></h2>
+      <p class="section-sub">ফর্মটি পূরণ করুন — আমরা ২৪ ঘণ্টার মধ্যে WhatsApp-এ Premium Preview সহ যোগাযোগ করব।</p>
+    </div>
+    <div class="req-form-card">
+      <form id="reqForm" onsubmit="DB.submitRequirement(event)">
+
+        <div class="form-section">
+          <h3 class="form-section-title">১. আপনার পরিচয়</h3>
+          <div class="f-row">
+            <div class="f-group">
+              <label class="f-label">আপনার নাম <span class="req">*</span></label>
+              <input type="text" class="f-control" id="clientName" placeholder="পূর্ণ নাম লিখুন" required />
+            </div>
+            <div class="f-group">
+              <label class="f-label">WhatsApp নম্বর <span class="req">*</span></label>
+              <input type="tel" class="f-control" id="clientPhone" placeholder="01XXXXXXXXX" required />
+            </div>
+          </div>
+          <div class="f-row">
+            <div class="f-group">
+              <label class="f-label">Business-এর নাম</label>
+              <input type="text" class="f-control" id="businessName" placeholder="আপনার Business-এর নাম" />
+            </div>
+            <div class="f-group">
+              <label class="f-label">Email</label>
+              <input type="email" class="f-control" id="clientEmail" placeholder="email@example.com" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="form-section-title">২. কোন ধরনের Project চান?</h3>
+          <div class="pill-group">
+            <label class="r-pill"><input type="radio" name="projectType" value="Website" required /><span>🌐 Website</span></label>
+            <label class="r-pill"><input type="radio" name="projectType" value="Ecommerce" /><span>🛒 Ecommerce Store</span></label>
+            <label class="r-pill"><input type="radio" name="projectType" value="Mobile App" /><span>📱 Mobile App</span></label>
+            <label class="r-pill"><input type="radio" name="projectType" value="Web App" /><span>💻 Web Application</span></label>
+            <label class="r-pill"><input type="radio" name="projectType" value="Software" /><span>⚙️ Custom Software</span></label>
+            <label class="r-pill"><input type="radio" name="projectType" value="Multiple" /><span>✨ একাধিক</span></label>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="form-section-title">৩. বাজেট রেঞ্জ</h3>
+          <div class="pill-group">
+            <label class="r-pill"><input type="radio" name="budget" value="৳4,999–৳9,999" required /><span>৳4,999–৳9,999</span></label>
+            <label class="r-pill"><input type="radio" name="budget" value="৳10,000–৳24,999" /><span>৳10,000–৳24,999</span></label>
+            <label class="r-pill"><input type="radio" name="budget" value="৳25,000–৳49,999" /><span>৳25,000–৳49,999</span></label>
+            <label class="r-pill"><input type="radio" name="budget" value="৳50,000–৳99,999" /><span>৳50,000–৳99,999</span></label>
+            <label class="r-pill"><input type="radio" name="budget" value="৳1,00,000+" /><span>৳1,00,000+</span></label>
+            <label class="r-pill"><input type="radio" name="budget" value="নিশ্চিত নই" /><span>নিশ্চিত নই</span></label>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="form-section-title">৪. কতদিনের মধ্যে চান?</h3>
+          <div class="pill-group">
+            <label class="r-pill"><input type="radio" name="timeline" value="৭ দিনের মধ্যে" required /><span>⚡ ৭ দিনের মধ্যে</span></label>
+            <label class="r-pill"><input type="radio" name="timeline" value="১৫ দিনের মধ্যে" /><span>১৫ দিনের মধ্যে</span></label>
+            <label class="r-pill"><input type="radio" name="timeline" value="১ মাসের মধ্যে" /><span>১ মাসের মধ্যে</span></label>
+            <label class="r-pill"><input type="radio" name="timeline" value="২-৩ মাস" /><span>২–৩ মাস</span></label>
+            <label class="r-pill"><input type="radio" name="timeline" value="সময় নেই" /><span>সময়সীমা নেই</span></label>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="form-section-title">৫. কী কী Feature দরকার? (একাধিক বেছে নিন)</h3>
+          <div class="pill-group">
+            <label class="c-pill"><input type="checkbox" name="features" value="Admin Panel" /><span>⚙️ Admin Panel</span></label>
+            <label class="c-pill"><input type="checkbox" name="features" value="Payment Gateway" /><span>💳 Payment Gateway</span></label>
+            <label class="c-pill"><input type="checkbox" name="features" value="User Login/Register" /><span>🔐 User Login</span></label>
+            <label class="c-pill"><input type="checkbox" name="features" value="Blog/CMS" /><span>📝 Blog / CMS</span></label>
+            <label class="c-pill"><input type="checkbox" name="features" value="Inventory Management" /><span>📦 Inventory</span></label>
+            <label class="c-pill"><input type="checkbox" name="features" value="Live Chat" /><span>💬 Live Chat</span></label>
+            <label class="c-pill"><input type="checkbox" name="features" value="Delivery Tracking" /><span>🚚 Delivery Tracking</span></label>
+            <label class="c-pill"><input type="checkbox" name="features" value="SMS/Email Notification" /><span>📩 SMS/Email</span></label>
+            <label class="c-pill"><input type="checkbox" name="features" value="Multi-vendor" /><span>🏪 Multi-vendor</span></label>
+            <label class="c-pill"><input type="checkbox" name="features" value="Analytics Dashboard" /><span>📊 Analytics</span></label>
+            <label class="c-pill"><input type="checkbox" name="features" value="Mobile App" /><span>📱 App সহ</span></label>
+            <label class="c-pill"><input type="checkbox" name="features" value="API Integration" /><span>🔗 API Integration</span></label>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="form-section-title">৬. Design Style</h3>
+          <div class="pill-group">
+            <label class="r-pill"><input type="radio" name="designStyle" value="Minimal & Clean" /><span>✨ Minimal &amp; Clean</span></label>
+            <label class="r-pill"><input type="radio" name="designStyle" value="Bold & Colorful" /><span>🎨 Bold &amp; Colorful</span></label>
+            <label class="r-pill"><input type="radio" name="designStyle" value="Corporate & Professional" /><span>💼 Corporate</span></label>
+            <label class="r-pill"><input type="radio" name="designStyle" value="Dark & Premium" /><span>🌙 Dark &amp; Premium</span></label>
+            <label class="r-pill"><input type="radio" name="designStyle" value="যেকোনো চলবে" /><span>যেকোনো চলবে</span></label>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="form-section-title">৭. Reference ও বিস্তারিত</h3>
+          <div class="f-group">
+            <label class="f-label">Reference Website বা App Link (যদি থাকে)</label>
+            <input type="url" class="f-control" id="referenceLink" placeholder="https://example.com" />
+          </div>
+          <div class="f-group">
+            <label class="f-label">Project সম্পর্কে বিস্তারিত লিখুন <span class="req">*</span></label>
+            <textarea class="f-control f-textarea" id="projectDetails" rows="5" placeholder="আপনার Project-এর idea, main features, target audience — যা মনে চায় লিখুন।" required></textarea>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="form-section-title">৮. কীভাবে আমাদের পেলেন?</h3>
+          <div class="pill-group">
+            <label class="r-pill"><input type="radio" name="source" value="Facebook" /><span>Facebook</span></label>
+            <label class="r-pill"><input type="radio" name="source" value="YouTube" /><span>YouTube</span></label>
+            <label class="r-pill"><input type="radio" name="source" value="Google" /><span>Google</span></label>
+            <label class="r-pill"><input type="radio" name="source" value="বন্ধু/পরিচিত" /><span>বন্ধু / পরিচিত</span></label>
+            <label class="r-pill"><input type="radio" name="source" value="অন্যান্য" /><span>অন্যান্য</span></label>
+          </div>
+        </div>
+
+        <div class="consent-row">
+          <label class="c-pill consent-pill">
+            <input type="checkbox" id="consentCheck" required />
+            <span>আমি সম্মত আছি যে DhandaBuzz আমার দেওয়া তথ্য project proposal-এর জন্য ব্যবহার করবে এবং WhatsApp-এ যোগাযোগ করবে।</span>
+          </label>
+        </div>
+
+        <div class="form-submit-row">
+          <button type="submit" class="btn-primary btn-xl" data-cta="dev_form_submit">
+            <span id="submitBtnText">Free Preview Request পাঠান →</span>
+          </button>
+          <p class="form-note">✅ ২৪ ঘণ্টার মধ্যে WhatsApp-এ সাড়া দেওয়া হবে</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="nav-brand" href="#" onclick="return DB.scrollTo('hero')">
+          <span class="brand-dot"></span>DhandaBuzz <span>Dev</span>
+        </a>
+        <p>আপনার Digital Dream-কে Reality-তে রূপ দিন।</p>
+      </div>
+      <div class="footer-links">
+        <a href="#" onclick="return DB.navTo('services')">Development</a>
+        <a href="#" onclick="return DB.navTo('digital-marketing')">Digital Marketing</a>
+        <a href="#" onclick="return DB.navTo('pricing')">প্রাইসিং</a>
+        <a href="#" onclick="return DB.navTo('audit-form')">Business Audit</a>
+        <a href="#" onclick="return DB.navTo('requirement-form')">যোগাযোগ</a>
+        <a href="#" onclick="DB.showSalesGuide(); return false;" class="footer-team-link">Team Guide</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 DhandaBuzz. All rights reserved. · <a href="#" onclick="return DB.navTo('requirement-form')" style="color:var(--primary)">Project শুরু করুন</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- SALES GUIDE OVERLAY -->
+<div id="salesGuide" class="guide-overlay" style="display:none">
+  <div class="guide-wrap">
+    <div class="guide-header">
+      <h2>🔐 DhandaBuzz Sales Guide</h2>
+      <button class="guide-close" onclick="DB.hideSalesGuide()">✕</button>
+    </div>
+    <div class="guide-body" id="guideBody"></div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal" style="display:none">
+  <div class="modal-box">
+    <div class="modal-icon">🎉</div>
+    <h3 class="modal-title" id="modalTitle">Request সফলভাবে পাঠানো হয়েছে!</h3>
+    <p class="modal-sub" id="modalSub">আমরা আপনার WhatsApp-এ ২৪ ঘণ্টার মধ্যে যোগাযোগ করব।</p>
+    <div class="modal-actions">
+      <a href="#" class="btn-wa" id="modalWaBtn" data-cta="modal_whatsapp">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp-এ কথা বলুন
+      </a>
+      <button class="btn-outline" onclick="DB.closeModal()">বন্ধ করুন</button>
+    </div>
+  </div>
+</div>
+
+<!-- BKASH PAYMENT MODAL -->
+<div class="modal-overlay" id="bkashModal" style="display:none">
+  <div class="modal-box bkash-modal-box">
+
+    <!-- Step 1: Payment Instructions -->
+    <div id="bkashStep1">
+      <div class="bkash-header">
+        <span class="bkash-brand-badge">bKash</span>
+        <h3 class="bkash-title">৳499 পেমেন্ট করুন</h3>
+        <p class="modal-sub">নিচের নম্বরে bKash <strong>Send Money</strong> করুন</p>
+      </div>
+      <div class="bkash-number-card">
+        <div class="bkash-num-label">Personal bKash Number</div>
+        <div class="bkash-num-value" id="bkashDisplayNum">01778307704</div>
+        <div class="bkash-num-amount">পরিমাণ: <strong>৳499</strong></div>
+        <button class="btn-copy" onclick="DB.copyBkashNum()" type="button">📋 নম্বর কপি করুন</button>
+      </div>
+      <ol class="bkash-steps">
+        <li>bKash App খুলুন → <strong>Send Money</strong> ট্যাপ করুন</li>
+        <li>Number: <strong>01778307704</strong> দিন</li>
+        <li>Amount: <strong>৳499</strong> দিন, Reference: <strong>Audit</strong></li>
+        <li>Confirm করুন — TrxID নোট করুন</li>
+      </ol>
+      <button class="btn-primary bkash-next-btn" onclick="DB.bkashNext()" type="button">
+        পাঠিয়ে দিলাম → TrxID দিন
+      </button>
+      <button class="bkash-cancel-btn" onclick="DB.closeBkashModal()" type="button">পরে করব</button>
+    </div>
+
+    <!-- Step 2: TrxID Entry -->
+    <div id="bkashStep2" style="display:none">
+      <div class="modal-icon">💳</div>
+      <h3 class="bkash-title">Transaction ID দিন</h3>
+      <p class="modal-sub">bKash-এ পাঠানোর পর যে TrxID পেয়েছেন সেটা দিন</p>
+      <input type="text" class="f-control bkash-trx-input" id="bkashTrxId"
+        placeholder="যেমন: 8AB1CD2E3F" maxlength="20" autocomplete="off"
+        oninput="this.value=this.value.toUpperCase()" />
+      <p class="bkash-trx-hint">TrxID সাধারণত ৮–১০ অক্ষরের হয় (বড় হাতের অক্ষর + সংখ্যা)</p>
+      <div class="bkash-actions">
+        <button class="btn-primary" onclick="DB.confirmBkash()" type="button">✓ Confirm করুন</button>
+        <button class="btn-outline" onclick="DB.bkashBack()" type="button">← পিছনে</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Confirmed -->
+    <div id="bkashStep3" style="display:none">
+      <div class="modal-icon">✅</div>
+      <h3 class="bkash-title">Payment Confirmed!</h3>
+      <p class="modal-sub">আপনার bKash payment গ্রহণ করা হয়েছে। <strong>৫–৩০ মিনিটের মধ্যে</strong> WhatsApp-এ Audit-এর বিস্তারিত পাঠানো হবে।</p>
+      <div class="bkash-confirmed-trx">
+        TrxID: <strong id="bkashConfirmedTrx"></strong>
+      </div>
+      <div class="modal-actions">
+        <a href="#" class="btn-wa" id="bkashWaBtn" target="_blank" rel="noopener" data-cta="bkash_confirm_whatsapp">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp-এ TrxID পাঠান
+        </a>
+        <button class="btn-outline" onclick="DB.closeBkashModal()" type="button">বন্ধ করুন</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- WHATSAPP FAB -->
+<a href="#" class="wa-fab" id="waFab" onclick="DB.openWhatsApp('fab'); return false;" data-cta="fab_whatsapp" aria-label="WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span class="wa-tooltip">WhatsApp-এ কথা বলুন</span>
+</a>
+
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <a href="#" class="sticky-cta-btn" onclick="return DB.navTo('audit-form')" data-cta="sticky_audit">
+    🔥 ৳499-তে Business Audit নিন →
   </a>
+</div>
 
-  <script src="js/app.js"></script>
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/app.js"></script>
 </body>
 </html>
