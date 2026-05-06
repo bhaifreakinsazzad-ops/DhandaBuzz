@@ -1677,6 +1677,8 @@ section[id], div[id] { scroll-margin-top: 80px; }
   .fb1, .fb2, .fb3 { display: none; }
   .sticky-cta { display: block; }
   body { padding-bottom: 80px; }
+  .wa-fab { bottom: 100px; }
+  .wa-tooltip { display: none; }
 }
 
 @media (max-width: 480px) {
