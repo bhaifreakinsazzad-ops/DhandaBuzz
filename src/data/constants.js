@@ -46,3 +46,6 @@ export const REVISION_COSTS = {
 
 // Admin role is determined by the 'role' field in the Firestore users collection.
 // To make a user admin, set their role to 'admin' directly in Firestore.
+
+export const AUDIT_PRICE_BDT = 499
+export const AUDIT_PRODUCT_NAME = 'Business Audit'
