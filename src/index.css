@@ -194,7 +194,14 @@
   .animation-delay-2000 { animation-delay: 2s; }
   .animation-delay-3000 { animation-delay: 3s; }
 
-  .opacity-0-init { opacity: 0; }
+  /* Scroll-reveal: elements start paused, JS adds .revealed when in viewport */
+  .opacity-0-init {
+    opacity: 0;
+    animation-play-state: paused !important;
+  }
+  .opacity-0-init.revealed {
+    animation-play-state: running !important;
+  }
 }
 
 ::-webkit-scrollbar {
