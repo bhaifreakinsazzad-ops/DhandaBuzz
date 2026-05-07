@@ -1,0 +1,32 @@
+{
+  "name": "DhandaBuzz",
+  "short_name": "DhandaBuzz",
+  "description": "AI-Powered Digital Agency — Content, Website, Advertisement",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0A1628",
+  "theme_color": "#0A1628",
+  "lang": "bn",
+  "icons": [
+    {
+      "src": "/logo-icon-green.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "url": "/dashboard",
+      "description": "আপনার ড্যাশবোর্ড"
+    },
+    {
+      "name": "Services",
+      "url": "/services",
+      "description": "সার্ভিস অর্ডার করুন"
+    }
+  ]
+}

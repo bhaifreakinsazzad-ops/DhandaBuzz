@@ -1,1 +1,0 @@
-import{j as t,S as a}from"./index-8e4npqbb.js";function s({status:e}){return t.jsx("span",{className:`${a[e]||"bg-gray-500"} text-white text-xs px-3 py-1 rounded-full font-medium whitespace-nowrap`,children:e})}export{s as S};
