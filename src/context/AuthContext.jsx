@@ -215,6 +215,20 @@ export function AuthProvider({ children }) {
 
   const logout = () => signOut(auth)
 
+  const updateProfile = async ({ name, businessName, phone }) => {
+    if (!firebaseUser) return { success: false }
+    try {
+      await updateDoc(doc(db, 'users', firebaseUser.uid), {
+        ownerName: name,
+        businessName,
+        phone,
+      })
+      return { success: true }
+    } catch (err) {
+      return { success: false, message: err.message }
+    }
+  }
+
   // ── WALLET ────────────────────────────────────────────────────────────────
 
   const addTransaction = async (data) => {
@@ -429,6 +443,7 @@ export function AuthProvider({ children }) {
     register,
     login,
     logout,
+    updateProfile,
     addTransaction,
     addOrder,
     getOrderById,
