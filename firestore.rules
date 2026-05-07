@@ -1,0 +1,53 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // ── Users ──────────────────────────────────────────────────────────────
+    match /users/{userId} {
+      // Users can read and update their own profile; admins can read/write all
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isAuthenticated() && isOwner(userId);
+      allow update: if (isOwner(userId) &&
+        // clients cannot elevate their own role
+        !('role' in request.resource.data) ||
+        request.resource.data.role == resource.data.role
+      ) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // ── Orders ─────────────────────────────────────────────────────────────
+    match /orders/{orderId} {
+      allow read: if isAuthenticated() &&
+        (isOwner(resource.data.userId) || isAdmin());
+      allow create: if isAuthenticated() &&
+        isOwner(request.resource.data.userId);
+      allow update: if isAuthenticated() &&
+        (isOwner(resource.data.userId) || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    // ── Recharge Requests ──────────────────────────────────────────────────
+    match /rechargeRequests/{reqId} {
+      allow read: if isAuthenticated() &&
+        (isOwner(resource.data.userId) || isAdmin());
+      allow create: if isAuthenticated() &&
+        isOwner(request.resource.data.userId);
+      // Only admins can approve/reject (status update)
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+  }
+}

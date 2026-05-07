@@ -4,10 +4,12 @@ import { useAuth } from './hooks/useAuth'
 import PublicLayout from './components/layout/PublicLayout'
 import DashboardLayout from './components/layout/DashboardLayout'
 import AdminLayout from './components/layout/AdminLayout'
+import ErrorBoundary from './components/ui/ErrorBoundary'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import DashboardPreviewPage from './pages/DashboardPreviewPage'
+import NotFoundPage from './pages/NotFoundPage'
 
 const DashboardPage = lazy(() => import('./pages/DashboardPage'))
 const WalletPage = lazy(() => import('./pages/WalletPage'))
@@ -67,6 +69,7 @@ function AdminProtectedRoute() {
 
 export default function App() {
   return (
+    <ErrorBoundary>
     <AuthGate>
       <Routes>
         <Route element={<PublicLayout />}>
@@ -101,8 +104,11 @@ export default function App() {
           </Route>
         </Route>
 
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route element={<PublicLayout />}>
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
       </Routes>
     </AuthGate>
+    </ErrorBoundary>
   )
 }
